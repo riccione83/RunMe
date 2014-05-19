@@ -21,6 +21,17 @@
 		933A84521924D5D700676CE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84341924D5D200676CE5 /* UIKit.framework */; };
 		933A845A1924D5D800676CE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 933A84581924D5D800676CE5 /* InfoPlist.strings */; };
 		933A845C1924D5D800676CE5 /* bykeMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 933A845B1924D5D800676CE5 /* bykeMeTests.m */; };
+		933A846E19251E8700676CE5 /* Altitude.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846619251E8700676CE5 /* Altitude.png */; };
+		933A846F19251E8700676CE5 /* backgroung.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846719251E8700676CE5 /* backgroung.png */; };
+		933A847019251E8700676CE5 /* Bottom_Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846819251E8700676CE5 /* Bottom_Bar.png */; };
+		933A847119251E8700676CE5 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846919251E8700676CE5 /* button.png */; };
+		933A847219251E8700676CE5 /* Distance.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846A19251E8700676CE5 /* Distance.png */; };
+		933A847319251E8700676CE5 /* on_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846B19251E8700676CE5 /* on_off.png */; };
+		933A847419251E8700676CE5 /* Speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846C19251E8700676CE5 /* Speed.png */; };
+		933A847519251E8700676CE5 /* Time.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A846D19251E8700676CE5 /* Time.png */; };
+		933A84771925210E00676CE5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84761925210E00676CE5 /* iAd.framework */; };
+		933A847919252B6600676CE5 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A847819252B6600676CE5 /* up.png */; };
+		933A847B192533E200676CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A847A192533E200676CE5 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +64,17 @@
 		933A84571924D5D800676CE5 /* bykeMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "bykeMeTests-Info.plist"; sourceTree = "<group>"; };
 		933A84591924D5D800676CE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		933A845B1924D5D800676CE5 /* bykeMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bykeMeTests.m; sourceTree = "<group>"; };
+		933A846619251E8700676CE5 /* Altitude.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Altitude.png; sourceTree = "<group>"; };
+		933A846719251E8700676CE5 /* backgroung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroung.png; sourceTree = "<group>"; };
+		933A846819251E8700676CE5 /* Bottom_Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bottom_Bar.png; sourceTree = "<group>"; };
+		933A846919251E8700676CE5 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		933A846A19251E8700676CE5 /* Distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Distance.png; sourceTree = "<group>"; };
+		933A846B19251E8700676CE5 /* on_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = on_off.png; sourceTree = "<group>"; };
+		933A846C19251E8700676CE5 /* Speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Speed.png; sourceTree = "<group>"; };
+		933A846D19251E8700676CE5 /* Time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Time.png; sourceTree = "<group>"; };
+		933A84761925210E00676CE5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		933A847819252B6600676CE5 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = ../../../../Downloads/up.png; sourceTree = "<group>"; };
+		933A847A192533E200676CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933A847B192533E200676CE5 /* MapKit.framework in Frameworks */,
+				933A84771925210E00676CE5 /* iAd.framework in Frameworks */,
 				933A84331924D5D200676CE5 /* CoreGraphics.framework in Frameworks */,
 				933A84351924D5D200676CE5 /* UIKit.framework in Frameworks */,
 				933A84311924D5D200676CE5 /* Foundation.framework in Frameworks */,
@@ -101,6 +125,8 @@
 		933A842F1924D5D200676CE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				933A847A192533E200676CE5 /* MapKit.framework */,
+				933A84761925210E00676CE5 /* iAd.framework */,
 				933A84301924D5D200676CE5 /* Foundation.framework */,
 				933A84321924D5D200676CE5 /* CoreGraphics.framework */,
 				933A84341924D5D200676CE5 /* UIKit.framework */,
@@ -112,6 +138,7 @@
 		933A84361924D5D300676CE5 /* bykeMe */ = {
 			isa = PBXGroup;
 			children = (
+				933A846519251E7100676CE5 /* Images */,
 				933A843F1924D5D400676CE5 /* AppDelegate.h */,
 				933A84401924D5D500676CE5 /* AppDelegate.m */,
 				933A84421924D5D500676CE5 /* Main.storyboard */,
@@ -150,6 +177,22 @@
 				933A84581924D5D800676CE5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		933A846519251E7100676CE5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				933A847819252B6600676CE5 /* up.png */,
+				933A846619251E8700676CE5 /* Altitude.png */,
+				933A846719251E8700676CE5 /* backgroung.png */,
+				933A846819251E8700676CE5 /* Bottom_Bar.png */,
+				933A846919251E8700676CE5 /* button.png */,
+				933A846A19251E8700676CE5 /* Distance.png */,
+				933A846B19251E8700676CE5 /* on_off.png */,
+				933A846C19251E8700676CE5 /* Speed.png */,
+				933A846D19251E8700676CE5 /* Time.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,9 +271,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933A847519251E8700676CE5 /* Time.png in Resources */,
+				933A847319251E8700676CE5 /* on_off.png in Resources */,
+				933A847919252B6600676CE5 /* up.png in Resources */,
+				933A847419251E8700676CE5 /* Speed.png in Resources */,
+				933A847119251E8700676CE5 /* button.png in Resources */,
 				933A84491924D5D700676CE5 /* Images.xcassets in Resources */,
+				933A847219251E8700676CE5 /* Distance.png in Resources */,
+				933A846F19251E8700676CE5 /* backgroung.png in Resources */,
+				933A847019251E8700676CE5 /* Bottom_Bar.png in Resources */,
 				933A843B1924D5D300676CE5 /* InfoPlist.strings in Resources */,
 				933A84441924D5D500676CE5 /* Main.storyboard in Resources */,
+				933A846E19251E8700676CE5 /* Altitude.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +508,7 @@
 				933A84611924D5D800676CE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		933A84621924D5D800676CE5 /* Build configuration list for PBXNativeTarget "bykeMeTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +517,7 @@
 				933A84641924D5D800676CE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
