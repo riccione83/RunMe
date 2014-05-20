@@ -10,8 +10,10 @@
 #import <iAd/iAd.h>
 #import <MapKit/MapKit.h>
 #include <math.h>
+#include "FileSupport.h"
+#include <Social/Social.h>
 
-@interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate>{
+@interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate>{
     BOOL STARTED;
     BOOL menuShowed;
     CLLocationManager *locationManager;
@@ -20,10 +22,28 @@
     bool regionCreated;
     NSTimer *timeTimer;
     NSTimer *bannerTimer;
+    NSTimer *hideMenuTimer;
     int iSec,iMin,iHr;
     float distance;
+    float distance2;
+    NSUInteger num_of_point;
     BOOL isKmh;
     BOOL bannerGoShowed;
+    
+    
+    
+    NSMutableArray *sessDate;
+    NSString *iseDate;
+    NSMutableArray *sessDistance;
+    NSInteger iseDistance;
+    NSMutableArray *sessMaxSpeed;
+    NSInteger iseMaxSpeed;
+    NSMutableArray *sessAvgSpeed;
+    NSInteger iseAvgSpeed;
+    NSInteger tempAvgSpeed;
+    NSMutableArray *sessAltitude;
+    NSInteger iseAltitude;
+    
 }
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
 @property (strong, nonatomic) IBOutlet MKMapView *myMap;
@@ -39,6 +59,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblUnitSpeed;
 @property (strong, nonatomic) IBOutlet UIView *bannerKM;
 @property (strong, nonatomic) IBOutlet UILabel *labelKM;
+@property (strong, nonatomic) IBOutlet UILabel *gpsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+
+
+//@property (strong) FileSupport *myFile;
 
 - (IBAction)showOnOffPanel:(id)sender;
 - (IBAction)closePanel:(id)sender;

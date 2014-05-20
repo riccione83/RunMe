@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93168F87192B5E3700F18F76 /* myCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93168F86192B5E3700F18F76 /* myCell.m */; };
+		93168F8A192B5F4700F18F76 /* sessions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93168F89192B5F4700F18F76 /* sessions.m */; };
+		93168F8C192BA2E500F18F76 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93168F8B192BA2E500F18F76 /* Social.framework */; };
+		93168F8E192BA5D700F18F76 /* Facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 93168F8D192BA5D700F18F76 /* Facebook_logo.png */; };
+		93168F90192BA7E900F18F76 /* upGraph.png in Resources */ = {isa = PBXBuildFile; fileRef = 93168F8F192BA7E900F18F76 /* upGraph.png */; };
 		933A84311924D5D200676CE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84301924D5D200676CE5 /* Foundation.framework */; };
 		933A84331924D5D200676CE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84321924D5D200676CE5 /* CoreGraphics.framework */; };
 		933A84351924D5D200676CE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84341924D5D200676CE5 /* UIKit.framework */; };
@@ -32,6 +37,7 @@
 		933A84771925210E00676CE5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84761925210E00676CE5 /* iAd.framework */; };
 		933A847919252B6600676CE5 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A847819252B6600676CE5 /* up.png */; };
 		933A847B192533E200676CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A847A192533E200676CE5 /* MapKit.framework */; };
+		93FA06BD192A7AE00077031A /* FileSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FA06BC192A7AE00077031A /* FileSupport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,23 +51,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		933A842D1924D5D200676CE5 /* bykeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bykeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		93168F85192B5E3700F18F76 /* myCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCell.h; sourceTree = "<group>"; };
+		93168F86192B5E3700F18F76 /* myCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCell.m; sourceTree = "<group>"; };
+		93168F88192B5F4700F18F76 /* sessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sessions.h; path = ../sessions.h; sourceTree = "<group>"; };
+		93168F89192B5F4700F18F76 /* sessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = sessions.m; path = ../sessions.m; sourceTree = "<group>"; };
+		93168F8B192BA2E500F18F76 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		93168F8D192BA5D700F18F76 /* Facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook_logo.png; sourceTree = "<group>"; };
+		93168F8F192BA7E900F18F76 /* upGraph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upGraph.png; sourceTree = "<group>"; };
+		933A842D1924D5D200676CE5 /* RunMe!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RunMe!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A84301924D5D200676CE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		933A84321924D5D200676CE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		933A84341924D5D200676CE5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		933A84381924D5D300676CE5 /* bykeMe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "bykeMe-Info.plist"; sourceTree = "<group>"; };
+		933A84381924D5D300676CE5 /* RunMe!-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RunMe!-Info.plist"; sourceTree = "<group>"; };
 		933A843A1924D5D300676CE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		933A843C1924D5D400676CE5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		933A843E1924D5D400676CE5 /* bykeMe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bykeMe-Prefix.pch"; sourceTree = "<group>"; };
+		933A843E1924D5D400676CE5 /* RunMe!-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunMe!-Prefix.pch"; sourceTree = "<group>"; };
 		933A843F1924D5D400676CE5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		933A84401924D5D500676CE5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		933A84431924D5D500676CE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		933A84451924D5D500676CE5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		933A84461924D5D500676CE5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		933A84481924D5D700676CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		933A844E1924D5D700676CE5 /* bykeMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bykeMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		933A844E1924D5D700676CE5 /* RunMe!Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RunMe!Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A844F1924D5D700676CE5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		933A84571924D5D800676CE5 /* bykeMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "bykeMeTests-Info.plist"; sourceTree = "<group>"; };
+		933A84571924D5D800676CE5 /* RunMe!Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RunMe!Tests-Info.plist"; sourceTree = "<group>"; };
 		933A84591924D5D800676CE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		933A845B1924D5D800676CE5 /* bykeMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bykeMeTests.m; sourceTree = "<group>"; };
 		933A846619251E8700676CE5 /* Altitude.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Altitude.png; sourceTree = "<group>"; };
@@ -75,6 +88,8 @@
 		933A84761925210E00676CE5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		933A847819252B6600676CE5 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = ../../../../Downloads/up.png; sourceTree = "<group>"; };
 		933A847A192533E200676CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		93FA06BB192A7AE00077031A /* FileSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileSupport.h; path = ../FileSupport.h; sourceTree = "<group>"; };
+		93FA06BC192A7AE00077031A /* FileSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileSupport.m; path = ../FileSupport.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93168F8C192BA2E500F18F76 /* Social.framework in Frameworks */,
 				933A847B192533E200676CE5 /* MapKit.framework in Frameworks */,
 				933A84771925210E00676CE5 /* iAd.framework in Frameworks */,
 				933A84331924D5D200676CE5 /* CoreGraphics.framework in Frameworks */,
@@ -106,7 +122,7 @@
 		933A84241924D5D200676CE5 = {
 			isa = PBXGroup;
 			children = (
-				933A84361924D5D300676CE5 /* bykeMe */,
+				933A84361924D5D300676CE5 /* Runme */,
 				933A84551924D5D700676CE5 /* bykeMeTests */,
 				933A842F1924D5D200676CE5 /* Frameworks */,
 				933A842E1924D5D200676CE5 /* Products */,
@@ -116,8 +132,8 @@
 		933A842E1924D5D200676CE5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				933A842D1924D5D200676CE5 /* bykeMe.app */,
-				933A844E1924D5D700676CE5 /* bykeMeTests.xctest */,
+				933A842D1924D5D200676CE5 /* RunMe!.app */,
+				933A844E1924D5D700676CE5 /* RunMe!Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +141,7 @@
 		933A842F1924D5D200676CE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93168F8B192BA2E500F18F76 /* Social.framework */,
 				933A847A192533E200676CE5 /* MapKit.framework */,
 				933A84761925210E00676CE5 /* iAd.framework */,
 				933A84301924D5D200676CE5 /* Foundation.framework */,
@@ -135,28 +152,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		933A84361924D5D300676CE5 /* bykeMe */ = {
+		933A84361924D5D300676CE5 /* Runme */ = {
 			isa = PBXGroup;
 			children = (
-				933A846519251E7100676CE5 /* Images */,
 				933A843F1924D5D400676CE5 /* AppDelegate.h */,
 				933A84401924D5D500676CE5 /* AppDelegate.m */,
+				93FA06BB192A7AE00077031A /* FileSupport.h */,
+				93FA06BC192A7AE00077031A /* FileSupport.m */,
+				933A846519251E7100676CE5 /* Images */,
+				933A84481924D5D700676CE5 /* Images.xcassets */,
 				933A84421924D5D500676CE5 /* Main.storyboard */,
+				93168F85192B5E3700F18F76 /* myCell.h */,
+				93168F86192B5E3700F18F76 /* myCell.m */,
+				93168F88192B5F4700F18F76 /* sessions.h */,
+				93168F89192B5F4700F18F76 /* sessions.m */,
+				933A84371924D5D300676CE5 /* Supporting Files */,
 				933A84451924D5D500676CE5 /* ViewController.h */,
 				933A84461924D5D500676CE5 /* ViewController.m */,
-				933A84481924D5D700676CE5 /* Images.xcassets */,
-				933A84371924D5D300676CE5 /* Supporting Files */,
 			);
+			name = Runme;
 			path = bykeMe;
 			sourceTree = "<group>";
 		};
 		933A84371924D5D300676CE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				933A84381924D5D300676CE5 /* bykeMe-Info.plist */,
+				933A84381924D5D300676CE5 /* RunMe!-Info.plist */,
 				933A84391924D5D300676CE5 /* InfoPlist.strings */,
 				933A843C1924D5D400676CE5 /* main.m */,
-				933A843E1924D5D400676CE5 /* bykeMe-Prefix.pch */,
+				933A843E1924D5D400676CE5 /* RunMe!-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -173,7 +197,7 @@
 		933A84561924D5D800676CE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				933A84571924D5D800676CE5 /* bykeMeTests-Info.plist */,
+				933A84571924D5D800676CE5 /* RunMe!Tests-Info.plist */,
 				933A84581924D5D800676CE5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -182,6 +206,8 @@
 		933A846519251E7100676CE5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				93168F8F192BA7E900F18F76 /* upGraph.png */,
+				93168F8D192BA5D700F18F76 /* Facebook_logo.png */,
 				933A847819252B6600676CE5 /* up.png */,
 				933A846619251E8700676CE5 /* Altitude.png */,
 				933A846719251E8700676CE5 /* backgroung.png */,
@@ -198,9 +224,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		933A842C1924D5D200676CE5 /* bykeMe */ = {
+		933A842C1924D5D200676CE5 /* RunMe! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 933A845F1924D5D800676CE5 /* Build configuration list for PBXNativeTarget "bykeMe" */;
+			buildConfigurationList = 933A845F1924D5D800676CE5 /* Build configuration list for PBXNativeTarget "RunMe!" */;
 			buildPhases = (
 				933A84291924D5D200676CE5 /* Sources */,
 				933A842A1924D5D200676CE5 /* Frameworks */,
@@ -210,14 +236,14 @@
 			);
 			dependencies = (
 			);
-			name = bykeMe;
+			name = "RunMe!";
 			productName = bykeMe;
-			productReference = 933A842D1924D5D200676CE5 /* bykeMe.app */;
+			productReference = 933A842D1924D5D200676CE5 /* RunMe!.app */;
 			productType = "com.apple.product-type.application";
 		};
-		933A844D1924D5D700676CE5 /* bykeMeTests */ = {
+		933A844D1924D5D700676CE5 /* RunMe!Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 933A84621924D5D800676CE5 /* Build configuration list for PBXNativeTarget "bykeMeTests" */;
+			buildConfigurationList = 933A84621924D5D800676CE5 /* Build configuration list for PBXNativeTarget "RunMe!Tests" */;
 			buildPhases = (
 				933A844A1924D5D700676CE5 /* Sources */,
 				933A844B1924D5D700676CE5 /* Frameworks */,
@@ -228,9 +254,9 @@
 			dependencies = (
 				933A84541924D5D700676CE5 /* PBXTargetDependency */,
 			);
-			name = bykeMeTests;
+			name = "RunMe!Tests";
 			productName = bykeMeTests;
-			productReference = 933A844E1924D5D700676CE5 /* bykeMeTests.xctest */;
+			productReference = 933A844E1924D5D700676CE5 /* RunMe!Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -242,12 +268,15 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Riccardo Rizzo";
 				TargetAttributes = {
+					933A842C1924D5D200676CE5 = {
+						DevelopmentTeam = RKD82WWETR;
+					};
 					933A844D1924D5D700676CE5 = {
 						TestTargetID = 933A842C1924D5D200676CE5;
 					};
 				};
 			};
-			buildConfigurationList = 933A84281924D5D200676CE5 /* Build configuration list for PBXProject "bykeMe" */;
+			buildConfigurationList = 933A84281924D5D200676CE5 /* Build configuration list for PBXProject "RunMe!" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -260,8 +289,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				933A842C1924D5D200676CE5 /* bykeMe */,
-				933A844D1924D5D700676CE5 /* bykeMeTests */,
+				933A842C1924D5D200676CE5 /* RunMe! */,
+				933A844D1924D5D700676CE5 /* RunMe!Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -273,6 +302,8 @@
 			files = (
 				933A847519251E8700676CE5 /* Time.png in Resources */,
 				933A847319251E8700676CE5 /* on_off.png in Resources */,
+				93168F8E192BA5D700F18F76 /* Facebook_logo.png in Resources */,
+				93168F90192BA7E900F18F76 /* upGraph.png in Resources */,
 				933A847919252B6600676CE5 /* up.png in Resources */,
 				933A847419251E8700676CE5 /* Speed.png in Resources */,
 				933A847119251E8700676CE5 /* button.png in Resources */,
@@ -302,7 +333,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				933A84471924D5D500676CE5 /* ViewController.m in Sources */,
+				93FA06BD192A7AE00077031A /* FileSupport.m in Sources */,
+				93168F87192B5E3700F18F76 /* myCell.m in Sources */,
 				933A84411924D5D500676CE5 /* AppDelegate.m in Sources */,
+				93168F8A192B5F4700F18F76 /* sessions.m in Sources */,
 				933A843D1924D5D400676CE5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +354,7 @@
 /* Begin PBXTargetDependency section */
 		933A84541924D5D700676CE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 933A842C1924D5D200676CE5 /* bykeMe */;
+			target = 933A842C1924D5D200676CE5 /* RunMe! */;
 			targetProxy = 933A84531924D5D700676CE5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -428,10 +462,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "bykeMe/bykeMe-Prefix.pch";
-				INFOPLIST_FILE = "bykeMe/bykeMe-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "bykeMe/RunMe!-Prefix.pch";
+				INFOPLIST_FILE = "bykeMe/RunMe!-Info.plist";
+				PRODUCT_NAME = "RunMe!";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -441,10 +478,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "bykeMe/bykeMe-Prefix.pch";
-				INFOPLIST_FILE = "bykeMe/bykeMe-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "bykeMe/RunMe!-Prefix.pch";
+				INFOPLIST_FILE = "bykeMe/RunMe!-Info.plist";
+				PRODUCT_NAME = "RunMe!";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -464,8 +504,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "bykeMeTests/bykeMeTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "bykeMeTests/RunMe!Tests-Info.plist";
+				PRODUCT_NAME = "RunMe!Tests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -482,8 +522,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bykeMe/bykeMe-Prefix.pch";
-				INFOPLIST_FILE = "bykeMeTests/bykeMeTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "bykeMeTests/RunMe!Tests-Info.plist";
+				PRODUCT_NAME = "RunMe!Tests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -492,7 +532,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		933A84281924D5D200676CE5 /* Build configuration list for PBXProject "bykeMe" */ = {
+		933A84281924D5D200676CE5 /* Build configuration list for PBXProject "RunMe!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				933A845D1924D5D800676CE5 /* Debug */,
@@ -501,7 +541,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		933A845F1924D5D800676CE5 /* Build configuration list for PBXNativeTarget "bykeMe" */ = {
+		933A845F1924D5D800676CE5 /* Build configuration list for PBXNativeTarget "RunMe!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				933A84601924D5D800676CE5 /* Debug */,
@@ -510,7 +550,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		933A84621924D5D800676CE5 /* Build configuration list for PBXNativeTarget "bykeMeTests" */ = {
+		933A84621924D5D800676CE5 /* Build configuration list for PBXNativeTarget "RunMe!Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				933A84631924D5D800676CE5 /* Debug */,

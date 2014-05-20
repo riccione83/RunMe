@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>027FCA25-AC29-431D-AA33-98F9DE20F690</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RunMe!</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6C59FB22-EC42-4153-A84E-9CEAE975DE07</key>
+		<string>https://github.com/riccione83/bykeMe.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RunMe!.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6C59FB22-EC42-4153-A84E-9CEAE975DE07</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/riccione83/bykeMe.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6C59FB22-EC42-4153-A84E-9CEAE975DE07</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6C59FB22-EC42-4153-A84E-9CEAE975DE07</string>
+			<key>IDESourceControlWCCName</key>
+			<string>bykeMe</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "933A842C1924D5D200676CE5"
-               BuildableName = "bykeMe.app"
-               BlueprintName = "bykeMe"
-               ReferencedContainer = "container:bykeMe.xcodeproj">
+               BuildableName = "RunMe!.app"
+               BlueprintName = "RunMe!"
+               ReferencedContainer = "container:RunMe!.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "933A844D1924D5D700676CE5"
-               BuildableName = "bykeMeTests.xctest"
-               BlueprintName = "bykeMeTests"
-               ReferencedContainer = "container:bykeMe.xcodeproj">
+               BuildableName = "RunMe!Tests.xctest"
+               BlueprintName = "RunMe!Tests"
+               ReferencedContainer = "container:RunMe!.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "933A842C1924D5D200676CE5"
-            BuildableName = "bykeMe.app"
-            BlueprintName = "bykeMe"
-            ReferencedContainer = "container:bykeMe.xcodeproj">
+            BuildableName = "RunMe!.app"
+            BlueprintName = "RunMe!"
+            ReferencedContainer = "container:RunMe!.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "933A842C1924D5D200676CE5"
-            BuildableName = "bykeMe.app"
-            BlueprintName = "bykeMe"
-            ReferencedContainer = "container:bykeMe.xcodeproj">
+            BuildableName = "RunMe!.app"
+            BlueprintName = "RunMe!"
+            ReferencedContainer = "container:RunMe!.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "933A842C1924D5D200676CE5"
-            BuildableName = "bykeMe.app"
-            BlueprintName = "bykeMe"
-            ReferencedContainer = "container:bykeMe.xcodeproj">
+            BuildableName = "RunMe!.app"
+            BlueprintName = "RunMe!"
+            ReferencedContainer = "container:RunMe!.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
