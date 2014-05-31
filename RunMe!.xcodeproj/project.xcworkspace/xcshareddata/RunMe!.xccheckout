@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>027FCA25-AC29-431D-AA33-98F9DE20F690</string>
+	<string>EE11ACFE-8027-4FF3-BF80-74F59B71A628</string>
 	<key>IDESourceControlProjectName</key>
 	<string>RunMe!</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6C59FB22-EC42-4153-A84E-9CEAE975DE07</key>
-		<string>https://github.com/riccione83/bykeMe.git</string>
+		<key>6647B060-766A-4FF1-BB61-19814489F2FE</key>
+		<string>https://github.com/riccione83/RunMe.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>RunMe!.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6C59FB22-EC42-4153-A84E-9CEAE975DE07</key>
+		<key>6647B060-766A-4FF1-BB61-19814489F2FE</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/riccione83/bykeMe.git</string>
+	<string>https://github.com/riccione83/RunMe.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6C59FB22-EC42-4153-A84E-9CEAE975DE07</string>
+	<string>6647B060-766A-4FF1-BB61-19814489F2FE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6C59FB22-EC42-4153-A84E-9CEAE975DE07</string>
+			<string>6647B060-766A-4FF1-BB61-19814489F2FE</string>
 			<key>IDESourceControlWCCName</key>
-			<string>bykeMe</string>
+			<string>RunMe</string>
 		</dict>
 	</array>
 </dict>

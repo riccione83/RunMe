@@ -30,7 +30,6 @@
 @synthesize bannerKM,labelKM;
 @synthesize statusLabel,gpsLabel;
 
-
 - (IBAction)postOnFacebook:(id)sender {
     
     if(distance>100 || distance2>1.0)
@@ -95,7 +94,7 @@
     
     pos = [locations lastObject];
     
-    if(pos.verticalAccuracy<=10.0)
+    if(pos.verticalAccuracy<=100.0)
     {
         statusLabel.text =@"Running...";
         gpsLabel.textColor = [UIColor greenColor];
@@ -168,11 +167,16 @@
     
     oldPos = pos;
     
+        
+        
     if(iseAltitude==0)
         iseAltitude = pos.altitude;
     else {
         if(pos.altitude>iseAltitude)
             iseAltitude = pos.altitude;
+        
+      //  viewAltitude.percent = (100*pos.altitude)/iseAltitude;
+        
     }
     
     if(distance<1000)
@@ -180,11 +184,19 @@
     else
         iseDistance = distance2;
     
+        
+        
     if(iseMaxSpeed==0)
         iseMaxSpeed = speed;
     else {
         if(speed>iseMaxSpeed)
+        {
             iseMaxSpeed = speed;
+        }
+        
+        m_testView.percent = speed;
+        [m_testView setNeedsDisplay];
+        
     }
     
     num_of_point++;
@@ -202,6 +214,21 @@
     
 }
 
+-(void)decrementSpeed
+{
+    if(m_testView.percent > 0)
+    {
+        m_testView.percent = m_testView.percent - 1;
+        [m_testView setNeedsDisplay];
+    }
+    else
+    {
+        [m_timer invalidate];
+        m_timer = nil;
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -209,6 +236,17 @@
     //banner = [[ADBannerView alloc] init];
     [banner setDelegate:self];
 
+    
+    //test
+    
+    m_testView = [[BeizerView alloc] initWithFrame:self.viewTest.bounds];
+    m_testView.percent = 100;
+    m_testView.lineWith = 10;
+    //m_testView.radius = 50;
+    [self.viewTest addSubview:m_testView];
+  //  m_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(decrementSpeed) userInfo:nil repeats:YES];
+   
+    
     
     [UIView animateWithDuration:0.0 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeScale(0, 0);

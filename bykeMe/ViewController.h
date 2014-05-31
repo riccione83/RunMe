@@ -11,6 +11,7 @@
 #import <MapKit/MapKit.h>
 #include <math.h>
 #include "FileSupport.h"
+#include "BeizerView.h"
 #include <Social/Social.h>
 
 @interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate>{
@@ -44,6 +45,12 @@
     NSMutableArray *sessAltitude;
     NSInteger iseAltitude;
     
+    
+    
+    //test
+    BeizerView *m_testView;
+    NSTimer *m_timer;
+    
 }
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
 @property (strong, nonatomic) IBOutlet MKMapView *myMap;
@@ -62,6 +69,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *gpsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *viewTest;
 
 //@property (strong) FileSupport *myFile;
 
@@ -72,5 +80,6 @@
 -(void)startLocation;
 -(void)timer;
 -(void)hideBanner;
+-(void)decrementSpeed;
 
 @end

@@ -37,6 +37,7 @@
 		933A84771925210E00676CE5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84761925210E00676CE5 /* iAd.framework */; };
 		933A847B192533E200676CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A847A192533E200676CE5 /* MapKit.framework */; };
 		93991BF61939A9ED00324333 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 93991BF51939A9ED00324333 /* up.png */; };
+		93A3A16F1939C466005EB3A1 /* BeizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A3A16E1939C466005EB3A1 /* BeizerView.m */; };
 		93FA06BD192A7AE00077031A /* FileSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FA06BC192A7AE00077031A /* FileSupport.m */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,8 @@
 		933A84761925210E00676CE5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		933A847A192533E200676CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		93991BF51939A9ED00324333 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		93A3A16D1939C466005EB3A1 /* BeizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeizerView.h; sourceTree = "<group>"; };
+		93A3A16E1939C466005EB3A1 /* BeizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeizerView.m; sourceTree = "<group>"; };
 		93FA06BB192A7AE00077031A /* FileSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileSupport.h; path = ../FileSupport.h; sourceTree = "<group>"; };
 		93FA06BC192A7AE00077031A /* FileSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileSupport.m; path = ../FileSupport.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +172,8 @@
 				933A84371924D5D300676CE5 /* Supporting Files */,
 				933A84451924D5D500676CE5 /* ViewController.h */,
 				933A84461924D5D500676CE5 /* ViewController.m */,
+				93A3A16D1939C466005EB3A1 /* BeizerView.h */,
+				93A3A16E1939C466005EB3A1 /* BeizerView.m */,
 			);
 			name = Runme;
 			path = bykeMe;
@@ -332,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93A3A16F1939C466005EB3A1 /* BeizerView.m in Sources */,
 				933A84471924D5D500676CE5 /* ViewController.m in Sources */,
 				93FA06BD192A7AE00077031A /* FileSupport.m in Sources */,
 				93168F87192B5E3700F18F76 /* myCell.m in Sources */,
