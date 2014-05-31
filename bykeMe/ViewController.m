@@ -33,30 +33,38 @@
 
 - (IBAction)postOnFacebook:(id)sender {
     
-    UIGraphicsBeginImageContext(myMap.frame.size);
-    [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-        NSString *temp;
+    if(distance>100 || distance2>1.0)
+    {
+        UIGraphicsBeginImageContext(myMap.frame.size);
+        [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
         
-        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        if(distance<1000)
-            temp = [NSString stringWithFormat:@"I'm running %.01f m with RunMe! for iPhone",distance];
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+            NSString *temp;
+        
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            if(distance<1000)
+                temp = [NSString stringWithFormat:@"I'm running %.01f m with RunMe! for iPhone",distance];
+            else
+                temp = [NSString stringWithFormat:@"I'm running %.02f Km with RunMe! for iPhone",distance2];
+        
+            [controller setInitialText:temp];
+            //[controller add]
+            [controller addImage:image];
+            [self presentViewController:controller animated:YES completion:Nil];
+        }
         else
-            temp = [NSString stringWithFormat:@"I'm running %.02f Km with RunMe! for iPhone",distance2];
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Share on Facebook" message:@"Sorry but you don't have a Facebook account on your iPhone. Please add one and try again. Thankyou." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
-        [controller setInitialText:temp];
-        //[controller add]
-        [controller addImage:image];
-        [self presentViewController:controller animated:YES completion:Nil];
+            [alert show];
+        }
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Share on Facebook" message:@"Sorry but you don't have a Facebook account on your iPhone. Please add one and try again. Thankyou." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        
-        [alert show];
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Share on Facebook" message:@"Sorry, for share on facebook you need to run at least 100 meters." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [al show];
     }
 }
 
@@ -87,15 +95,16 @@
     
     pos = [locations lastObject];
     
-    if(pos.verticalAccuracy<10)
+    if(pos.verticalAccuracy<=10.0)
     {
+        statusLabel.text =@"Running...";
         gpsLabel.textColor = [UIColor greenColor];
-    }
-    else
-    {
-        gpsLabel.textColor = [UIColor redColor];
-    }
-    
+       
+        if(timeTimer==nil)
+        {
+            timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
+        }
+        
     NSLog(@"Accuracy: %f",pos.verticalAccuracy);
     
     
@@ -181,7 +190,15 @@
     num_of_point++;
     tempAvgSpeed += speed;
     iseAvgSpeed = (tempAvgSpeed/num_of_point);
-    
+    }
+    else
+    {
+        gpsLabel.textColor = [UIColor redColor];
+        statusLabel.text =@"Waiting for a better gps signal...";
+        [timeTimer invalidate];
+        timeTimer = nil;
+    }
+
     
 }
 
@@ -414,7 +431,7 @@
             iseAltitude = 0;
             
             [self startLocation];
-            timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
+          //  timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
             
         }
     else
