@@ -70,6 +70,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *viewTest;
+@property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 
 //@property (strong) FileSupport *myFile;
 

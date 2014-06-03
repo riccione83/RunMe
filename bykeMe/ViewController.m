@@ -102,6 +102,14 @@
         if(timeTimer==nil)
         {
             timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
+            
+            self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+                NSLog(@"Background handle called, Not running background task anymore");
+                [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+                self.backgroundTask = UIBackgroundTaskInvalid;
+            }];
+
+            
         }
         
     NSLog(@"Accuracy: %f",pos.verticalAccuracy);
@@ -156,7 +164,7 @@
     lblAltitude.text = [NSString stringWithFormat:@"%.01f mt",pos.altitude];
     lblSpeed.text = [NSString stringWithFormat:@"%.01f", speed];
     
-    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.001, 0.001));
+    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
     
     if(!regionCreated) {
         [myMap setRegion:reg];
@@ -209,6 +217,12 @@
         statusLabel.text =@"Waiting for a better gps signal...";
         [timeTimer invalidate];
         timeTimer = nil;
+        if(self.backgroundTask != UIBackgroundTaskInvalid)
+        {
+            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+            self.backgroundTask = UIBackgroundTaskInvalid;
+        }
+
     }
 
     
@@ -240,12 +254,12 @@
     //test
     
     m_testView = [[BeizerView alloc] initWithFrame:self.viewTest.bounds];
-    m_testView.percent = 100;
+    m_testView.percent = 0.0;
     m_testView.lineWith = 10;
     //m_testView.radius = 50;
     [self.viewTest addSubview:m_testView];
   //  m_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(decrementSpeed) userInfo:nil repeats:YES];
-   
+    myMap.showsUserLocation = YES;
     
     
     [UIView animateWithDuration:0.0 animations:^{
@@ -327,6 +341,8 @@
 
 
 -(void)timer {
+    @autoreleasepool {
+        
     
     iSec++;
     if(iSec==60) {
@@ -342,7 +358,7 @@
     
     lblTime.text = [NSString stringWithFormat:@"%02d:%02d:%02d",iHr,iMin,iSec];
     
-    
+    }
   /*  if(!menuShowed)
     {
         if(iSec>=5)
@@ -369,6 +385,11 @@
     STARTED = false;
     [timeTimer invalidate];
     timeTimer = nil;
+    if(self.backgroundTask != UIBackgroundTaskInvalid)
+    {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+        self.backgroundTask = UIBackgroundTaskInvalid;
+    }
     oldPos = nil;
     distance = 0.0;
     iSec = 0; iMin=0; iHr = 0;
