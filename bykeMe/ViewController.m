@@ -152,11 +152,13 @@
     
     if(isKmh) {
         speed = pos.speed * kph;
-        lblUnitSpeed.text = @"Km/h";
+        m_testView.indicator = @"Km/h";
+        //lblUnitSpeed.text = @"Km/h";
     }
     else {
         speed = pos.speed * mph;
-        lblUnitSpeed.text = @"mph";
+       // lblUnitSpeed.text = @"mph";
+        m_testView.indicator = @"mph";
     }
     
     if(speed<0) speed=0.0;
@@ -193,6 +195,14 @@
         iseDistance = distance2;
     
         
+    if(speed<=50)
+        m_testView.maxValue = 50;
+    if(speed>50 && speed<=100)
+        m_testView.maxValue = 100;
+    if(speed>100 && speed<=200)
+        m_testView.maxValue = 200;
+    if(speed>200)
+        m_testView.maxValue = 400;
         
     if(iseMaxSpeed==0)
         iseMaxSpeed = speed;
@@ -256,7 +266,7 @@
     m_testView = [[BeizerView alloc] initWithFrame:self.viewTest.bounds];
     m_testView.percent = 0.0;
     m_testView.lineWith = 10;
-    //m_testView.radius = 50;
+    m_testView.maxValue = 200;
     [self.viewTest addSubview:m_testView];
   //  m_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(decrementSpeed) userInfo:nil repeats:YES];
     myMap.showsUserLocation = YES;
@@ -405,6 +415,10 @@
     tempAvgSpeed = 0;
     distance2 =0;
     statusLabel.text = @"Stopped";
+    
+    m_testView.maxValue = 50;
+    m_testView.percent = 0.0;
+    [m_testView setNeedsDisplay];
 }
 
 -(void)loadSession {
@@ -465,8 +479,6 @@
             //UIAlertView *al2 = [[UIAlertView alloc] initWithTitle:@"TEST" message:@"Salvo i dati" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
             //[al2 show];
         }
-    
-    
 }
 
 

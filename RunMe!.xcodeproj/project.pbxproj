@@ -468,13 +468,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bykeMe/RunMe!-Prefix.pch";
 				INFOPLIST_FILE = "bykeMe/RunMe!-Info.plist";
 				PRODUCT_NAME = "RunMe!";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0CA02EB8-A147-4293-B12A-744AFB2E27FB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -484,13 +484,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bykeMe/RunMe!-Prefix.pch";
 				INFOPLIST_FILE = "bykeMe/RunMe!-Info.plist";
 				PRODUCT_NAME = "RunMe!";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0CA02EB8-A147-4293-B12A-744AFB2E27FB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

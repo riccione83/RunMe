@@ -15,6 +15,7 @@
 
 @synthesize percent;
 @synthesize lineWith,radius,maxValue;
+@synthesize indicator;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,6 +29,7 @@
         radius = (frame.size.height/2) - 10;
         lineWith = 10;
         maxValue = 100;
+        indicator = @"Km/h";
     }
     return self;
 }
@@ -40,22 +42,19 @@
     // Drawing code
     
     NSString * textContent = [NSString stringWithFormat:@"%.01f",percent];
-    NSString* value = [NSString stringWithFormat:@"Km/h"];
+    NSString* value = [NSString stringWithFormat:@"%@",indicator];
 
-    
 
-    
-    
     UIBezierPath *bezierPathSfondo = [UIBezierPath bezierPath];
     
-    [bezierPathSfondo addArcWithCenter:CGPointMake(rect.size.width/2, rect.size.height/2) radius:radius startAngle:startAngle endAngle:(endAngle-startAngle)*(100 / 100.0) + startAngle clockwise:YES];
+    [bezierPathSfondo addArcWithCenter:CGPointMake(rect.size.width/2, rect.size.height/2) radius:radius startAngle:startAngle endAngle:(endAngle-startAngle)*(maxValue / maxValue) + startAngle clockwise:YES];
     [[UIColor blueColor] setStroke];
     bezierPathSfondo.lineWidth = lineWith;
     [bezierPathSfondo stroke];
     
     UIBezierPath *bezierLato = [UIBezierPath bezierPath];
     
-    [bezierLato addArcWithCenter:CGPointMake(rect.size.width/2, rect.size.height/2) radius:radius+6 startAngle:startAngle endAngle:(endAngle-startAngle)*(100 / 100.0) + startAngle clockwise:YES];
+    [bezierLato addArcWithCenter:CGPointMake(rect.size.width/2, rect.size.height/2) radius:radius+6 startAngle:startAngle endAngle:(endAngle-startAngle)*(maxValue / maxValue) + startAngle clockwise:YES];
     [UIColorFromRGB(143234) setStroke];
     bezierLato.lineWidth = 2;
     [bezierLato stroke];
@@ -63,7 +62,7 @@
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     
-    [bezierPath addArcWithCenter:CGPointMake(rect.size.width/2, rect.size.height/2) radius:radius startAngle:startAngle endAngle:(endAngle-startAngle)*(percent / 100.0) + startAngle clockwise:YES];
+    [bezierPath addArcWithCenter:CGPointMake(rect.size.width/2, rect.size.height/2) radius:radius startAngle:startAngle endAngle:(endAngle-startAngle)*(percent / maxValue) + startAngle clockwise:YES];
     
     bezierPath.lineWidth = lineWith+3;
     [[UIColor redColor] setStroke];

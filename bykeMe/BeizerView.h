@@ -14,12 +14,14 @@
     double percent;
     NSInteger radius;
     NSInteger lineWith;
-    NSInteger maxValue;
+    NSUInteger maxValue;
+    NSString *indicator;
 }
 
 @property (nonatomic) double percent;
 @property (nonatomic) NSInteger radius;
 @property (nonatomic) NSInteger lineWith;
-@property (nonatomic) NSInteger maxValue;
+@property (nonatomic) NSUInteger maxValue;
+@property (nonatomic) NSString *indicator;
 
 @end
