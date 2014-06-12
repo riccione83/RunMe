@@ -11,10 +11,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[sessions tableView:commitEditingStyle:forRowAtIndexPath:]:sessions.m">
+         contextName = "-[ViewController changeUnits:]:ViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "_btnUnits.titleLabel.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -25,6 +25,17 @@
                value = "self.delegate">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[sessions tableView:commitEditingStyle:forRowAtIndexPath:]:sessions.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FileSupport metaDQFinita:]:FileSupport.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -95,7 +95,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest; // 100 m
+    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // 100 m
     [locationManager startUpdatingLocation];
 }
 
@@ -105,6 +105,18 @@
     bannerTimer = nil;
     [bannerKM setHidden:YES];
     bannerGoShowed = false;
+}
+- (IBAction)changeUnits:(id)sender {
+    if(isKmh)
+    {
+        isKmh = NO;
+         [sender setTitle:@"Units mph" forState:UIControlStateNormal];
+    }
+    else
+    {
+        isKmh = YES;
+         [sender setTitle:@"Units Km/h" forState:UIControlStateNormal];
+    }
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
@@ -117,6 +129,17 @@
     NSString *unit = @"";
     
     pos = [locations lastObject];
+    
+    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
+    
+    if(!regionCreated) {
+        [myMap setRegion:reg];
+        regionCreated = true;
+    }
+    
+    [myMap setCenterCoordinate:pos.coordinate];
+    
+    if(RUNNING) {
     
     if(pos.verticalAccuracy<=100.0)
     {
@@ -190,15 +213,6 @@
     lblAltitude.text = [NSString stringWithFormat:@"%.01f mt",pos.altitude];
     lblSpeed.text = [NSString stringWithFormat:@"%.01f", speed];
     
-    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
-    
-    if(!regionCreated) {
-        [myMap setRegion:reg];
-        regionCreated = true;
-    }
-    
-    [myMap setCenterCoordinate:pos.coordinate];
-    
     oldPos = pos;
     
         
@@ -217,7 +231,7 @@
         iseDistance = distance;
     else
         iseDistance = distance2;
-    
+        speed = 50;
         
     if(speed<=50)
         m_testView.maxValue = 50;
@@ -258,7 +272,7 @@
         }
 
     }
-
+    }
     
 }
 
@@ -312,6 +326,7 @@
     menuShowed = FALSE;
     isKmh = true;
     bannerGoShowed = false;
+    RUNNING = false;
     
     
     sessDate     = [[NSMutableArray alloc] init];
@@ -319,6 +334,11 @@
     sessAltitude = [[NSMutableArray alloc] init];
     sessAvgSpeed = [[NSMutableArray alloc] init];
     sessMaxSpeed = [[NSMutableArray alloc] init];
+    
+    iCFile = [[FileSupport alloc] init];
+    //iCFile.delegate = self;
+    [iCFile initiCloudFile:@"RunMeData.data"];
+     [self startLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -413,9 +433,9 @@
         CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
         startBtn.transform = trasform;
     }];
-    [locationManager stopUpdatingLocation];
+   // [locationManager stopUpdatingLocation];
     [bannerKM setHidden:true];
-    myMap.showsUserLocation = false;
+    //myMap.showsUserLocation = false;
     STARTED = false;
     [timeTimer invalidate];
     timeTimer = nil;
@@ -439,7 +459,7 @@
     tempAvgSpeed = 0;
     distance2 =0;
     statusLabel.text = @"Stopped";
-    
+    RUNNING = false;
     m_testView.maxValue = 50;
     m_testView.percent = 0.0;
     [m_testView setNeedsDisplay];
@@ -464,8 +484,6 @@
 -(void)saveSession {
     [self loadSession];
     
-    
-    
     NSDate *currDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"dd/MM/YY"];
@@ -474,8 +492,6 @@
     NSLog(@"%@",dateString);
     
     iseDate = dateString;
-    
-    
        
     [sessDate addObject:iseDate];
     [sessAltitude addObject:[NSNumber numberWithInteger:iseAltitude]];
@@ -490,6 +506,11 @@
     [myFile writeDataToFile:sessAvgSpeed fileToWrite:@"sessionAvgSpeed.txt"];
     [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
     [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
+    
+    iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
+    [iCFile saveFile:iCloudArray];
+
+    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -524,23 +545,23 @@
             iseDistance = 0;
             iseMaxSpeed = 0;
             iseAltitude = 0;
-            
-            [self startLocation];
+            RUNNING=true;
+           // [self startLocation];
           //  timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
             
         }
     else
     {
-        if(distance>100)
-        {
+       // if(distance>100)
+       // {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sessione" message:@"Una sessione è attualmente attiva. Cosa desideri fare?" delegate:self cancelButtonTitle:@"Annulla" otherButtonTitles:@"Salva sessione",@"Annulla sessione", nil];
             
             [alert show];
-        }
+     /*   }
         else
         {
             [self resetData];
-        }
+        }*/
     }
 }
 

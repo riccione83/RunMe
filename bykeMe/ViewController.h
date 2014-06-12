@@ -31,8 +31,10 @@
     BOOL isKmh;
     BOOL bannerGoShowed;
     BOOL bannerIsVisible;
+    BOOL RUNNING;
     
-    
+    FileSupport* iCFile;
+    NSMutableArray *iCloudArray;
     NSMutableArray *sessDate;
     NSString *iseDate;
     NSMutableArray *sessDistance;
@@ -68,6 +70,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelKM;
 @property (strong, nonatomic) IBOutlet UILabel *gpsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIButton *btnUnits;
 
 @property (weak, nonatomic) IBOutlet UIView *viewTest;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
