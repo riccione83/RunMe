@@ -7,19 +7,43 @@
 //
 
 #import "sessions.h"
+#import "FileSupport.h"
+#import "myDoc.h"
 
 @interface sessions ()
 
 @end
 
 @implementation sessions
-
+FileSupport *iCFile;
 @synthesize sessionTable;
 
 #pragma mark LoadSession
 
 - (IBAction)returnToMainView:(id)sender {
         [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)updateFilesFromiCloud:(NSMutableArray *) _title_ ar2:(NSMutableArray*)_creation ar3:(NSMutableArray*) _descriptions ar4:(NSMutableArray*)_checked ar5:(NSMutableArray*)_notifications_ {
+    
+    FileSupport *myFile = [[FileSupport alloc] init];
+    
+    [myFile writeDataToFile:_title_ fileToWrite:@"sessionDate.txt"];
+    [myFile writeDataToFile:_creation fileToWrite:@"sessionAltitude.txt"];
+    [myFile writeDataToFile:_descriptions fileToWrite:@"sessionAvgSpeed.txt"];
+    [myFile writeDataToFile:_checked fileToWrite:@"sessionDistance.txt"];
+    [myFile writeObjectToFile:_notifications_ fileToWrite:@"sessionMaxSpeed.txt"];
+    
+    sessDate = _title_;
+    sessAltitude = _creation;
+    sessAvgSpeed = _descriptions;
+    sessDistance = _checked;
+    sessMaxSpeed = _notifications_;
+    
+    [sessionTable reloadData];
+    
+    //  iCloudArray = [[NSMutableArray alloc] initWithObjects:titles,creation,descriptions,checked, nil];
+    //[iCFile saveFile:iCloudArray];
 }
 
 
@@ -32,6 +56,30 @@
     [myFile writeDataToFile:sessAvgSpeed fileToWrite:@"sessionAvgSpeed.txt"];
     [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
     [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
+    
+    iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
+    [iCFile saveFile:iCloudArray];
+}
+
+-(void)loadSessions:(BOOL)iCloudSupport {
+    FileSupport *myFile = [[FileSupport alloc] init];
+    
+    NSMutableArray *testArray = [myFile readDataFromFile:@"sessionDate.txt"];
+    
+    if(testArray!=nil)
+    {
+        sessDate     = [myFile readDataFromFile:@"sessionDate.txt"];
+        sessDistance = [myFile readDataFromFile:@"sessionDistance.txt"];
+        sessAltitude = [myFile readDataFromFile:@"sessionAltitude.txt"];
+        sessAvgSpeed = [myFile readDataFromFile:@"sessionAvgSpeed.txt"];
+        sessMaxSpeed = [myFile readDataFromFile:@"sessionMaxSpeed.txt"];
+    }
+    
+    if(iCloudSupport){
+        iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessDistance,sessAltitude,sessAvgSpeed,sessMaxSpeed, nil];
+        [iCFile saveFile:iCloudArray];
+    }
+    
 }
 
 -(void)loadSessions {
@@ -116,7 +164,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self loadSessions];
+    
+    
+    iCFile = [[FileSupport alloc] init];
+    iCFile.delegate = self;
+    [iCFile initiCloudFile:@"RunMeData.data"];
+   // [self loadSessions];
 }
 
 - (void)didReceiveMemoryWarning

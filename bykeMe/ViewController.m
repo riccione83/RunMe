@@ -67,6 +67,30 @@
     }
 }
 
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+   if(!bannerIsVisible)
+   {
+    bannerIsVisible = true;
+    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+    banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+    myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - banner.frame.size.height);
+    m_testView.frame = CGRectOffset(m_testView.frame, 0, -banner.frame.size.height);
+    [UIView commitAnimations];
+   }
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    if(bannerIsVisible)
+    {
+        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+        banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
+        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
+        m_testView.frame = CGRectOffset(m_testView.frame, 0, +banner.frame.size.height);
+        [UIView commitAnimations];
+        bannerIsVisible = NO;
+    }
+}
+
 -(void)startLocation {
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -259,7 +283,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     //banner = [[ADBannerView alloc] init];
     [banner setDelegate:self];
-
+    bannerIsVisible = TRUE;
     
     //test
     

@@ -16,8 +16,15 @@
     NSMutableArray *sessMaxSpeed;
     NSMutableArray *sessAvgSpeed;
     NSMutableArray *sessAltitude;
+    NSMutableArray *iCloudArray;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *sessionTable;
+@property (strong,nonatomic) myDoc *document_titles;
+
+-(void)loadSessions;
+-(void)loadSessions:(BOOL)iCloudSupport;
+-(void)saveSessions;
+-(void)updateFilesFromiCloud:(NSMutableArray *) _title_ ar2:(NSMutableArray*)_creation ar3:(NSMutableArray*) _descriptions ar4:(NSMutableArray*)_checked ar5:(NSMutableArray*)_notifications_;
 
 @end

@@ -30,7 +30,7 @@
     NSUInteger num_of_point;
     BOOL isKmh;
     BOOL bannerGoShowed;
-    
+    BOOL bannerIsVisible;
     
     
     NSMutableArray *sessDate;

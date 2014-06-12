@@ -140,7 +140,7 @@
                             </label>
                             <view contentMode="scaleToFill" id="RQi-oI-VRr">
                                 <rect key="frame" x="0.0" y="312" width="319" height="120"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                             <view contentMode="scaleToFill" id="03w-tF-9Jo">
                                 <rect key="frame" x="0.0" y="-7" width="320" height="213"/>
