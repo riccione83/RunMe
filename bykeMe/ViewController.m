@@ -111,12 +111,15 @@
     {
         isKmh = NO;
          [sender setTitle:@"Units mph" forState:UIControlStateNormal];
+        m_testView.indicator = @"mph";
     }
     else
     {
         isKmh = YES;
          [sender setTitle:@"Units Km/h" forState:UIControlStateNormal];
+        m_testView.indicator = @"Km/h";
     }
+    [m_testView setNeedsDisplay];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
@@ -216,7 +219,6 @@
     oldPos = pos;
     
         
-        
     if(iseAltitude==0)
         iseAltitude = pos.altitude;
     else {
@@ -231,7 +233,7 @@
         iseDistance = distance;
     else
         iseDistance = distance2;
-        speed = 50;
+
         
     if(speed<=50)
         m_testView.maxValue = 50;
@@ -291,6 +293,51 @@
     
 }
 
+-(void)loadOptions {
+    FileSupport *myFile = [[FileSupport alloc] init];
+    
+    NSMutableArray *testArray = [myFile readDataFromFile:@"options.plist"];
+    
+    if(testArray!=nil)
+    {
+        sessDate     = [myFile readDataFromFile:@"options.plist"];
+    }
+    
+}
+
+-(void)saveOptions {
+    [self loadSession];
+    
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd/MM/YY"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    
+    NSLog(@"%@",dateString);
+    
+    iseDate = dateString;
+    
+    [sessDate addObject:iseDate];
+    [sessAltitude addObject:[NSNumber numberWithInteger:iseAltitude]];
+    [sessAvgSpeed addObject:[NSNumber numberWithInteger:iseAvgSpeed]];
+    [sessDistance addObject:[NSNumber numberWithInteger:iseDistance]];
+    [sessMaxSpeed addObject:[NSNumber numberWithInteger:iseMaxSpeed]];
+    
+    FileSupport *myFile = [[FileSupport alloc] init];
+    
+    [myFile writeDataToFile:sessDate fileToWrite:@"sessionDate.txt"];
+    [myFile writeDataToFile:sessAltitude fileToWrite:@"sessionAltitude.txt"];
+    [myFile writeDataToFile:sessAvgSpeed fileToWrite:@"sessionAvgSpeed.txt"];
+    [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
+    [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
+    
+    //   iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
+    //   [iCFile saveFile:iCloudArray];
+    
+    
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -335,9 +382,9 @@
     sessAvgSpeed = [[NSMutableArray alloc] init];
     sessMaxSpeed = [[NSMutableArray alloc] init];
     
-    iCFile = [[FileSupport alloc] init];
+    //iCFile = [[FileSupport alloc] init];
     //iCFile.delegate = self;
-    [iCFile initiCloudFile:@"RunMeData.data"];
+   // [iCFile initiCloudFile:@"RunMeData.data"];
      [self startLocation];
 }
 
@@ -507,8 +554,8 @@
     [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
     [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
     
-    iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
-    [iCFile saveFile:iCloudArray];
+ //   iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
+ //   [iCFile saveFile:iCloudArray];
 
     
 }
