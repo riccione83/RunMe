@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9303C104194A35F400C92454 /* 3+Santa+Lucia.tcx.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 9303C103194A35F400C92454 /* 3+Santa+Lucia.tcx.gpx */; };
 		9303C106194A3B0100C92454 /* tacho-speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9303C105194A3B0100C92454 /* tacho-speed.png */; };
 		93168F87192B5E3700F18F76 /* myCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93168F86192B5E3700F18F76 /* myCell.m */; };
 		93168F8C192BA2E500F18F76 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93168F8B192BA2E500F18F76 /* Social.framework */; };
@@ -55,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9303C103194A35F400C92454 /* 3+Santa+Lucia.tcx.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "3+Santa+Lucia.tcx.gpx"; sourceTree = "<group>"; };
 		9303C105194A3B0100C92454 /* tacho-speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tacho-speed.png"; sourceTree = "<group>"; };
 		93168F85192B5E3700F18F76 /* myCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCell.h; sourceTree = "<group>"; };
 		93168F86192B5E3700F18F76 /* myCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCell.m; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 		933A84241924D5D200676CE5 = {
 			isa = PBXGroup;
 			children = (
-				9303C103194A35F400C92454 /* 3+Santa+Lucia.tcx.gpx */,
 				9321D8C51949FFE700D39DF8 /* RunMe!.entitlements */,
 				933A84361924D5D300676CE5 /* Runme */,
 				933A84551924D5D700676CE5 /* bykeMeTests */,
@@ -290,7 +287,7 @@
 						DevelopmentTeam = RKD82WWETR;
 						SystemCapabilities = {
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -336,7 +333,6 @@
 				933A847019251E8700676CE5 /* Bottom_Bar.png in Resources */,
 				933A843B1924D5D300676CE5 /* InfoPlist.strings in Resources */,
 				933A84441924D5D500676CE5 /* Main.storyboard in Resources */,
-				9303C104194A35F400C92454 /* 3+Santa+Lucia.tcx.gpx in Resources */,
 				9303C106194A3B0100C92454 /* tacho-speed.png in Resources */,
 				933A846E19251E8700676CE5 /* Altitude.png in Resources */,
 			);
@@ -489,7 +485,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "RunMe!.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -506,7 +501,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "RunMe!.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -20,6 +20,10 @@
     CLLocationManager *locationManager;
     CLLocation *pos;
     CLLocation *oldPos;
+    CLLocation *firstPoint;
+    CLLocation *lastPoint;
+    MKPointAnnotation *startPoint;
+    MKPointAnnotation *endPoint;
     bool regionCreated;
     NSTimer *timeTimer;
     NSTimer *bannerTimer;
@@ -32,6 +36,9 @@
     BOOL bannerGoShowed;
     BOOL bannerIsVisible;
     BOOL RUNNING;
+    BOOL SESSION_ACTIVE;
+    
+    NSMutableArray *options;
     
     FileSupport* iCFile;
     NSMutableArray *iCloudArray;
@@ -46,7 +53,7 @@
     NSInteger tempAvgSpeed;
     NSMutableArray *sessAltitude;
     NSInteger iseAltitude;
-    
+    NSMutableArray *savedPoint;
     
     
     //test

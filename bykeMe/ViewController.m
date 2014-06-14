@@ -34,6 +34,11 @@
     
     if(distance>100 || distance2>1.0)
     {
+        
+        NSArray* posArray = [[NSArray alloc] initWithObjects:startPoint,endPoint, nil];
+        MKCoordinateRegion region = [self regionForAnnotations:posArray];
+        [myMap setRegion:region animated:YES];
+        
         UIGraphicsBeginImageContext(myMap.frame.size);
         [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
@@ -43,10 +48,11 @@
             NSString *temp;
         
             SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            
             if(distance<1000)
-                temp = [NSString stringWithFormat:@"I'm running %.01f m with RunMe! for iPhone",distance];
+                temp = [NSString stringWithFormat:@"I'm running %.01f m with RunMe! - development version - for iPhone",distance];
             else
-                temp = [NSString stringWithFormat:@"I'm running %.02f Km with RunMe! for iPhone",distance2];
+                temp = [NSString stringWithFormat:@"I'm running %.02f Km with RunMe! - development version - for iPhone",distance2];
         
             [controller setInitialText:temp];
             //[controller add]
@@ -67,29 +73,81 @@
     }
 }
 
--(void)bannerViewDidLoadAd:(ADBannerView *)banner{
-   if(!bannerIsVisible)
-   {
-    bannerIsVisible = true;
-    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-    banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
-    myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - banner.frame.size.height);
-    m_testView.frame = CGRectOffset(m_testView.frame, 0, -banner.frame.size.height);
-    [UIView commitAnimations];
-   }
+-(MKCoordinateRegion)regionForAnnotations:(NSArray*)annotations {
+
+    MKCoordinateRegion region;
+    
+    if([annotations count] == 0)
+    {
+        region = MKCoordinateRegionMakeWithDistance(myMap.userLocation.coordinate, 1000, 1000);
+    }
+    else if ([annotations count] == 1)
+    {
+        id<MKAnnotation> annotation = [annotations lastObject];
+        region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 1000, 1000);
+    }
+    else
+    {
+        CLLocationCoordinate2D topLeftCoord;
+        topLeftCoord.latitude = -90;
+        topLeftCoord.longitude = 180;
+        
+        CLLocationCoordinate2D bottomRighCoord;
+        bottomRighCoord.latitude = 90;
+        bottomRighCoord.longitude = -180;
+        
+        for( id <MKAnnotation> annotation in annotations)
+        {
+            topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
+            topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
+            bottomRighCoord.latitude = fmin(bottomRighCoord.latitude, annotation.coordinate.latitude);
+            bottomRighCoord.longitude = fmax(bottomRighCoord.longitude, annotation.coordinate.longitude);
+        }
+        
+        const double extraSpace = 1.12;
+        
+        region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude-bottomRighCoord.latitude)/2.0;
+        region.center.longitude = topLeftCoord.longitude - (topLeftCoord.longitude-bottomRighCoord.longitude)/2.0;
+        region.span.latitudeDelta = fabs(topLeftCoord.latitude-bottomRighCoord.latitude)*extraSpace;
+        region.span.longitudeDelta = fabs(topLeftCoord.longitude-bottomRighCoord.longitude)* extraSpace;
+    }
+    
+    return [myMap regionThatFits:region];
 }
 
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    if(bannerIsVisible)
+-(void) showBannerAd {
+    if(!bannerIsVisible)
     {
+        bannerIsVisible = true;
         [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-        banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
-        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
-        m_testView.frame = CGRectOffset(m_testView.frame, 0, +banner.frame.size.height);
+        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - banner.frame.size.height);
+        m_testView.frame = CGRectOffset(m_testView.frame, 0, -banner.frame.size.height);
         [UIView commitAnimations];
-        bannerIsVisible = NO;
     }
+
 }
+
+-(void) hideBannerAD {
+      if(bannerIsVisible)
+      {
+    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+    banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
+    myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
+    m_testView.frame = CGRectOffset(m_testView.frame, 0, +banner.frame.size.height);
+    [UIView commitAnimations];
+    bannerIsVisible = NO;
+      }
+
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    [self showBannerAd];
+   }
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    [self hideBannerAD];
+  }
 
 -(void)startLocation {
     locationManager = [[CLLocationManager alloc] init];
@@ -106,20 +164,30 @@
     [bannerKM setHidden:YES];
     bannerGoShowed = false;
 }
+
 - (IBAction)changeUnits:(id)sender {
     if(isKmh)
     {
         isKmh = NO;
-         [sender setTitle:@"Units mph" forState:UIControlStateNormal];
+        [_btnUnits setTitle:@"Units mph" forState:UIControlStateNormal];
+
+//      [sender setTitle:@"Units mph" forState:UIControlStateNormal];
         m_testView.indicator = @"mph";
     }
     else
     {
         isKmh = YES;
-         [sender setTitle:@"Units Km/h" forState:UIControlStateNormal];
+        [_btnUnits setTitle:@"Units Km/h" forState:UIControlStateNormal];
         m_testView.indicator = @"Km/h";
     }
     [m_testView setNeedsDisplay];
+    
+    if([options count]==0)
+        [options addObject:[NSNumber numberWithBool:isKmh]];
+    else
+        [options replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:isKmh]];
+    
+    [self saveOptions];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
@@ -144,6 +212,17 @@
     
     if(RUNNING) {
     
+    [savedPoint addObject:pos];
+    [self updateLines];
+
+
+    if(firstPoint==nil)
+    {
+        firstPoint = [savedPoint objectAtIndex:0];
+        [self setInitialPoint:firstPoint];
+    }
+        
+        
     if(pos.verticalAccuracy<=100.0)
     {
         statusLabel.text =@"Running...";
@@ -300,41 +379,28 @@
     
     if(testArray!=nil)
     {
-        sessDate     = [myFile readDataFromFile:@"options.plist"];
+        options  = [myFile readDataFromFile:@"options.plist"];
+        
+        isKmh = [[options objectAtIndex:0] boolValue];
+        if(isKmh) {
+            m_testView.indicator = @"Km/h";
+            [_btnUnits setTitle:@"Units Km/h" forState:UIControlStateNormal];
+        }
+        else {
+            m_testView.indicator = @"mph";
+            [_btnUnits setTitle:@"Units mph" forState:UIControlStateNormal];
+        }
+        
     }
     
 }
 
 -(void)saveOptions {
-    [self loadSession];
-    
-    NSDate *currDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"dd/MM/YY"];
-    NSString *dateString = [dateFormatter stringFromDate:currDate];
-    
-    NSLog(@"%@",dateString);
-    
-    iseDate = dateString;
-    
-    [sessDate addObject:iseDate];
-    [sessAltitude addObject:[NSNumber numberWithInteger:iseAltitude]];
-    [sessAvgSpeed addObject:[NSNumber numberWithInteger:iseAvgSpeed]];
-    [sessDistance addObject:[NSNumber numberWithInteger:iseDistance]];
-    [sessMaxSpeed addObject:[NSNumber numberWithInteger:iseMaxSpeed]];
-    
+    //[self loadOptions];
+
     FileSupport *myFile = [[FileSupport alloc] init];
     
-    [myFile writeDataToFile:sessDate fileToWrite:@"sessionDate.txt"];
-    [myFile writeDataToFile:sessAltitude fileToWrite:@"sessionAltitude.txt"];
-    [myFile writeDataToFile:sessAvgSpeed fileToWrite:@"sessionAvgSpeed.txt"];
-    [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
-    [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
-    
-    //   iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
-    //   [iCFile saveFile:iCloudArray];
-    
-    
+    [myFile writeDataToFile:options fileToWrite:@"options.plist"];
 }
 
 
@@ -342,8 +408,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    //banner = [[ADBannerView alloc] init];
-    [banner setDelegate:self];
+    //if(banner == nil)
+    //    banner = [[ADBannerView alloc] init];
+    //banner.delegate = self;
+    //[banner setDelegate:self];
     bannerIsVisible = TRUE;
     
     //test
@@ -375,17 +443,25 @@
     bannerGoShowed = false;
     RUNNING = false;
     
+    options = [[NSMutableArray alloc] init];
+    [self loadOptions];
+    
     
     sessDate     = [[NSMutableArray alloc] init];
     sessDistance = [[NSMutableArray alloc] init];
     sessAltitude = [[NSMutableArray alloc] init];
     sessAvgSpeed = [[NSMutableArray alloc] init];
     sessMaxSpeed = [[NSMutableArray alloc] init];
+    savedPoint   = [[NSMutableArray alloc] init];
     
     //iCFile = [[FileSupport alloc] init];
     //iCFile.delegate = self;
    // [iCFile initiCloudFile:@"RunMeData.data"];
      [self startLocation];
+    
+    banner.delegate = self;
+    [self hideBannerAD];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -476,13 +552,13 @@
 }
 
 -(void)resetData {
-    [UIView animateWithDuration:0.5 animations:^{
+   /* [UIView animateWithDuration:0.5 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
         startBtn.transform = trasform;
-    }];
-   // [locationManager stopUpdatingLocation];
+    }];*/
+    [locationManager stopUpdatingLocation];
     [bannerKM setHidden:true];
-    //myMap.showsUserLocation = false;
+    myMap.showsUserLocation = false;
     STARTED = false;
     [timeTimer invalidate];
     timeTimer = nil;
@@ -492,6 +568,12 @@
         self.backgroundTask = UIBackgroundTaskInvalid;
     }
     oldPos = nil;
+    firstPoint = nil;
+    lastPoint = nil;
+    startPoint = nil;
+    endPoint = nil;
+    savedPoint = [[NSMutableArray alloc] init];
+    SESSION_ACTIVE = false;
     distance = 0.0;
     iSec = 0; iMin=0; iHr = 0;
     lblTime.text = [NSString stringWithFormat:@"%02d:%02d:%02d",iHr,iMin,iSec];
@@ -510,6 +592,12 @@
     m_testView.maxValue = 50;
     m_testView.percent = 0.0;
     [m_testView setNeedsDisplay];
+    
+    NSArray *pointArray = [myMap overlays];
+    [myMap removeOverlays:pointArray];
+    
+    NSArray *pointAnn = [myMap annotations];
+    [myMap removeAnnotations:pointAnn];
 }
 
 -(void)loadSession {
@@ -563,16 +651,64 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
         if(buttonIndex==2)
+        {
             [self resetData];
+             [UIView animateWithDuration:0.5 animations:^{
+             CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+             startBtn.transform = trasform;
+             }];
+        }
         if(buttonIndex==1)
         {
             [self saveSession];
-            [self resetData];
-            //UIAlertView *al2 = [[UIAlertView alloc] initWithTitle:@"TEST" message:@"Salvo i dati" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-            //[al2 show];
+            [self setFinalPoint:[savedPoint objectAtIndex:([savedPoint count]-1)]];
+            [UIView animateWithDuration:0.5 animations:^{
+                CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+                startBtn.transform = trasform;
+            }];
+            [locationManager stopUpdatingLocation];
+            [bannerKM setHidden:true];
+            myMap.showsUserLocation = false;
+            STARTED = false;
+            [timeTimer invalidate];
+            timeTimer = nil;
+            if(self.backgroundTask != UIBackgroundTaskInvalid)
+            {
+                [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+                self.backgroundTask = UIBackgroundTaskInvalid;
+            }
+            
+            statusLabel.text = @"Stopped";
+            RUNNING = false;
+            m_testView.maxValue = 50;
+            m_testView.percent = 0.0;
+            [m_testView setNeedsDisplay];
         }
 }
 
+
+
+-(void) setInitialPoint:(CLLocation*)start_loc {
+    MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
+    point.coordinate = start_loc.coordinate;
+    point.title = @"Start";
+    firstPoint = start_loc;
+    startPoint = point;
+    [myMap addAnnotation:point];
+    [myMap selectAnnotation:point animated:TRUE];
+}
+
+-(void) setFinalPoint:(CLLocation*)end_point {
+    MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
+    point.coordinate = end_point.coordinate;
+    point.title = @"End";
+    end_point = end_point;
+    endPoint = point;
+    [myMap addAnnotation:point];
+
+    //NSArray* annotations_array = [[NSArray alloc] initWithObjects:firstPoint, point, nil];
+    [myMap selectAnnotation:point animated:TRUE];
+}
 
 - (IBAction)startByking:(id)sender {
         if(!STARTED)
@@ -581,10 +717,14 @@
                 CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-90));
                 startBtn.transform = trasform;
             }];
+            if(SESSION_ACTIVE)
+                [self resetData];
             statusLabel.text = @"Running...";
             STARTED = true;
             myMap.showsUserLocation=true;
             oldPos = nil;
+            firstPoint = nil;
+            lastPoint = nil;
             distance = 0.0;
             distance2 = 0.0;
             num_of_point = 0;
@@ -593,15 +733,15 @@
             iseMaxSpeed = 0;
             iseAltitude = 0;
             RUNNING=true;
-           // [self startLocation];
-          //  timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
+            [self startLocation];
+            SESSION_ACTIVE = true;
             
         }
     else
     {
        // if(distance>100)
        // {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sessione" message:@"Una sessione è attualmente attiva. Cosa desideri fare?" delegate:self cancelButtonTitle:@"Annulla" otherButtonTitles:@"Salva sessione",@"Annulla sessione", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New session" message:@"A session is active. What would you like to do?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save session",@"Cancel session", nil];
             
             [alert show];
      /*   }
@@ -610,6 +750,41 @@
             [self resetData];
         }*/
     }
+    
+}
+
+#pragma mark Map delegate
+- (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
+{
+    if([overlay isKindOfClass:[MKPolyline class]])
+    {
+        MKPolylineView *aView = [[MKPolylineView alloc] initWithPolyline:overlay];
+        aView.fillColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+        aView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.7];
+        aView.lineWidth = 10;
+        return aView;
+    }
+    else {
+        return nil;
+    }
+}
+
+-(void)updateLines {
+    //Add drawing of route line
+    NSInteger numberOfSteps = savedPoint.count;
+    
+    CLLocationCoordinate2D coordinates[numberOfSteps];
+    
+    int i=0;
+    for (CLLocation *loc in savedPoint)
+    {
+        CLLocationCoordinate2D l = loc.coordinate;
+        coordinates[i] = l;
+        i++;
+    }
+    
+    MKPolyline *route = [MKPolyline polylineWithCoordinates:coordinates count:i];
+    [myMap addOverlay:route];
 }
 
 

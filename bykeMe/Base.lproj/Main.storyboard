@@ -71,9 +71,6 @@
                             <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" id="pic-XY-zgL">
                                 <rect key="frame" x="-1" y="430" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="go5-SL-irV"/>
-                                </connections>
                             </adBannerView>
                             <view hidden="YES" alpha="0.89999999999999991" contentMode="scaleToFill" id="3WT-lT-E2H">
                                 <rect key="frame" x="37" y="47" width="245" height="84"/>
