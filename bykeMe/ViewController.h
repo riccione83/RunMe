@@ -22,6 +22,8 @@
     CLLocation *oldPos;
     CLLocation *firstPoint;
     CLLocation *lastPoint;
+    CLLocation *currPoint,*prevPoint;
+    bool prevpoint;
     MKPointAnnotation *startPoint;
     MKPointAnnotation *endPoint;
     bool regionCreated;

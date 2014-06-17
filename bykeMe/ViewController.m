@@ -212,13 +212,23 @@
     
     if(RUNNING) {
     
-    [savedPoint addObject:pos];
+        if(!prevpoint) {
+            currPoint = pos;
+            prevpoint = true;
+        }
+        else
+        {
+            prevPoint = pos;
+            prevpoint = false; }
+        
+    //[savedPoint addObject:pos];
     [self updateLines];
 
-
+        lastPoint = pos;
+        
     if(firstPoint==nil)
     {
-        firstPoint = [savedPoint objectAtIndex:0];
+        firstPoint = pos;
         [self setInitialPoint:firstPoint];
     }
         
@@ -661,7 +671,7 @@
         if(buttonIndex==1)
         {
             [self saveSession];
-            [self setFinalPoint:[savedPoint objectAtIndex:([savedPoint count]-1)]];
+            [self setFinalPoint];
             [UIView animateWithDuration:0.5 animations:^{
                 CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
                 startBtn.transform = trasform;
@@ -683,6 +693,10 @@
             m_testView.maxValue = 50;
             m_testView.percent = 0.0;
             [m_testView setNeedsDisplay];
+            NSArray* posArray = [[NSArray alloc] initWithObjects:startPoint,endPoint, nil];
+            MKCoordinateRegion region = [self regionForAnnotations:posArray];
+            [myMap setRegion:region animated:YES];
+
         }
 }
 
@@ -698,11 +712,11 @@
     [myMap selectAnnotation:point animated:TRUE];
 }
 
--(void) setFinalPoint:(CLLocation*)end_point {
+-(void) setFinalPoint{
     MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
-    point.coordinate = end_point.coordinate;
+    point.coordinate = lastPoint.coordinate;
     point.title = @"End";
-    end_point = end_point;
+    //end_point = lastPoint;
     endPoint = point;
     [myMap addAnnotation:point];
 
@@ -771,6 +785,11 @@
 
 -(void)updateLines {
     //Add drawing of route line
+ 
+    if(prevpoint && prevPoint!=nil && currPoint!=nil) {
+    [savedPoint addObject:prevPoint];
+    [savedPoint addObject:currPoint];
+    
     NSInteger numberOfSteps = savedPoint.count;
     
     CLLocationCoordinate2D coordinates[numberOfSteps];
@@ -785,6 +804,7 @@
     
     MKPolyline *route = [MKPolyline polylineWithCoordinates:coordinates count:i];
     [myMap addOverlay:route];
+    }
 }
 
 
