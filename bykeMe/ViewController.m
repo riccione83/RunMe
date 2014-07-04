@@ -150,6 +150,13 @@
   }
 
 -(void)startLocation {
+    
+    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
+    
+    if(!regionCreated) {
+        [myMap setRegion:reg];
+        regionCreated = true;
+    }
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
@@ -192,7 +199,6 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
-    
     float kph = 3.6;
     float mph = 2.23693629;
     float speed = 0.0;
@@ -201,17 +207,17 @@
     
     pos = [locations lastObject];
     
-    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
+   MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
     
     if(!regionCreated) {
         [myMap setRegion:reg];
         regionCreated = true;
     }
     
-    [myMap setCenterCoordinate:pos.coordinate];
-    
     if(RUNNING) {
     
+        [myMap setCenterCoordinate:pos.coordinate];
+        
         if(!prevpoint) {
             currPoint = pos;
             prevpoint = true;
@@ -221,23 +227,27 @@
             prevPoint = pos;
             prevpoint = false; }
         
-    //[savedPoint addObject:pos];
     [self updateLines];
 
-        lastPoint = pos;
+    
         
     if(firstPoint==nil)
     {
         firstPoint = pos;
         [self setInitialPoint:firstPoint];
     }
+    else
+        lastPoint = pos;
         
         
     if(pos.verticalAccuracy<=100.0)
     {
-        statusLabel.text =@"Running...";
-        gpsLabel.textColor = [UIColor greenColor];
-       
+        if(![statusLabel.text isEqualToString:@"Running..."])
+        {
+            statusLabel.text =@"Running...";
+            gpsLabel.textColor = [UIColor greenColor];
+        }
+        
         if(timeTimer==nil)
         {
             timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
@@ -251,104 +261,98 @@
             
         }
         
-    NSLog(@"Accuracy: %f",pos.verticalAccuracy);
+        //NSLog(@"Accuracy: %f",pos.verticalAccuracy);
     
-    
-    if(oldPos!=nil)
-    {
-        CLLocationDistance meters = [pos distanceFromLocation:oldPos];
-        distance += meters;
-    }
-    
-    if(distance<1000)
-    {
-        unit = @"mt";
-        lblDistance.text = [NSString stringWithFormat:@"%.01f %@",distance,unit];
-    }
-    else
-    {
-        distance2 = distance/1000;
-        unit = @"km";
-        lblDistance.text = [NSString stringWithFormat:@"%.02f %@",distance2,unit];
-        
-        if((distance2 > 1.0) && (distance2<1.1) && bannerGoShowed==false)
+        if(oldPos!=nil)
         {
-            bannerGoShowed = true;
-            [bannerKM setHidden:false];
-            labelKM.text = @"1 Km";
-            bannerTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideBanner) userInfo:nil repeats:NO];
+            CLLocationDistance meters = [pos distanceFromLocation:oldPos];
+            distance += meters;
         }
-        
-        if( ((distance2 == 10.0)||(distance2 == 20.0)||(distance2 == 30.0)||(distance2 == 40.0)||(distance2 == 50.0)||(distance2 == 60.0)||(distance2 == 70.0)||(distance2 == 80.0)||(distance2 == 90.0)||(distance2 == 100.0))  && bannerGoShowed==false)
+    
+        if(distance<1000)
         {
-            labelKM.text = [NSString stringWithFormat:@"%01f Km",distance];
-            bannerGoShowed = true;
-            [bannerKM setHidden:false];
-            bannerTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(hideBanner) userInfo:nil repeats:NO];
+            unit = @"mt";
+            lblDistance.text = [NSString stringWithFormat:@"%.01f %@",distance,unit];
         }
-    }
+        else
+        {
+            distance2 = distance/1000;
+            unit = @"km";
+            lblDistance.text = [NSString stringWithFormat:@"%.02f %@",distance2,unit];
+        
+            /*if((distance2 > 1.0) && (distance2<1.1) && bannerGoShowed==false)
+            {
+                bannerGoShowed = true;
+                [bannerKM setHidden:false];
+                labelKM.text = @"1 Km";
+                bannerTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideBanner) userInfo:nil repeats:NO];
+            }
+        
+            if( ((distance2 == 10.0)||(distance2 == 20.0)||(distance2 == 30.0)||(distance2 == 40.0)||(distance2 == 50.0)||(distance2 == 60.0)||(distance2 == 70.0)||(distance2 == 80.0)||(distance2 == 90.0)||(distance2 == 100.0))  && bannerGoShowed==false)
+            {
+                labelKM.text = [NSString stringWithFormat:@"%01f Km",distance];
+                bannerGoShowed = true;
+                [bannerKM setHidden:false];
+                bannerTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(hideBanner) userInfo:nil repeats:NO];
+            }*/
+        }
     
     
-    if(isKmh) {
-        speed = pos.speed * kph;
-        m_testView.indicator = @"Km/h";
-        //lblUnitSpeed.text = @"Km/h";
-    }
-    else {
-        speed = pos.speed * mph;
-       // lblUnitSpeed.text = @"mph";
-        m_testView.indicator = @"mph";
-    }
+        if(isKmh) {
+            speed = pos.speed * kph;
+        //    m_testView.indicator = @"Km/h";
+        }
+        else {
+            speed = pos.speed * mph;
+        //    m_testView.indicator = @"mph";
+        }
     
-    if(speed<0) speed=0.0;
+        if(speed<0) speed=0.0;
     
-    lblAltitude.text = [NSString stringWithFormat:@"%.01f mt",pos.altitude];
-    lblSpeed.text = [NSString stringWithFormat:@"%.01f", speed];
+        lblAltitude.text = [NSString stringWithFormat:@"%.01f mt",pos.altitude];
+        lblSpeed.text = [NSString stringWithFormat:@"%.01f", speed];
     
-    oldPos = pos;
+        oldPos = pos;
     
         
-    if(iseAltitude==0)
-        iseAltitude = pos.altitude;
-    else {
-        if(pos.altitude>iseAltitude)
+        if(iseAltitude==0)
             iseAltitude = pos.altitude;
-        
-      //  viewAltitude.percent = (100*pos.altitude)/iseAltitude;
-        
-    }
+        else {
+                if(pos.altitude>iseAltitude)
+                    iseAltitude = pos.altitude;
+        }
     
-    if(distance<1000)
-        iseDistance = distance;
-    else
-        iseDistance = distance2;
+        if(distance<1000)
+            iseDistance = distance;
+        else
+            iseDistance = distance2;
 
         
-    if(speed<=50)
-        m_testView.maxValue = 50;
-    if(speed>50 && speed<=100)
-        m_testView.maxValue = 100;
-    if(speed>100 && speed<=200)
-        m_testView.maxValue = 200;
-    if(speed>200)
-        m_testView.maxValue = 400;
+        if(speed<=50)
+            m_testView.maxValue = 50;
+        else if(speed>50 && speed<=100)
+            m_testView.maxValue = 100;
+        else if(speed>100 && speed<=200)
+            m_testView.maxValue = 200;
+        else if(speed>200)
+            m_testView.maxValue = 400;
         
-    if(iseMaxSpeed==0)
-        iseMaxSpeed = speed;
-    else {
-        if(speed>iseMaxSpeed)
-        {
+        if(iseMaxSpeed==0)
             iseMaxSpeed = speed;
+        else {
+            if(speed>iseMaxSpeed) {
+                iseMaxSpeed = speed;
         }
         
         m_testView.percent = speed;
         [m_testView setNeedsDisplay];
-        
     }
+    
     
     num_of_point++;
     tempAvgSpeed += speed;
     iseAvgSpeed = (tempAvgSpeed/num_of_point);
+        
     }
     else
     {
@@ -356,18 +360,17 @@
         statusLabel.text =@"Waiting for a better gps signal...";
         [timeTimer invalidate];
         timeTimer = nil;
-        if(self.backgroundTask != UIBackgroundTaskInvalid)
-        {
+        if(self.backgroundTask != UIBackgroundTaskInvalid) {
             [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
             self.backgroundTask = UIBackgroundTaskInvalid;
         }
 
     }
-    }
+  }
     
 }
 
--(void)decrementSpeed
+/*-(void)decrementSpeed
 {
     if(m_testView.percent > 0)
     {
@@ -380,7 +383,7 @@
         m_timer = nil;
     }
     
-}
+}*/
 
 -(void)loadOptions {
     FileSupport *myFile = [[FileSupport alloc] init];
@@ -406,10 +409,7 @@
 }
 
 -(void)saveOptions {
-    //[self loadOptions];
-
     FileSupport *myFile = [[FileSupport alloc] init];
-    
     [myFile writeDataToFile:options fileToWrite:@"options.plist"];
 }
 
@@ -417,23 +417,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    //if(banner == nil)
-    //    banner = [[ADBannerView alloc] init];
-    //banner.delegate = self;
-    //[banner setDelegate:self];
-    bannerIsVisible = TRUE;
+
     
-    //test
+    bannerIsVisible = TRUE;
     
     m_testView = [[BeizerView alloc] initWithFrame:self.viewTest.bounds];
     m_testView.percent = 0.0;
     m_testView.lineWith = 10;
     m_testView.maxValue = 200;
     [self.viewTest addSubview:m_testView];
-  //  m_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(decrementSpeed) userInfo:nil repeats:YES];
+ 
     myMap.showsUserLocation = YES;
     
+    /* MKCoordinateRegion reg = MKCoordinateRegionMake(myMap.userLocation.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
+     
+     if(!regionCreated) {
+     [myMap setRegion:reg];
+     regionCreated = true;
+     }*/
     
     [UIView animateWithDuration:0.0 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeScale(0, 0);
@@ -464,10 +465,7 @@
     sessMaxSpeed = [[NSMutableArray alloc] init];
     savedPoint   = [[NSMutableArray alloc] init];
     
-    //iCFile = [[FileSupport alloc] init];
-    //iCFile.delegate = self;
-   // [iCFile initiCloudFile:@"RunMeData.data"];
-     [self startLocation];
+    [self startLocation];
     
     banner.delegate = self;
     [self hideBannerAD];
@@ -562,10 +560,7 @@
 }
 
 -(void)resetData {
-   /* [UIView animateWithDuration:0.5 animations:^{
-        CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
-        startBtn.transform = trasform;
-    }];*/
+    
     [locationManager stopUpdatingLocation];
     [bannerKM setHidden:true];
     myMap.showsUserLocation = false;
@@ -651,11 +646,6 @@
     [myFile writeDataToFile:sessAvgSpeed fileToWrite:@"sessionAvgSpeed.txt"];
     [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
     [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
-    
- //   iCloudArray = [[NSMutableArray alloc] initWithObjects:sessDate,sessAltitude,sessAvgSpeed,sessDistance,sessMaxSpeed, nil];
- //   [iCFile saveFile:iCloudArray];
-
-    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -700,8 +690,6 @@
         }
 }
 
-
-
 -(void) setInitialPoint:(CLLocation*)start_loc {
     MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
     point.coordinate = start_loc.coordinate;
@@ -716,11 +704,9 @@
     MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
     point.coordinate = lastPoint.coordinate;
     point.title = @"End";
-    //end_point = lastPoint;
     endPoint = point;
     [myMap addAnnotation:point];
 
-    //NSArray* annotations_array = [[NSArray alloc] initWithObjects:firstPoint, point, nil];
     [myMap selectAnnotation:point animated:TRUE];
 }
 

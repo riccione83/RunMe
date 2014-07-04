@@ -72,8 +72,33 @@
     
     CGRect valueRect = CGRectMake((rect.size.width/2.0) - 71/2.0, (rect.size.height / 3.0) + 100/3.0, 71, 45);
     [[UIColor blackColor] setFill];
-    [textContent drawInRect:textRect withFont:[UIFont fontWithName:@"Helvetica-Bold" size:30.0] lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
-    [value drawInRect:valueRect withFont:[UIFont fontWithName:@"Helvetica-Bold" size:10.0] lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+    //[textContent drawInRect:textRect withFont:[UIFont fontWithName:@"Helvetica-Bold" size:30.0] lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+    
+    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:30.0];
+    /// Make a copy of the default paragraph style
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    /// Set line break mode
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    /// Set text alignment
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{ NSFontAttributeName: font,
+                                  NSParagraphStyleAttributeName: paragraphStyle };
+    [textContent drawInRect:textRect withAttributes:attributes];
+    
+  //  [value drawInRect:valueRect withFont:[UIFont fontWithName:@"Helvetica-Bold" size:10.0] lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+    UIFont *font2 = [UIFont fontWithName:@"Helvetica-Bold" size:10.0];
+    /// Make a copy of the default paragraph style
+    NSMutableParagraphStyle *paragraphStyle2 = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    /// Set line break mode
+    paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
+    /// Set text alignment
+    paragraphStyle2.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes2 = @{ NSFontAttributeName: font2,
+                                  NSParagraphStyleAttributeName: paragraphStyle2 };
+    [value drawInRect:valueRect withAttributes:attributes2];
+
 }
 
 

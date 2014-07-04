@@ -93,6 +93,5 @@
 -(void)startLocation;
 -(void)timer;
 -(void)hideBanner;
--(void)decrementSpeed;
 
 @end
