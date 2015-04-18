@@ -6,6 +6,9 @@
          contextName = "-[ViewController locationManager:didUpdateLocations:]:ViewController.m">
          <PersistentStrings>
             <PersistentString
+               value = "statusLabel.text">
+            </PersistentString>
+            <PersistentString
                value = "pos.altitude">
             </PersistentString>
          </PersistentStrings>

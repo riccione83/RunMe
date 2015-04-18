@@ -9,6 +9,8 @@
 //#define M_PI 3.14159265359
 
 #define DEGREES_TO_RADIANS(angle)  (angle / 180.0 * M_PI)
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
 
 
 
@@ -20,6 +22,8 @@
 
 @implementation ViewController
 
+@synthesize slideToStartLabel;
+@synthesize slideToStart;
 @synthesize banner;
 @synthesize myMap;
 @synthesize panelView;
@@ -29,6 +33,10 @@
 @synthesize lblAltitude,lblDistance,lblSpeed,lblTime,lblUnitSpeed;
 @synthesize bannerKM,labelKM;
 @synthesize statusLabel,gpsLabel;
+@synthesize lblRitmoMedio;
+
+
+BOOL UNLOCKED = NO;
 
 - (IBAction)postOnFacebook:(id)sender {
     
@@ -50,9 +58,9 @@
             SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
             
             if(distance<1000)
-                temp = [NSString stringWithFormat:@"I'm running %.01f m with RunMe! - development version - for iPhone",distance];
+                temp = [NSString stringWithFormat:@"I'm running %.01f mt with RunMe! for iPhone",distance];
             else
-                temp = [NSString stringWithFormat:@"I'm running %.02f Km with RunMe! - development version - for iPhone",distance2];
+                temp = [NSString stringWithFormat:@"I'm running %.02f Km with RunMe! for iPhone",distance2];
         
             [controller setInitialText:temp];
             //[controller add]
@@ -157,11 +165,7 @@
         [myMap setRegion:reg];
         regionCreated = true;
     }
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
-    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // 100 m
-    [locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
 }
 
 -(void)hideBanner{
@@ -214,6 +218,8 @@
         regionCreated = true;
     }
     
+    [myMap setCenterCoordinate:pos.coordinate];
+    
     if(RUNNING) {
     
         [myMap setCenterCoordinate:pos.coordinate];
@@ -245,9 +251,9 @@
         if(![statusLabel.text isEqualToString:@"Running..."])
         {
             statusLabel.text =@"Running...";
-            gpsLabel.textColor = [UIColor greenColor];
+            
         }
-        
+        gpsLabel.textColor = [UIColor greenColor];
         if(timeTimer==nil)
         {
             timeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer) userInfo:nil repeats:YES];
@@ -414,27 +420,142 @@
 }
 
 
+/*- (void)requestAlwaysAuthorization
+{
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    
+    // If the status is denied or only granted for when in use, display an alert
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
+        NSString *title;
+        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
+        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Settings", nil];
+        alertView.tag = 100;
+        [alertView show];
+    }
+    // The user has not enabled any location services. Request background authorization.
+    else if (status == kCLAuthorizationStatusNotDetermined) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+}
+*/
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if(IS_OS_8_OR_LATER) {
+    [self.locationManager requestAlwaysAuthorization];
+    }
+}
+
+-(IBAction)LockIt {
+    slideToStart.hidden = NO;
+    //lockButton.hidden = YES;
+    //Container.hidden = NO;
+    slideToStartLabel.hidden = NO;
+    slideToStartLabel.alpha = 1.0;
+    UNLOCKED = NO;
+    slideToStart.value = 0.0;
+  //  NSString *str = @"The iPhone is Locked!";
+  //  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:str delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+   // [alert show];
+}
+
+-(IBAction)fadeLabel {
+    
+    slideToStartLabel.alpha = 1.0 - slideToStart.value;
+    
+}
+
+-(IBAction)UnLockIt {
+
+    
+    if (!UNLOCKED) {
+        if (slideToStart.value ==1.0) {  // if user slide far enough, stop the operation
+            // Put here what happens when it is unlocked
+            
+           // slideToStart.hidden = YES;
+         //   lockButton.hidden = NO;
+          //  Container.hidden = YES;
+            
+          //  slideToStartLabel.hidden = YES;
+            if(RUNNING)
+                slideToStartLabel.text = @"Slide to start";
+            else
+                slideToStartLabel.text = @"Slide to stop";
+            UNLOCKED = YES;
+            [self closePanel:nil];
+            [self startByking:nil];
+        } else {
+            // user did not slide far enough, so return back to 0 position
+            [UIView beginAnimations: @"SlideCanceled" context: nil];
+            [UIView setAnimationDelegate: self];
+            [UIView setAnimationDuration: 0.35];
+            // use CurveEaseOut to create "spring" effect
+            [UIView setAnimationCurve: UIViewAnimationCurveEaseOut];	
+            slideToStart.value = 0.0;
+            slideToStartLabel.alpha = 1.0;
+            [UIView commitAnimations];
+            
+            
+        }
+    }
+}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIImage *stetchLeftTrack= [[UIImage imageNamed:@"Nothing.png"]
+                               stretchableImageWithLeftCapWidth:30.0 topCapHeight:0.0];
+    UIImage *stetchRightTrack= [[UIImage imageNamed:@"Nothing.png"]
+                                stretchableImageWithLeftCapWidth:30.0 topCapHeight:0.0];
+    [slideToStart setThumbImage: [UIImage imageNamed:@"SlideToStop.png"] forState:UIControlStateNormal];
+    [slideToStart setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+    [slideToStart setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
 
     
+    
+    myMap.delegate = self;
+
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // 100
+    
+    if(IS_OS_8_OR_LATER) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
     bannerIsVisible = TRUE;
+    
+    WildcardGestureRecognizer * tapInterceptor = [[WildcardGestureRecognizer alloc] init];
+    tapInterceptor.touchesBeganCallback = ^(NSSet * touches, UIEvent * event) {
+        [self closePanel:nil];
+    };
+    [myMap addGestureRecognizer:tapInterceptor];
+    
     
     m_testView = [[BeizerView alloc] initWithFrame:self.viewTest.bounds];
     m_testView.percent = 0.0;
     m_testView.lineWith = 10;
     m_testView.maxValue = 200;
     [self.viewTest addSubview:m_testView];
- 
-    myMap.showsUserLocation = YES;
     
-    /* MKCoordinateRegion reg = MKCoordinateRegionMake(myMap.userLocation.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
+     MKCoordinateRegion reg = MKCoordinateRegionMake(myMap.userLocation.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
      
      if(!regionCreated) {
      [myMap setRegion:reg];
      regionCreated = true;
-     }*/
+     }
+    
+    myMap.showsUserLocation = YES;
     
     [UIView animateWithDuration:0.0 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeScale(0, 0);
@@ -489,6 +610,7 @@
         hint.transform = trasform;
     }];
     [hint setHidden:true];
+    [self LockIt];
 }
 
 - (IBAction)closePanel:(id)sender {
@@ -525,6 +647,24 @@
 }
 
 
+-(NSString *)calcRitmoMedio {
+    NSString *temp = @"";
+    float secondi,metri,tempo,velocitaKMH;
+    secondi = iHr * 60 * 60 + iMin * 60 + iSec;
+    metri = distance;
+    velocitaKMH = metri * 3600 / secondi;
+    tempo = metri / secondi;
+    tempo = 1000 / tempo;
+    secondi = floor(((tempo/60)-floor(tempo/60))*60);
+    tempo = floor(tempo/60);
+    if(secondi==60) {
+        secondi = 0;
+        tempo = tempo + 1;
+    }
+    temp = [NSString stringWithFormat:@"%.0f:%.0f",tempo,secondi];
+    return temp;
+}
+
 -(void)timer {
     @autoreleasepool {
         
@@ -533,6 +673,11 @@
     if(iSec==60) {
         iSec = 0;
         iMin++;
+    
+        //Calcolo del ritmo medio
+        lblRitmoMedio.text = [self calcRitmoMedio];
+        
+        
     }
     
     if(iMin == 60)
@@ -542,6 +687,7 @@
     }
     
     lblTime.text = [NSString stringWithFormat:@"%02d:%02d:%02d",iHr,iMin,iSec];
+        
     
     }
   /*  if(!menuShowed)
@@ -561,7 +707,7 @@
 
 -(void)resetData {
     
-    [locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
     [bannerKM setHidden:true];
     myMap.showsUserLocation = false;
     STARTED = false;
@@ -650,23 +796,26 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    if(alertView.tag!=100) {
         if(buttonIndex==2)
         {
             [self resetData];
-             [UIView animateWithDuration:0.5 animations:^{
+             /*[UIView animateWithDuration:0.5 animations:^{
              CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
              startBtn.transform = trasform;
-             }];
+             }];*/
+             _onOffImage.image = [UIImage imageNamed:@"on_off_off.png"];
         }
         if(buttonIndex==1)
         {
             [self saveSession];
             [self setFinalPoint];
-            [UIView animateWithDuration:0.5 animations:^{
+            /*[UIView animateWithDuration:0.5 animations:^{
                 CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
                 startBtn.transform = trasform;
-            }];
-            [locationManager stopUpdatingLocation];
+            }];*/
+             _onOffImage.image = [UIImage imageNamed:@"on_off_off.png"];
+            [self.locationManager stopUpdatingLocation];
             [bannerKM setHidden:true];
             myMap.showsUserLocation = false;
             STARTED = false;
@@ -686,8 +835,17 @@
             NSArray* posArray = [[NSArray alloc] initWithObjects:startPoint,endPoint, nil];
             MKCoordinateRegion region = [self regionForAnnotations:posArray];
             [myMap setRegion:region animated:YES];
-
         }
+    }
+    else
+    {
+        if (buttonIndex == 1) {
+            // Send the user to the Settings for this app
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:settingsURL];
+        }
+
+    }
 }
 
 -(void) setInitialPoint:(CLLocation*)start_loc {
@@ -713,10 +871,11 @@
 - (IBAction)startByking:(id)sender {
         if(!STARTED)
         {
-            [UIView animateWithDuration:0.5 animations:^{
+            /*[UIView animateWithDuration:0.5 animations:^{
                 CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-90));
                 startBtn.transform = trasform;
-            }];
+            }];*/
+            _onOffImage.image = [UIImage imageNamed:@"on_off_on.png"];
             if(SESSION_ACTIVE)
                 [self resetData];
             statusLabel.text = @"Running...";

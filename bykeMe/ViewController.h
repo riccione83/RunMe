@@ -13,11 +13,12 @@
 #include "FileSupport.h"
 #include "BeizerView.h"
 #include <Social/Social.h>
+#include "WildcardGestureRecognizer.h"
+#include "Appirater.h"
 
 @interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate>{
     BOOL STARTED;
     BOOL menuShowed;
-    CLLocationManager *locationManager;
     CLLocation *pos;
     CLLocation *oldPos;
     CLLocation *firstPoint;
@@ -33,6 +34,7 @@
     int iSec,iMin,iHr;
     float distance;
     float distance2;
+    float ritmoMedio;
     NSUInteger num_of_point;
     BOOL isKmh;
     BOOL bannerGoShowed;
@@ -62,7 +64,19 @@
     BeizerView *m_testView;
     NSTimer *m_timer;
     
+    IBOutlet UISlider *slideToStart;
+    IBOutlet UILabel *slideToStartLabel;
+    IBOutlet UISwitch *runningSwitch;
+    IBOutlet UISwitch *bikingSwitch;
+    IBOutlet UISwitch *otherSwitch;
+    
 }
+
+@property (strong, nonatomic) IBOutlet UISwitch *runningSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *bikingSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *otherSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *slideToStartLabel;
+@property (strong, nonatomic) IBOutlet UISlider *slideToStart;
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
 @property (strong, nonatomic) IBOutlet MKMapView *myMap;
 @property (strong, nonatomic) IBOutlet UIView *onOffView;
@@ -75,12 +89,14 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblDistance;
 @property (strong, nonatomic) IBOutlet UILabel *lblSpeed;
 @property (strong, nonatomic) IBOutlet UILabel *lblUnitSpeed;
+@property (strong, nonatomic) IBOutlet UILabel *lblRitmoMedio;
 @property (strong, nonatomic) IBOutlet UIView *bannerKM;
 @property (strong, nonatomic) IBOutlet UILabel *labelKM;
 @property (strong, nonatomic) IBOutlet UILabel *gpsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnUnits;
-
+@property (strong, nonatomic) IBOutlet UIImageView *onOffImage;
+@property(nonatomic, retain) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UIView *viewTest;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 
@@ -89,6 +105,10 @@
 - (IBAction)showOnOffPanel:(id)sender;
 - (IBAction)closePanel:(id)sender;
 - (IBAction)startByking:(id)sender;
+- (IBAction)UnLockIt;
+- (IBAction)fadeLabel;
+- (IBAction)LockIt;
+
 
 -(void)startLocation;
 -(void)timer;
