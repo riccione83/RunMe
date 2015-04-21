@@ -15,6 +15,7 @@
 #include <Social/Social.h>
 #include "WildcardGestureRecognizer.h"
 #include "Appirater.h"
+#include "SessionData.h"
 
 @interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate>{
     BOOL STARTED;
@@ -58,6 +59,7 @@
     NSMutableArray *sessAltitude;
     NSInteger iseAltitude;
     NSMutableArray *savedPoint;
+    UIImage *sessionImage;
     
     
     //test
@@ -69,6 +71,8 @@
     IBOutlet UISwitch *runningSwitch;
     IBOutlet UISwitch *bikingSwitch;
     IBOutlet UISwitch *otherSwitch;
+    
+    IBOutlet UIWebView *backgroundVideoView;
     
 }
 

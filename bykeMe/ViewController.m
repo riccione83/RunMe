@@ -35,22 +35,29 @@
 @synthesize statusLabel,gpsLabel;
 @synthesize lblRitmoMedio;
 
+@synthesize runningSwitch,bikingSwitch,otherSwitch;
+
 
 BOOL UNLOCKED = NO;
+
+-(UIImage *)prepareBackgroundImage {
+    NSArray* posArray = [[NSArray alloc] initWithObjects:startPoint,endPoint, nil];
+    MKCoordinateRegion region = [self regionForAnnotations:posArray];
+    [myMap setRegion:region animated:NO];
+    UIGraphicsBeginImageContext(myMap.frame.size);
+    [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 - (IBAction)postOnFacebook:(id)sender {
     
     if(distance>100 || distance2>1.0)
     {
-        
-        NSArray* posArray = [[NSArray alloc] initWithObjects:startPoint,endPoint, nil];
-        MKCoordinateRegion region = [self regionForAnnotations:posArray];
-        [myMap setRegion:region animated:YES];
-        
-        UIGraphicsBeginImageContext(myMap.frame.size);
-        [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+     
+        UIImage *image = [self prepareBackgroundImage];
         
         if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
             NSString *temp;
@@ -80,6 +87,44 @@ BOOL UNLOCKED = NO;
         [al show];
     }
 }
+
+-(IBAction)selectRunningMode:(id)sender
+{
+    if(runningSwitch.isOn)
+    {
+        [bikingSwitch setOn:NO animated:YES];
+        [otherSwitch setOn:NO animated:YES];
+    }
+    else
+    {
+        [runningSwitch setOn:YES animated:NO];
+    }
+}
+
+-(IBAction)selectBikeMode:(id)sender {
+    if(bikingSwitch.isOn)
+    {
+        [runningSwitch setOn:NO animated:YES];
+        [otherSwitch setOn:NO animated:YES];
+    }
+    else
+    {
+        [bikingSwitch setOn:YES animated:NO];
+    }
+}
+
+-(IBAction)selectOtherMode:(id)sender {
+    if(otherSwitch.isOn)
+    {
+        [bikingSwitch setOn:NO animated:YES];
+        [runningSwitch setOn:NO animated:YES];
+    }
+    else
+    {
+        [otherSwitch setOn:YES animated:NO];
+    }
+}
+
 
 -(MKCoordinateRegion)regionForAnnotations:(NSArray*)annotations {
 
@@ -139,14 +184,13 @@ BOOL UNLOCKED = NO;
 -(void) hideBannerAD {
       if(bannerIsVisible)
       {
-    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-    banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
-    myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
-    m_testView.frame = CGRectOffset(m_testView.frame, 0, +banner.frame.size.height);
-    [UIView commitAnimations];
-    bannerIsVisible = NO;
+          [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+          banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
+          myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
+          m_testView.frame = CGRectOffset(m_testView.frame, 0, +banner.frame.size.height);
+          [UIView commitAnimations];
+          bannerIsVisible = NO;
       }
-
 }
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner{
@@ -181,8 +225,6 @@ BOOL UNLOCKED = NO;
     {
         isKmh = NO;
         [_btnUnits setTitle:@"Units mph" forState:UIControlStateNormal];
-
-//      [sender setTitle:@"Units mph" forState:UIControlStateNormal];
         m_testView.indicator = @"mph";
     }
     else
@@ -306,11 +348,9 @@ BOOL UNLOCKED = NO;
     
         if(isKmh) {
             speed = pos.speed * kph;
-        //    m_testView.indicator = @"Km/h";
         }
         else {
             speed = pos.speed * mph;
-        //    m_testView.indicator = @"mph";
         }
     
         if(speed<0) speed=0.0;
@@ -321,8 +361,9 @@ BOOL UNLOCKED = NO;
         oldPos = pos;
     
         
-        if(iseAltitude==0)
+        if(iseAltitude==0) {
             iseAltitude = pos.altitude;
+        }
         else {
                 if(pos.altitude>iseAltitude)
                     iseAltitude = pos.altitude;
@@ -352,6 +393,9 @@ BOOL UNLOCKED = NO;
         
         m_testView.percent = speed;
         [m_testView setNeedsDisplay];
+            
+        //Calcolo del ritmo medio
+        lblRitmoMedio.text = [self calcRitmoMedio];
     }
     
     
@@ -375,21 +419,6 @@ BOOL UNLOCKED = NO;
   }
     
 }
-
-/*-(void)decrementSpeed
-{
-    if(m_testView.percent > 0)
-    {
-        m_testView.percent = m_testView.percent - 1;
-        [m_testView setNeedsDisplay];
-    }
-    else
-    {
-        [m_timer invalidate];
-        m_timer = nil;
-    }
-    
-}*/
 
 -(void)loadOptions {
     FileSupport *myFile = [[FileSupport alloc] init];
@@ -420,31 +449,6 @@ BOOL UNLOCKED = NO;
 }
 
 
-/*- (void)requestAlwaysAuthorization
-{
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    // If the status is denied or only granted for when in use, display an alert
-    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
-        NSString *title;
-        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
-        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"Settings", nil];
-        alertView.tag = 100;
-        [alertView show];
-    }
-    // The user has not enabled any location services. Request background authorization.
-    else if (status == kCLAuthorizationStatusNotDetermined) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
-}
-*/
-
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if(IS_OS_8_OR_LATER) {
     [self.locationManager requestAlwaysAuthorization];
@@ -453,21 +457,14 @@ BOOL UNLOCKED = NO;
 
 -(IBAction)LockIt {
     slideToStart.hidden = NO;
-    //lockButton.hidden = YES;
-    //Container.hidden = NO;
     slideToStartLabel.hidden = NO;
     slideToStartLabel.alpha = 1.0;
     UNLOCKED = NO;
     slideToStart.value = 0.0;
-  //  NSString *str = @"The iPhone is Locked!";
-  //  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:str delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-   // [alert show];
 }
 
 -(IBAction)fadeLabel {
-    
     slideToStartLabel.alpha = 1.0 - slideToStart.value;
-    
 }
 
 -(IBAction)UnLockIt {
@@ -476,12 +473,7 @@ BOOL UNLOCKED = NO;
     if (!UNLOCKED) {
         if (slideToStart.value ==1.0) {  // if user slide far enough, stop the operation
             // Put here what happens when it is unlocked
-            
-           // slideToStart.hidden = YES;
-         //   lockButton.hidden = NO;
-          //  Container.hidden = YES;
-            
-          //  slideToStartLabel.hidden = YES;
+        
             if(RUNNING)
                 slideToStartLabel.text = @"Slide to start";
             else
@@ -505,11 +497,23 @@ BOOL UNLOCKED = NO;
     }
 }
 
-
+-(void)startBackgroundAnimation {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"sport" ofType:@"gif"];
+    NSData *gif = [NSData dataWithContentsOfFile:filePath];
+    
+    [backgroundVideoView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    backgroundVideoView.userInteractionEnabled = NO;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+   // SessionData *sessionData = [[SessionData alloc] init];
+
+    [self startBackgroundAnimation];
+    
     
     UIImage *stetchLeftTrack= [[UIImage imageNamed:@"Nothing.png"]
                                stretchableImageWithLeftCapWidth:30.0 topCapHeight:0.0];
@@ -611,9 +615,13 @@ BOOL UNLOCKED = NO;
     }];
     [hint setHidden:true];
     [self LockIt];
+    [self startBackgroundAnimation];
 }
 
 - (IBAction)closePanel:(id)sender {
+    
+    [backgroundVideoView stopLoading];
+    backgroundVideoView = nil;
     
     [UIView animateWithDuration:0.5 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeTranslation(0, -400);
@@ -673,11 +681,6 @@ BOOL UNLOCKED = NO;
     if(iSec==60) {
         iSec = 0;
         iMin++;
-    
-        //Calcolo del ritmo medio
-        lblRitmoMedio.text = [self calcRitmoMedio];
-        
-        
     }
     
     if(iMin == 60)
@@ -687,22 +690,7 @@ BOOL UNLOCKED = NO;
     }
     
     lblTime.text = [NSString stringWithFormat:@"%02d:%02d:%02d",iHr,iMin,iSec];
-        
-    
     }
-  /*  if(!menuShowed)
-    {
-        if(iSec>=5)
-        {
-            menuShowed = true;
-            [UIView animateWithDuration:0.5 animations:^{
-                CGAffineTransform trasform = CGAffineTransformMakeScale(0, 0);
-                hint.transform = trasform;
-            }];
-            [hint setHidden:true];
-        }
-    }*/
-    
 }
 
 -(void)resetData {
@@ -751,47 +739,26 @@ BOOL UNLOCKED = NO;
     [myMap removeAnnotations:pointAnn];
 }
 
--(void)loadSession {
-    FileSupport *myFile = [[FileSupport alloc] init];
-    
-    NSMutableArray *testArray = [myFile readDataFromFile:@"sessionDate.txt"];
-    
-    if(testArray!=nil)
-    {
-        sessDate     = [myFile readDataFromFile:@"sessionDate.txt"];
-        sessDistance = [myFile readDataFromFile:@"sessionDistance.txt"];
-        sessAltitude = [myFile readDataFromFile:@"sessionAltitude.txt"];
-        sessAvgSpeed = [myFile readDataFromFile:@"sessionAvgSpeed.txt"];
-        sessMaxSpeed = [myFile readDataFromFile:@"sessionMaxSpeed.txt"];
-    }
 
-}
 
 -(void)saveSession {
-    [self loadSession];
     
-    NSDate *currDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"dd/MM/YY"];
-    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    NSMutableArray *sessionData = [NSMutableArray new];
+    SessionData *sessionToSave = [[SessionData alloc] init];
     
-    NSLog(@"%@",dateString);
+    sessionImage = [self prepareBackgroundImage];
+    if(distance2==0)
+        iseDistance = iseDistance / 1000;
     
-    iseDate = dateString;
-       
-    [sessDate addObject:iseDate];
-    [sessAltitude addObject:[NSNumber numberWithInteger:iseAltitude]];
-    [sessAvgSpeed addObject:[NSNumber numberWithInteger:iseAvgSpeed]];
-    [sessDistance addObject:[NSNumber numberWithInteger:iseDistance]];
-    [sessMaxSpeed addObject:[NSNumber numberWithInteger:iseMaxSpeed]];
+    [sessionData addObject:[NSNumber numberWithInteger:iseAltitude]];
+    [sessionData addObject:[NSNumber numberWithInteger:iseAvgSpeed]];
+    [sessionData addObject:[NSNumber numberWithFloat:iseDistance]];
+    [sessionData addObject:[NSNumber numberWithInteger:iseMaxSpeed]];
+    [sessionData addObject:lblRitmoMedio.text];
+    [sessionData addObject:sessionImage];
     
-    FileSupport *myFile = [[FileSupport alloc] init];
-    
-    [myFile writeDataToFile:sessDate fileToWrite:@"sessionDate.txt"];
-    [myFile writeDataToFile:sessAltitude fileToWrite:@"sessionAltitude.txt"];
-    [myFile writeDataToFile:sessAvgSpeed fileToWrite:@"sessionAvgSpeed.txt"];
-    [myFile writeDataToFile:sessDistance fileToWrite:@"sessionDistance.txt"];
-    [myFile writeDataToFile:sessMaxSpeed fileToWrite:@"sessionMaxSpeed.txt"];
+    if(![sessionToSave saveNewSession:sessionData])
+        NSLog(@"Dati non salvati");
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -871,11 +838,6 @@ BOOL UNLOCKED = NO;
 - (IBAction)startByking:(id)sender {
         if(!STARTED)
         {
-            /*[UIView animateWithDuration:0.5 animations:^{
-                CGAffineTransform trasform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-90));
-                startBtn.transform = trasform;
-            }];*/
-            _onOffImage.image = [UIImage imageNamed:@"on_off_on.png"];
             if(SESSION_ACTIVE)
                 [self resetData];
             statusLabel.text = @"Running...";
@@ -898,16 +860,8 @@ BOOL UNLOCKED = NO;
         }
     else
     {
-       // if(distance>100)
-       // {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New session" message:@"A session is active. What would you like to do?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save session",@"Cancel session", nil];
-            
             [alert show];
-     /*   }
-        else
-        {
-            [self resetData];
-        }*/
     }
     
 }

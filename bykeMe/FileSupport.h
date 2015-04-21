@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "myDoc.h"
-#import "sessions.h"
+#import "SessionView.h"
 
 @protocol MainClassDelegate
 
