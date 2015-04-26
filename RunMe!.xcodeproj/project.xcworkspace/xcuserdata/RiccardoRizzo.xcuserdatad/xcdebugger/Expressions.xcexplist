@@ -3,6 +3,25 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[ViewController playMusic:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "musicPlayer.isPreparedToPlay">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController speechThisSessionData]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "distance">
+            </PersistentString>
+            <PersistentString
+               value = "distance2">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[SessionView postOnFacebook:]:SessionView.m">
          <PersistentStrings>
             <PersistentString
@@ -11,21 +30,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ViewController locationManager:didUpdateLocations:]:ViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "statusLabel.text">
-            </PersistentString>
-            <PersistentString
-               value = "pos.altitude">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[FileSupport metaDQFinita:]:FileSupport.m">
       </ContextState>
       <ContextState
-         contextName = "-[ViewController changeUnits:]:ViewController.m">
+         contextName = "-[ViewController loadOptions]:ViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "_btnUnits.titleLabel.text">
+               value = "lblMusic.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -46,7 +57,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FileSupport metaDQFinita:]:FileSupport.m">
+         contextName = "-[ViewController locationManager:didUpdateLocations:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "statusLabel.text">
+            </PersistentString>
+            <PersistentString
+               value = "pos.altitude">
+            </PersistentString>
+            <PersistentString
+               value = "gpsLabel.textColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController changeUnits:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_btnUnits.titleLabel.text">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
