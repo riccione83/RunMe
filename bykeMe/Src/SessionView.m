@@ -27,7 +27,7 @@ FileSupport *iCFile;
 
 - (IBAction)postOnFacebook:(id)sender {
     
-        NSIndexPath *position = [sessionTable indexPathForSelectedRow];
+    NSIndexPath *position = [sessionTable indexPathForSelectedRow];
     
     if(position != nil) {
     
@@ -58,6 +58,22 @@ FileSupport *iCFile;
 
 #pragma mark TableViewDelegate
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+/*    
+    NSIndexPath *position = [sessionTable indexPathForSelectedRow];
+    
+    if(position != nil) {
+        
+        UIImage *image = [sessions.imagesSession objectAtIndex:position.row];
+        backgroundImage.image = image;
+    }
+    else {
+        backgroundImage.image = [UIImage imageNamed:@"background.png"];
+    }
+ */
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -72,6 +88,8 @@ FileSupport *iCFile;
         [sessions.Altitudes removeObjectAtIndex:indexPath.row];
         [sessions.AvgSpeeds removeObjectAtIndex:indexPath.row];
         [sessions.MaxSpeeds removeObjectAtIndex:indexPath.row];
+        [sessions.Rythms removeObjectAtIndex:indexPath.row];
+        [sessions.imagesSession removeObjectAtIndex:indexPath.row];
         
         //[self saveSessions];
         [sessions saveSessions];

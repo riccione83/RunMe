@@ -57,6 +57,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ViewController prepareBackgroundImage]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "myMap.annotations">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ViewController locationManager:didUpdateLocations:]:ViewController.m">
          <PersistentStrings>
             <PersistentString

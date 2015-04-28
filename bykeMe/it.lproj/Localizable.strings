@@ -30,7 +30,7 @@
 "SPEECH_SESSION_DATA" = "Dati sulla sessione:  ";
 "meters" = "metri";
 "kilometers" = "kilometri";
-"SPEECH_DISTANCE" = "%@     Distanza: %.1ld %@,,    ";
+"SPEECH_DISTANCE" = "%@     Distanza: %.2f %@,,    ";
 "SPEECH_AVG_SPEED" = "%@     Velocità media: %@,,   ";
 "SPEECH_RYTHM" = "%@     Tempo su kilometro: %@,,    ";
 "SPEECH_SPEED" = "%@     Velocità attuale: %.1f";

@@ -16,6 +16,7 @@
     SessionData *sessions;    
     IBOutlet UINavigationItem *navigationItemTitle;
     IBOutlet UIBarButtonItem *btnShare;
+    IBOutlet UIImageView *backgroundImage;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *sessionTable;
