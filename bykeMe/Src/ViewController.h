@@ -22,6 +22,7 @@
 @interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate,MPMediaPickerControllerDelegate>{
     
     BOOL hintViewHasShowed;
+    BOOL adIsShowed;
     CLLocation *pos;
     CLLocation *oldPos;
     CLLocation *firstPoint;
@@ -45,6 +46,9 @@
     float lastSpeed;
     NSUInteger num_of_point;
     
+    NSUInteger userWeight;  //Store weight of the user
+    int SESSION_MODE;               //Store the session type (for performing calculations)
+    
     BOOL isKmh;
     BOOL RUNNING;
     
@@ -61,6 +65,7 @@
     UIImage *sessionImage;
     BOOL isVoiceON;
     BOOL isMusicON;
+    BOOL canAnimate;
     
     //Speed view
     BeizerView *viewSpeed;
@@ -81,7 +86,7 @@
     IBOutlet UIButton *shareLabel;
     IBOutlet UIButton *unitsLabel;
     IBOutlet UILabel *lblVoice;
-    IBOutlet UILabel *lblMusic;
+    IBOutlet UIButton *lblMusic;
     IBOutlet UILabel *lblTimeB;
     IBOutlet UILabel *lblDistanceB;
     IBOutlet UILabel *lblAltitudeB;
@@ -105,6 +110,14 @@
     IBOutlet UIImageView *onOffImage;
     IBOutlet ADBannerView *banner;
     IBOutlet UIView *viewTest;
+    IBOutlet UILabel *valCaloriesLabel;
+    IBOutlet UILabel *lblCalories;
+    IBOutlet UIButton *btnSessionMode;
+    IBOutlet UILabel *lblWeight;
+    IBOutlet UILabel *lblWeightUnits;
+    IBOutlet UIStepper *weightStepper;
+    IBOutlet UIView *viewMusic;
+    IBOutlet UIImageView *sessionModeImage;
 }
 
 - (IBAction)showMenuPanel:(id)sender;
@@ -114,6 +127,7 @@
 - (IBAction)fadeLabel;
 - (IBAction)LockIt;
 
+-(float)getCalorieForBike;
 -(void)restartMusic;
 -(void)startLocation;
 -(void)timer;

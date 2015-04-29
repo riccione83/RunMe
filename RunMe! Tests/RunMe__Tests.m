@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #include "SessionData.h"
+#include "ViewController.h"
 
 @interface RunMe__Tests : XCTestCase
 
@@ -44,6 +45,10 @@
     XCTAssertNotNil(sessionData,@"File support not created");
     
    // XCTAssert(YES,@"File support passed");
-    
 }
+
+-(void)testCalcolaLalorie {
+
+}
+
 @end

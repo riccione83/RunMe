@@ -11,10 +11,40 @@
 
 @implementation AppDelegate
 
+-(void)welcomeScreen {
+    
+    UIImageView *welcome = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splashScreen.png"]];
+    //welcome.image = [UIImage imageNamed:@"sky2.jpg"];
+    welcome.contentMode = UIViewContentModeScaleAspectFill;
+    welcome.frame = self.window.bounds;
+    
+    [self.window addSubview:welcome];
+    [self.window bringSubviewToFront:welcome];
+    
+    //Animation
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2.0];
+    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.window cache:YES];
+    [UIView setAnimationDelegate:welcome];
+    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+    
+    welcome.alpha = 0.0;
+    welcome.frame = CGRectMake(-60, -60, self.window.bounds.size.width+120, self.window.bounds.size.height+120);
+    
+    [UIView commitAnimations];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+ 
+    [self.window makeKeyAndVisible];
+    [self welcomeScreen];
+ 
+    
     [Appirater appLaunched:YES];
+    
+    
     return YES;
 }
 							

@@ -3,8 +3,8 @@
 "My Sessions" = "My Sessions";
 "Share" = "Share";
 "Units Km/h" = "Units Km/h";
-"Voice" = "Voice";
-"Music" = "Music";
+"Voice" = "Voice for data";
+"Music" = "Select Music";
 "Slide to start" = "Slide to start";
 "Slide to stop" = "Slide to stop";
 "Time" = "Time";
@@ -42,4 +42,13 @@
 "%@ Km/h Avg" = "%@ Km/h Avg";
 "Distance %@ Km" = "Distance %@ Km";
 "Rythm: %@/Km" = "Time: %@/Km";
-"My Sessions" = "My Sessions";
+"Calories %@" = "Calories %@";
+"My Sessions" = "Sessions";
+"Calories" = "Calories";
+"Running" = "Running";
+"Walking" = "Walking";
+"Biking" = "Biking";
+"Km/h" = "Km/h";
+"mps" = "mps";
+"Kg" = "Kg";
+"Lbs" = "Lbs";

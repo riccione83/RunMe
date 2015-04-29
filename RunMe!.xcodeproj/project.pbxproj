@@ -24,7 +24,6 @@
 		933B5D6C1AEAA4EF001BCFAF /* sport.gif in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D641AEAA4EF001BCFAF /* sport.gif */; };
 		933B5D6D1AEAA4EF001BCFAF /* tacho-speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D651AEAA4EF001BCFAF /* tacho-speed.png */; };
 		933B5D6E1AEAA4EF001BCFAF /* Time.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D661AEAA4EF001BCFAF /* Time.png */; };
-		933B5D6F1AEAA4EF001BCFAF /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D671AEAA4EF001BCFAF /* up.png */; };
 		933B5D701AEAA4EF001BCFAF /* upGraph.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D681AEAA4EF001BCFAF /* upGraph.png */; };
 		933B5D741AEAA501001BCFAF /* Distance.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D711AEAA501001BCFAF /* Distance.png */; };
 		933B5D751AEAA501001BCFAF /* Facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D721AEAA501001BCFAF /* Facebook_logo.png */; };
@@ -43,11 +42,18 @@
 		933B5D9B1AEAA601001BCFAF /* FileSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B5D961AEAA601001BCFAF /* FileSupport.m */; };
 		933B5D9C1AEAA601001BCFAF /* myDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B5D981AEAA601001BCFAF /* myDoc.m */; };
 		933B5D9D1AEAA601001BCFAF /* SessionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B5D9A1AEAA601001BCFAF /* SessionData.m */; };
+		9342AD651AF0E170008FF44E /* splashScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9342AD641AF0E170008FF44E /* splashScreen.png */; };
+		934F588C1AF118DF003F4539 /* musicBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 934F588B1AF118DF003F4539 /* musicBackgroud.png */; };
+		934F588E1AF11AFA003F4539 /* walk.png in Resources */ = {isa = PBXBuildFile; fileRef = 934F588D1AF11AFA003F4539 /* walk.png */; };
+		934F58901AF11B01003F4539 /* Bike.png in Resources */ = {isa = PBXBuildFile; fileRef = 934F588F1AF11B01003F4539 /* Bike.png */; };
+		934F58931AF11CB3003F4539 /* nextBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 934F58911AF11CB3003F4539 /* nextBtn.png */; };
+		934F58941AF11CB3003F4539 /* prevBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 934F58921AF11CB3003F4539 /* prevBtn.png */; };
 		939347D31AE3E2AB00DC7356 /* RunMe__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 939347D21AE3E2AB00DC7356 /* RunMe__Tests.m */; };
 		93CE382B1ADE753F004E476A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CE382A1ADE753F004E476A /* SystemConfiguration.framework */; };
 		93CE382F1ADE75D5004E476A /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 93CE382E1ADE75D5004E476A /* Appirater.podspec.json */; };
 		93CE38331ADE75DD004E476A /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93CE38311ADE75DD004E476A /* AppiraterLocalizable.strings */; };
 		93D734DE1AE7AF630040B1A9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D734DD1AE7AF630040B1A9 /* MediaPlayer.framework */; };
+		93F115331AF0DB3500411BF0 /* Run.png in Resources */ = {isa = PBXBuildFile; fileRef = 93F115321AF0DB3500411BF0 /* Run.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +91,6 @@
 		933B5D641AEAA4EF001BCFAF /* sport.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = sport.gif; path = Images/sport.gif; sourceTree = "<group>"; };
 		933B5D651AEAA4EF001BCFAF /* tacho-speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tacho-speed.png"; path = "Images/tacho-speed.png"; sourceTree = "<group>"; };
 		933B5D661AEAA4EF001BCFAF /* Time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Time.png; path = Images/Time.png; sourceTree = "<group>"; };
-		933B5D671AEAA4EF001BCFAF /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = Images/up.png; sourceTree = "<group>"; };
 		933B5D681AEAA4EF001BCFAF /* upGraph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upGraph.png; path = Images/upGraph.png; sourceTree = "<group>"; };
 		933B5D711AEAA501001BCFAF /* Distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Distance.png; path = Images/Distance.png; sourceTree = "<group>"; };
 		933B5D721AEAA501001BCFAF /* Facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Facebook_logo.png; path = Images/Facebook_logo.png; sourceTree = "<group>"; };
@@ -115,6 +120,12 @@
 		933B5D981AEAA601001BCFAF /* myDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = myDoc.m; path = Src/myDoc.m; sourceTree = "<group>"; };
 		933B5D991AEAA601001BCFAF /* SessionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionData.h; path = Src/SessionData.h; sourceTree = "<group>"; };
 		933B5D9A1AEAA601001BCFAF /* SessionData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionData.m; path = Src/SessionData.m; sourceTree = "<group>"; };
+		9342AD641AF0E170008FF44E /* splashScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashScreen.png; path = Images/splashScreen.png; sourceTree = "<group>"; };
+		934F588B1AF118DF003F4539 /* musicBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = musicBackgroud.png; path = Images/musicBackgroud.png; sourceTree = "<group>"; };
+		934F588D1AF11AFA003F4539 /* walk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = walk.png; path = Images/walk.png; sourceTree = "<group>"; };
+		934F588F1AF11B01003F4539 /* Bike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bike.png; path = Images/Bike.png; sourceTree = "<group>"; };
+		934F58911AF11CB3003F4539 /* nextBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nextBtn.png; path = Images/nextBtn.png; sourceTree = "<group>"; };
+		934F58921AF11CB3003F4539 /* prevBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = prevBtn.png; path = Images/prevBtn.png; sourceTree = "<group>"; };
 		939347CE1AE3E2AB00DC7356 /* RunMe! Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RunMe! Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		939347D11AE3E2AB00DC7356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		939347D21AE3E2AB00DC7356 /* RunMe__Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunMe__Tests.m; sourceTree = "<group>"; };
@@ -123,6 +134,7 @@
 		93CE382E1ADE75D5004E476A /* Appirater.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Appirater.podspec.json; path = "../../../Downloads/appirater-master/Appirater.podspec.json"; sourceTree = "<group>"; };
 		93CE38321ADE75DD004E476A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		93D734DD1AE7AF630040B1A9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		93F115321AF0DB3500411BF0 /* Run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Run.png; path = Images/Run.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +237,14 @@
 			isa = PBXGroup;
 			children = (
 				933B5D611AEAA4EF001BCFAF /* SlideToStop.png */,
+				934F588B1AF118DF003F4539 /* musicBackgroud.png */,
+				93F115321AF0DB3500411BF0 /* Run.png */,
+				9342AD641AF0E170008FF44E /* splashScreen.png */,
 				933B5D621AEAA4EF001BCFAF /* SlideToStopBar.png */,
+				934F58911AF11CB3003F4539 /* nextBtn.png */,
+				934F58921AF11CB3003F4539 /* prevBtn.png */,
+				934F588D1AF11AFA003F4539 /* walk.png */,
+				934F588F1AF11B01003F4539 /* Bike.png */,
 				933B5D631AEAA4EF001BCFAF /* Speed.png */,
 				933B5D641AEAA4EF001BCFAF /* sport.gif */,
 				933B5D651AEAA4EF001BCFAF /* tacho-speed.png */,
@@ -236,7 +255,6 @@
 				933B5D711AEAA501001BCFAF /* Distance.png */,
 				933B5D721AEAA501001BCFAF /* Facebook_logo.png */,
 				933B5D731AEAA501001BCFAF /* Nothing.png */,
-				933B5D671AEAA4EF001BCFAF /* up.png */,
 				933B5D681AEAA4EF001BCFAF /* upGraph.png */,
 			);
 			name = Images;
@@ -409,13 +427,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				933B5D6F1AEAA4EF001BCFAF /* up.png in Resources */,
 				933A84491924D5D700676CE5 /* Images.xcassets in Resources */,
 				933B5D6C1AEAA4EF001BCFAF /* sport.gif in Resources */,
 				933B5D701AEAA4EF001BCFAF /* upGraph.png in Resources */,
 				933B5D7B1AEAA507001BCFAF /* background.png in Resources */,
 				933B5D741AEAA501001BCFAF /* Distance.png in Resources */,
+				934F58941AF11CB3003F4539 /* prevBtn.png in Resources */,
 				933B5D761AEAA501001BCFAF /* Nothing.png in Resources */,
+				934F58901AF11B01003F4539 /* Bike.png in Resources */,
+				9342AD651AF0E170008FF44E /* splashScreen.png in Resources */,
+				934F58931AF11CB3003F4539 /* nextBtn.png in Resources */,
 				9305A16E1AE7FD5700B95617 /* Localizable.strings in Resources */,
 				933B5D7A1AEAA507001BCFAF /* Altitude.png in Resources */,
 				93CE382F1ADE75D5004E476A /* Appirater.podspec.json in Resources */,
@@ -425,10 +446,13 @@
 				933A84441924D5D500676CE5 /* Main.storyboard in Resources */,
 				93CE38331ADE75DD004E476A /* AppiraterLocalizable.strings in Resources */,
 				933B5D691AEAA4EF001BCFAF /* SlideToStop.png in Resources */,
+				934F588E1AF11AFA003F4539 /* walk.png in Resources */,
 				933B5D6B1AEAA4EF001BCFAF /* Speed.png in Resources */,
 				933B5D751AEAA501001BCFAF /* Facebook_logo.png in Resources */,
+				934F588C1AF118DF003F4539 /* musicBackgroud.png in Resources */,
 				933B5D7C1AEAA507001BCFAF /* Bottom_Bar.png in Resources */,
 				933B5D6D1AEAA4EF001BCFAF /* tacho-speed.png in Resources */,
+				93F115331AF0DB3500411BF0 /* Run.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

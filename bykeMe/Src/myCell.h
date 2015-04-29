@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblAvgSpeed;
 @property (strong, nonatomic) IBOutlet UILabel *lblAltitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblRythm;
+@property (strong, nonatomic) IBOutlet UILabel *lblCalorie;
 
 @end

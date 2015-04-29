@@ -16,6 +16,7 @@
     NSMutableArray *Altitudes;
     NSMutableArray *Rythms;
     NSMutableArray *imagesSession;
+    NSMutableArray *Calories;
     
     NSString *Date;
     float Distance;
@@ -24,7 +25,7 @@
     NSInteger Altitude;
     NSString *Rythm;
     UIImage *imageSession;
-    
+    NSString *Calorie;
 }
 
 -(BOOL)saveNewSession:(NSMutableArray*)data;
@@ -38,5 +39,6 @@
 @property (strong, nonatomic) NSMutableArray *Altitudes;
 @property (strong, nonatomic) NSMutableArray *Rythms;
 @property (strong, nonatomic) NSMutableArray *imagesSession;
+@property (strong, nonatomic) NSMutableArray *Calories;
 
 @end

@@ -14,13 +14,15 @@
 #define SAVE_FOR_FACEBOOK   1
 #define SAVE_FOR_FILE       2
 
+#define MODE_RUNNING             1
+#define MODE_BIKING              2
+#define MODE_WALKING             3
+
 #import "ViewController.h"
 
 @interface ViewController ()
 
 @end
-
-
 
 @implementation ViewController
 
@@ -149,7 +151,7 @@ BOOL UNLOCKED = NO;
                                name: MPMusicPlayerControllerVolumeDidChangeNotification
                              object: musicPlayer];
     
-    
+
     [musicPlayer beginGeneratingPlaybackNotifications];
     
 }
@@ -160,23 +162,23 @@ BOOL UNLOCKED = NO;
 - (void) handle_NowPlayingItemChanged: (id) notification
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
-    NSString *title,*artist;
+    NSString *title;
     
     NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
     if (titleString) {
-        title = [NSString stringWithFormat:@"Play: %@",titleString];
+        title = [NSString stringWithFormat:@"%@",titleString];
     } else {
         title = @"";
     }
     
-    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
+  /*  NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
     if (artistString) {
         artist = [NSString stringWithFormat:@"Artist: %@",artistString];
     } else {
         artist = @"";
     }
-    
-    musicLabel.text = [NSString stringWithFormat:@"[%@] - %@",artist, title];
+    */
+    musicLabel.text = [NSString stringWithFormat:@"%@",title];
 }
 
 /**************************
@@ -244,7 +246,7 @@ BOOL UNLOCKED = NO;
  **************************/
 -(IBAction)selectMusicSwitch:(id)sender
 {
-    if(musicSwitch.isOn) {
+    //if(!isMusicON) {
         
         MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAny];
     
@@ -255,11 +257,11 @@ BOOL UNLOCKED = NO;
         [self presentViewController:mediaPicker animated:YES completion:nil];
         
         [self saveOptions];
-    }
+    /*}
     else
     {
         [musicPlayer stop];
-    }
+    }*/
 }
 
 /**************************
@@ -308,19 +310,26 @@ BOOL UNLOCKED = NO;
 -(void) showBannerAd:(BOOL)Visible {
     if(Visible)
     {
-        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
-        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - banner.frame.size.height);
-        viewSpeed.frame = CGRectOffset(viewSpeed.frame, 0, -banner.frame.size.height);
-        [UIView commitAnimations];
+        if(!adIsShowed)
+        {
+            [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+            banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+            myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - banner.frame.size.height);
+            viewSpeed.frame = CGRectOffset(viewSpeed.frame, 0, -banner.frame.size.height);
+            [UIView commitAnimations];
+            adIsShowed = YES;
+        }
     }
     else
     {
-        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-        banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
-        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
-        viewSpeed.frame = CGRectOffset(viewSpeed.frame, 0, +banner.frame.size.height);
-        [UIView commitAnimations];
+        if(adIsShowed) {
+            [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+            banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
+            myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
+            viewSpeed.frame = CGRectOffset(viewSpeed.frame, 0, +banner.frame.size.height);
+            [UIView commitAnimations];
+            adIsShowed = NO;
+        }
     }
 }
 
@@ -344,6 +353,8 @@ BOOL UNLOCKED = NO;
 /***************************
  SE VIENE SELEZIONATO DALLA UI IL CAMBIO DI UNITà DA MIGLIA A KM/H
  CAMBIA L'INTERFACCIA E SALVA I DATI NELLE OPZIONI 
+ NON C'E' il salvataggio finale
+ perchè già salva la changeWeight
  ***************************/
 - (IBAction)changeUnits:(id)sender {
     if(isKmh)
@@ -351,21 +362,18 @@ BOOL UNLOCKED = NO;
         isKmh = NO;
         [btnUnits setTitle:NSLocalizedString(@"Units mph",nil) forState:UIControlStateNormal];
         viewSpeed.indicator = @"mph";
+        lblWeightUnits.text = NSLocalizedString(@"Lbs", nil);
     }
     else
     {
         isKmh = YES;
         [btnUnits setTitle:NSLocalizedString(@"Units Km/h",nil) forState:UIControlStateNormal];
         viewSpeed.indicator = @"Km/h";
+        lblWeightUnits.text = NSLocalizedString(@"Kg", nil);
     }
     [viewSpeed setNeedsDisplay];
-    
-    if([options count]==0)
-        [options addObject:[NSNumber numberWithBool:isKmh]];
-    else
-        [options replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:isKmh]];
-    
-    [self saveOptions];
+    [self changeWeight:nil];
+  //  [self saveOptions];
 }
 
 
@@ -508,6 +516,10 @@ BOOL UNLOCKED = NO;
         num_of_point++;
         tempAvgSpeed += speed;
         iseAvgSpeed = (tempAvgSpeed/num_of_point);
+            
+            
+        //Visualizza le calorie bruciate
+        [self getCalorieForSession];
         
     }
     else
@@ -543,20 +555,26 @@ BOOL UNLOCKED = NO;
     if(testArray!=nil)
     {
         options  = [myFile readDataFromFile:@"options.plist"];
+        
         if([options count]>=1)
         {
             isKmh = [[options objectAtIndex:0] boolValue];
-            if(isKmh) {
-            viewSpeed.indicator = @"Km/h";
-            [btnUnits setTitle:NSLocalizedString(@"Units Km/h",nil) forState:UIControlStateNormal];
+            if(isKmh)
+            {
+                viewSpeed.indicator = @"Km/h";
+                [btnUnits setTitle:NSLocalizedString(@"Units Km/h",nil) forState:UIControlStateNormal];
+                lblWeightUnits.text = NSLocalizedString(@"Kg", nil);
+            }
+            else
+            {
+                viewSpeed.indicator = @"mph";
+                [btnUnits setTitle:NSLocalizedString(@"Units mph",nil) forState:UIControlStateNormal];
+                lblWeightUnits.text = NSLocalizedString(@"Lbs", nil);
+            }
         }
-        else {
-            viewSpeed.indicator = @"mph";
-            [btnUnits setTitle:NSLocalizedString(@"Units mph",nil) forState:UIControlStateNormal];
-        }
-                        }
         
-        if([options count]>1) {
+        if([options count]>=3)
+        {
             if([[options objectAtIndex:1] boolValue]) {
                 [voiceSwitch setOn:YES];
                 isVoiceON = YES;
@@ -567,14 +585,15 @@ BOOL UNLOCKED = NO;
                 isVoiceON = NO;
             }
             if([[options objectAtIndex:2] boolValue]) {
-                if([musicLabel.text length] > 0)
+               /* if([musicLabel.text length] > 0)
                     [musicSwitch setOn:YES];
                 else
-                    [musicSwitch setOn:NO];
+                    [musicSwitch setOn:NO];*/
+                isMusicON = YES;
             }
             else
             {
-                [musicSwitch setOn:NO];
+              //  [musicSwitch setOn:NO];
                 isMusicON = NO;
             }
         }
@@ -582,32 +601,60 @@ BOOL UNLOCKED = NO;
         {
             [voiceSwitch setOn:YES];
             isVoiceON = YES;
-            [musicSwitch setOn:NO];
+            //[musicSwitch setOn:NO];
             isMusicON = NO;
         }
-
+        
+        if([options count]>=5)
+        {
+            SESSION_MODE = [[options objectAtIndex:3] intValue];
+            userWeight   = [[options objectAtIndex:4] integerValue];
+            if(SESSION_MODE == 0) SESSION_MODE = MODE_RUNNING;
+            [self setSessionModeImage];
+        }
+        else
+        {
+            SESSION_MODE = MODE_RUNNING;
+            userWeight = 70;
+        }
+        weightStepper.value = userWeight;
+        if(!isKmh) {  //FOR NON EU MUSURATIONS
+            userWeight = userWeight * 2.2046;
+        }
+        lblWeight.text = [NSString stringWithFormat:@"%lu",(unsigned long)userWeight];
     }
     else
     {
         [voiceSwitch setOn:YES];
         isVoiceON = YES;
-        [musicSwitch setOn:NO];
+        //[musicSwitch setOn:NO];
         isMusicON = NO;
     }
     
 }
 
+
+/********************
+ SALVA LE OPZIONI
+ **********************/
 -(void)saveOptions {
     
-    if(options!=nil && [options count]== 1)
-    {
+    //if([options count] == 0)
+    //{
+        options = [NSMutableArray new];
+        [options addObject:[NSNumber numberWithBool:isKmh]];
         [options addObject:[NSNumber numberWithBool:voiceSwitch.isOn]];
         [options addObject:[NSNumber numberWithBool:musicSwitch.isOn]];
-    }
-    else if([options count] == 3) {
+        [options addObject:[NSNumber numberWithInt:SESSION_MODE]];
+        [options addObject:[NSNumber numberWithInteger:[weightStepper value]]];
+    /*}
+    else {
+        [options replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:isKmh]];
         [options replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:voiceSwitch.isOn]];
         [options replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:musicSwitch.isOn]];
-    }
+        [options replaceObjectAtIndex:3 withObject:[NSNumber numberWithInt:SESSION_MODE]];
+        [options replaceObjectAtIndex:4 withObject:[NSNumber numberWithInteger:[weightStepper value]]];
+    }*/
     
     FileSupport *myFile = [[FileSupport alloc] init];
     [myFile writeDataToFile:options fileToWrite:@"options.plist"];
@@ -678,13 +725,15 @@ BOOL UNLOCKED = NO;
     [shareLabel setTitle:NSLocalizedString(@"Share", nil) forState:UIControlStateNormal];
     [unitsLabel setTitle:NSLocalizedString(@"Units Km/h", nil) forState:UIControlStateNormal];
     lblVoice.text = NSLocalizedString(@"Voice", nil);
-    lblMusic.text = NSLocalizedString(@"Music", nil);
+    [lblMusic setTitle:NSLocalizedString(@"Music", nil) forState:UIControlStateNormal];
     slideToStartLabel.text = NSLocalizedString(@"Slide to start", nil);
     lblTimeB.text = NSLocalizedString(@"Time", nil);
     lblDistanceB.text = NSLocalizedString(@"Distance", nil);
     lblAltitudeB.text = NSLocalizedString(@"Altitude", nil);
     lblTapHere.text = NSLocalizedString(@"Tap here for menù", nil);
-    
+    lblCalories.text = NSLocalizedString(@"Calories", nil);
+    [btnSessionMode setTitle:NSLocalizedString(@"Running", nil) forState:UIControlStateNormal];
+    sessionModeImage.image = [UIImage imageNamed:@"Run.png"];
     
     /*******************
     UI CUSTOMIZATION
@@ -696,12 +745,122 @@ BOOL UNLOCKED = NO;
     [slideToStart setThumbImage: [UIImage imageNamed:@"SlideToStop.png"] forState:UIControlStateNormal];
     [slideToStart setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
     [slideToStart setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
+    
+    viewMusic.hidden = YES;
+    [self initSwipeforUIView];
+
 }
 
+-(void)initSwipeforUIView {
+    /***************
+     CUSTOM GESTURE RECOGNITION
+     ****************/
+    UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleftMenuPanel:)];
+    swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
+    [menuView addGestureRecognizer:swipeleft];
+    
+    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperightMenuPanel:)];
+    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+    [menuView addGestureRecognizer:swiperight];
+    
+    UISwipeGestureRecognizer * swipeleftMusic=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleftMusicPanel:)];
+    swipeleftMusic.direction=UISwipeGestureRecognizerDirectionLeft;
+    [viewMusic addGestureRecognizer:swipeleftMusic];
+    
+    UISwipeGestureRecognizer * swiperightMusic=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperightMusicPanel:)];
+    swiperightMusic.direction=UISwipeGestureRecognizerDirectionRight;
+    [viewMusic addGestureRecognizer:swiperightMusic];
+    
+    canAnimate = true;
+}
+
+-(void)swipeleftMusicPanel:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    //Do what you want here
+    NSLog(@"Swipe to left");
+   [self animatePanel:viewMusic withPanel:menuView rightToLeft:YES];
+}
+
+-(void)swiperightMusicPanel:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    //Do what you want here
+    NSLog(@"Swipe to right");
+    
+    [self animatePanel:viewMusic withPanel:menuView rightToLeft:NO];
+}
+
+
+-(void)swipeleftMenuPanel:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    //Do what you want here
+    NSLog(@"Swipe to left");
+
+    [self animatePanel:menuView withPanel:viewMusic rightToLeft:YES];
+    
+}
+
+-(void)swiperightMenuPanel:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    //Do what you want here
+    NSLog(@"Swipe to right");
+    
+    [self animatePanel:menuView withPanel:viewMusic rightToLeft:NO];
+}
+
+-(void)animatePanel:(UIView*)mainPanel withPanel:(UIView*)secondPanel rightToLeft:(BOOL)rightToLeft {
+    
+    float width = mainPanel.frame.size.width;
+    float height = mainPanel.frame.size.height;
+    
+    if(canAnimate) {
+    canAnimate = false;
+    if(rightToLeft) {
+        [secondPanel setFrame:CGRectMake(width, 0.0, width, height)];
+         secondPanel.hidden = NO;
+        [UIView animateWithDuration:0.3f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         [secondPanel setFrame:mainPanel.frame];
+                         [mainPanel setFrame:CGRectMake(-width, -7.0, width, height)];
+                     }
+                     completion:^(BOOL finished){
+                         // do whatever post processing you want (such as resetting what is "current" and what is "next")
+                         mainPanel.hidden = YES;
+                         canAnimate = true;
+                     }];
+    }
+    else
+    {
+        [secondPanel setFrame:CGRectMake(-width, 0.0, width, height)];
+        secondPanel.hidden = NO;
+        [UIView animateWithDuration:0.3f
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+                         animations:^{
+                             [secondPanel setFrame:mainPanel.frame];
+                             [mainPanel setFrame:CGRectMake(width, -7.0, width, height)];
+                         }
+                         completion:^(BOOL finished){
+                             // do whatever post processing you want (such as resetting what is "current" and what is "next")
+                             mainPanel.hidden = YES;
+                             canAnimate = true;
+                         }];
+
+    }
+}
+
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    userWeight = 90;
+    iHr = 0; iMin= 10; iSec = 0;
+    lastSpeed = 40.0;
+    [self getCalorieForBike];
+    
     
     [self initLocalizationAndUI];
     [self startBackgroundAnimation];
@@ -770,6 +929,7 @@ BOOL UNLOCKED = NO;
     [self loadOptions];
     
     //Hide AD Banner
+    adIsShowed = YES;
     [self showBannerAd:NO];
     
     //Turn off display light saver
@@ -797,7 +957,10 @@ BOOL UNLOCKED = NO;
 - (IBAction)showMenuPanel:(id)sender {
     [UIView animateWithDuration:0.5 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeTranslation(0, 0);
-        menuView.transform = trasform;
+        if(!menuView.hidden)
+            menuView.transform = trasform;
+        else
+            viewMusic.transform = trasform;
     }];
     hintViewHasShowed = true;
     [UIView animateWithDuration:0.5 animations:^{
@@ -820,7 +983,10 @@ BOOL UNLOCKED = NO;
     
     [UIView animateWithDuration:0.5 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeTranslation(0, -400);
-        menuView.transform = trasform;
+        if(!menuView.hidden)
+            menuView.transform = trasform;
+        else
+            viewMusic.transform = trasform;
     }];
     
     if(!hintViewHasShowed)
@@ -995,6 +1161,7 @@ BOOL UNLOCKED = NO;
     [sessionData addObject:[NSNumber numberWithInteger:iseMaxSpeed]];
     [sessionData addObject:lblRitmoMedio.text];
     [sessionData addObject:sessionImage];
+    [sessionData addObject:valCaloriesLabel.text];  //Calories
     
     if(![sessionToSave saveNewSession:sessionData])
         NSLog(@"Dati non salvati");
@@ -1161,5 +1328,112 @@ BOOL UNLOCKED = NO;
     //}
 }
 
+-(void)setSessionModeImage {
+    if(SESSION_MODE == MODE_RUNNING)
+    {
+        [btnSessionMode setTitle:NSLocalizedString(@"Running", nil) forState:UIControlStateNormal];
+        sessionModeImage.image = [UIImage imageNamed:@"Run.png"];
+    }
+    else if (SESSION_MODE == MODE_BIKING)
+    {
+        [btnSessionMode setTitle:NSLocalizedString(@"Biking", nil) forState:UIControlStateNormal];
+        sessionModeImage.image = [UIImage imageNamed:@"Bike.png"];
+    }
+    else if (SESSION_MODE == MODE_WALKING)
+    {
+        [btnSessionMode setTitle:NSLocalizedString(@"Walking", nil) forState:UIControlStateNormal];
+        sessionModeImage.image = [UIImage imageNamed:@"walk.png"];
+    }
+
+}
+
+-(IBAction)selectSessionMode:(id)sender {
+    
+    if(SESSION_MODE == MODE_WALKING)
+    {
+        SESSION_MODE = MODE_RUNNING;
+        [btnSessionMode setTitle:NSLocalizedString(@"Running", nil) forState:UIControlStateNormal];
+        sessionModeImage.image = [UIImage imageNamed:@"Run.png"];
+    }
+    else if (SESSION_MODE == MODE_RUNNING)
+    {
+        SESSION_MODE = MODE_BIKING;
+        [btnSessionMode setTitle:NSLocalizedString(@"Biking", nil) forState:UIControlStateNormal];
+        sessionModeImage.image = [UIImage imageNamed:@"Bike.png"];
+    }
+    else if (SESSION_MODE == MODE_BIKING)
+    {
+        SESSION_MODE = MODE_WALKING;
+        [btnSessionMode setTitle:NSLocalizedString(@"Walking", nil) forState:UIControlStateNormal];
+        sessionModeImage.image = [UIImage imageNamed:@"walk.png"];
+    }
+    [self saveOptions];
+}
+
+- (IBAction)changeWeight:(id)sender {
+    userWeight = [weightStepper value];
+    if(!isKmh) {  //FOR NON EU MUSURATIONS
+        userWeight = userWeight * 2.2046;
+    }
+    lblWeight.text = [NSString stringWithFormat:@"%lu",(unsigned long)userWeight];
+    [self saveOptions];
+}
+
+
+-(void) getCalorieForSession {
+    float current_calories = 0.0;
+    
+    if(SESSION_MODE == MODE_WALKING)
+    {
+        current_calories = [self getCalorieForWalking];
+    }
+    else if (SESSION_MODE == MODE_RUNNING)
+    {
+        current_calories = [self getCalorieForRunning];
+    }
+    else if (SESSION_MODE == MODE_BIKING)
+    {
+        current_calories = [self getCalorieForBike];
+    }
+    
+    valCaloriesLabel.text = [NSString stringWithFormat:@"%.0f",current_calories];
+}
+
+-(float)getCalorieForRunning {
+    float KCal = 0.9 * distanceInKM * userWeight;
+    return KCal;
+}
+
+-(float)getCalorieForWalking {
+    float KCal = 0.45 * distanceInKM * userWeight;
+    return KCal;
+}
+
+-(float)getCalorieForBike {
+    float value_table = 0.0;
+    float seconds = iHr * 60 * 60 + iMin * 60 + iSec;
+    float minutes = (seconds / 60) / 60;
+    if(lastSpeed < 16.0) {
+        value_table = 4.0;
+    }
+    else if ((lastSpeed>=16) && (lastSpeed<19)) {
+        value_table = 6.0;
+    }
+    else if ((lastSpeed>=19) && (lastSpeed<22)) {
+        value_table = 8.0;
+    }
+    else if ((lastSpeed>=22) && (lastSpeed<25)) {
+        value_table = 10.0;
+    }
+    else if ((lastSpeed>=25) && (lastSpeed<32)) {
+        value_table = 12.0;
+    }
+    else if (lastSpeed>32) {
+        value_table = 16.0;
+    }
+    float KCal = roundf((userWeight*value_table)*minutes);
+    
+    return KCal;
+}
 
 @end

@@ -33,18 +33,17 @@ FileSupport *iCFile;
     
         UIImage *image = [sessions.imagesSession objectAtIndex:position.row];
     
-        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
-        {
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
             NSString *temp;
             
             SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
             
-            temp = [NSString stringWithFormat:NSLocalizedString(@"RUNNING_KM",nil),[[sessions.Distances objectAtIndex:position.row] floatValue]];
+            temp = [NSString stringWithFormat:NSLocalizedString(@"RUNNING_MT", nil),[[sessions.Distances objectAtIndex:position.row] floatValue]];
             
             [controller setInitialText:temp];
-            //[controller add]
             [controller addImage:image];
             [self presentViewController:controller animated:YES completion:Nil];
+           }
         }
         else
         {
@@ -52,7 +51,6 @@ FileSupport *iCFile;
             
             [alert show];
         }
-    }
     }
 
 
@@ -90,6 +88,7 @@ FileSupport *iCFile;
         [sessions.MaxSpeeds removeObjectAtIndex:indexPath.row];
         [sessions.Rythms removeObjectAtIndex:indexPath.row];
         [sessions.imagesSession removeObjectAtIndex:indexPath.row];
+        [sessions.Calories removeObjectAtIndex:indexPath.row];
         
         //[self saveSessions];
         [sessions saveSessions];
@@ -128,6 +127,7 @@ FileSupport *iCFile;
         cell.lblDistance.text = [NSString stringWithFormat:NSLocalizedString(@"Distance %.2f Km",nil),Distance];
     
     cell.lblRythm.text = [NSString stringWithFormat:NSLocalizedString(@"Rythm: %@/Km",nil),[sessions.Rythms objectAtIndex:indexPath.row]];
+    cell.lblCalorie.text = [NSString stringWithFormat:NSLocalizedString(@"Calories %@", nil),[sessions.Calories objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -145,7 +145,7 @@ FileSupport *iCFile;
 
 -(void)setupUI {
     [navigationItemTitle setTitle:NSLocalizedString(@"My Sessions", nil)];
-    [btnShare setTitle:NSLocalizedString(@"Share", nil)];
+  //  [btnShare setTitle:NSLocalizedString(@"Share", nil)];
 }
 
 - (void)viewDidLoad

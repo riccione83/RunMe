@@ -79,6 +79,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ViewController showBannerAd:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "banner.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ViewController changeUnits:]:ViewController.m">
          <PersistentStrings>
             <PersistentString

@@ -13,7 +13,7 @@
 
 NSString *fileName = @"RunMeSessionData.data";
 
-@synthesize Altitudes,  Dates, Rythms, imagesSession, Distances, MaxSpeeds, AvgSpeeds;
+@synthesize Altitudes,  Dates, Rythms, imagesSession, Distances, MaxSpeeds, AvgSpeeds,Calories;
 
 -(id)init {
     self = [super init];
@@ -41,6 +41,8 @@ NSString *fileName = @"RunMeSessionData.data";
     Rythm = @"0:0";
     imagesSession = [NSMutableArray new];
     imageSession = nil;
+    Calories = [NSMutableArray new];
+    Calorie = @"0";
 }
 
 -(BOOL)loadSession {
@@ -50,7 +52,7 @@ NSString *fileName = @"RunMeSessionData.data";
     
     if(sessions!=nil)
     {
-        if([sessions count] == 7) {
+        if([sessions count] == 8) {
             Dates       = [sessions objectAtIndex:0];
             Altitudes   = [sessions objectAtIndex:1];
             AvgSpeeds   = [sessions objectAtIndex:2];
@@ -58,6 +60,7 @@ NSString *fileName = @"RunMeSessionData.data";
             MaxSpeeds   = [sessions objectAtIndex:4];
             Rythms      = [sessions objectAtIndex:5];
             imagesSession   = [sessions objectAtIndex:6];
+            Calories    = [sessions objectAtIndex:7];
             return true;
         }
     }
@@ -82,7 +85,7 @@ NSString *fileName = @"RunMeSessionData.data";
     
     [self loadSession];
     
-    if([data count] == 6) {                                             // Is a valid data - Store it.
+    if([data count] == 7) {                                             // Is a valid data - Store it.
         NSMutableArray *sessionToSave = [NSMutableArray new];
         
         NSDate *currDate = [NSDate date];
@@ -97,6 +100,7 @@ NSString *fileName = @"RunMeSessionData.data";
         MaxSpeed = [[data objectAtIndex:3] integerValue];   //MaxSpeed
         Rythm    = [data objectAtIndex:4];                  //Rythm
         imageSession = [data objectAtIndex:5];              //imageSession
+        Calorie = [data objectAtIndex:6];
         
         [Dates addObject:Date];
         [Altitudes addObject:[NSNumber numberWithInteger:Altitude]];
@@ -105,6 +109,7 @@ NSString *fileName = @"RunMeSessionData.data";
         [MaxSpeeds addObject:[NSNumber numberWithInteger:MaxSpeed]];
         [Rythms addObject:Rythm];
         [imagesSession addObject:imageSession];
+        [Calories addObject:Calorie];
     
         [sessionToSave addObject:Dates];
         [sessionToSave addObject:Altitudes];
@@ -113,6 +118,7 @@ NSString *fileName = @"RunMeSessionData.data";
         [sessionToSave addObject:MaxSpeeds];
         [sessionToSave addObject:Rythms];
         [sessionToSave addObject:imagesSession];
+        [sessionToSave addObject:Calories];
 
         FileSupport *myFile = [[FileSupport alloc] init];
         [myFile writeObjectToFile:sessionToSave fileToWrite:fileName];
@@ -132,6 +138,7 @@ NSString *fileName = @"RunMeSessionData.data";
     [sessionToSave addObject:MaxSpeeds];
     [sessionToSave addObject:Rythms];
     [sessionToSave addObject:imagesSession];
+    [sessionToSave addObject:Calories];
     
     FileSupport *myFile = [[FileSupport alloc] init];
     [myFile writeObjectToFile:sessionToSave fileToWrite:fileName];
