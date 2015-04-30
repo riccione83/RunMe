@@ -75,6 +75,7 @@
     MPMusicPlayerController *musicPlayer;
     UIBackgroundTaskIdentifier backgroundTask;
     
+    IBOutlet UIImageView *imageArtworkUI;
     IBOutlet UISlider *slideToStart;
     IBOutlet UILabel *slideToStartLabel;
     IBOutlet UISwitch *voiceSwitch;

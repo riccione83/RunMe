@@ -153,6 +153,70 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="RK5-UF-X4D">
+                                <rect key="frame" x="0.0" y="-7" width="414" height="230"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="musicBackgroud.png" id="gPG-6j-yLx">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="230"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Odx-PV-rhV">
+                                        <rect key="frame" x="175" y="131" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Play" image="playBtn.png">
+                                            <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playMusic:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pgo-Qg-DN2"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="musicBackgroud.png" id="yOg-ky-hyg">
+                                        <rect key="frame" x="170" y="55" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Q9-0A-nq1">
+                                        <rect key="frame" x="100" y="131" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="&lt;&lt;" image="prevBtn.png"/>
+                                        <connections>
+                                            <action selector="prevSong:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="s0V-c1-D9m"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gkQ-e4-MUA">
+                                        <rect key="frame" x="255" y="131" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="&gt;&gt;" image="nextBtn.png">
+                                            <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextSong:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ojX-Rp-Tgn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="C7w-EI-o28">
+                                        <rect key="frame" x="12" y="28" width="386" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
+                                        <state key="normal" title="Music">
+                                            <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectMusicSwitch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eZG-q0-pJc"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prova" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QUC-ij-5vQ">
+                                        <rect key="frame" x="8" y="199" width="398" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.96078437569999997" green="0.96078437569999997" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CoF-dL-5JW">
                                 <rect key="frame" x="368" y="26" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -256,6 +320,20 @@
                                         <color key="textColor" red="0.96078437569999997" green="0.96078437569999997" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="FyK-uw-GZA">
+                                        <rect key="frame" x="321" y="71" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="selectVoiceSwitch:" destination="vXZ-lx-hvc" eventType="valueChanged" id="23y-aD-akt"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voice active" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ebg-CO-D7f">
+                                        <rect key="frame" x="294" y="110" width="102" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="n9A-sx-KQW">
                                         <rect key="frame" x="6" y="184" width="400" height="31"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -275,81 +353,6 @@
                                 <rect key="frame" x="0.0" y="686" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </adBannerView>
-                            <view contentMode="scaleToFill" id="RK5-UF-X4D">
-                                <rect key="frame" x="0.0" y="-7" width="414" height="230"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="musicBackgroud.png" id="gPG-6j-yLx">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="230"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="FyK-uw-GZA">
-                                        <rect key="frame" x="181" y="55" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="selectVoiceSwitch:" destination="vXZ-lx-hvc" eventType="valueChanged" id="23y-aD-akt"/>
-                                        </connections>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ebg-CO-D7f">
-                                        <rect key="frame" x="0.0" y="25" width="414" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Odx-PV-rhV">
-                                        <rect key="frame" x="174" y="134" width="66" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
-                                        <state key="normal" title="Play">
-                                            <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playMusic:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pgo-Qg-DN2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Q9-0A-nq1">
-                                        <rect key="frame" x="12" y="128" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="&lt;&lt;" image="prevBtn.png"/>
-                                        <connections>
-                                            <action selector="prevSong:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="s0V-c1-D9m"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gkQ-e4-MUA">
-                                        <rect key="frame" x="338" y="128" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="&gt;&gt;" image="nextBtn.png">
-                                            <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="nextSong:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ojX-Rp-Tgn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="C7w-EI-o28">
-                                        <rect key="frame" x="12" y="95" width="386" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
-                                        <state key="normal" title="Music">
-                                            <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectMusicSwitch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eZG-q0-pJc"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prova" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QUC-ij-5vQ">
-                                        <rect key="frame" x="8" y="197" width="398" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.96078437569999997" green="0.96078437569999997" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -361,6 +364,7 @@
                         <outlet property="btnUnits" destination="3Sq-5e-rog" id="Ihj-4k-YO9"/>
                         <outlet property="gpsLabel" destination="CoF-dL-5JW" id="7eH-ww-df3"/>
                         <outlet property="hintView" destination="3WT-lT-E2H" id="rAH-cU-A8P"/>
+                        <outlet property="imageArtworkUI" destination="yOg-ky-hyg" id="d0c-gw-Ez0"/>
                         <outlet property="lblAltitude" destination="ljh-46-rQr" id="7by-CL-j3l"/>
                         <outlet property="lblAltitudeB" destination="545-hz-bQj" id="XM4-et-Ip4"/>
                         <outlet property="lblCalories" destination="1vR-M4-8fE" id="hUe-8d-8fm"/>
@@ -534,8 +538,9 @@
         <image name="background.png" width="640" height="960"/>
         <image name="backgroung.png" width="640" height="960"/>
         <image name="musicBackgroud.png" width="414" height="230"/>
-        <image name="nextBtn.png" width="128" height="128"/>
-        <image name="prevBtn.png" width="128" height="128"/>
+        <image name="nextBtn.png" width="512" height="512"/>
+        <image name="playBtn.png" width="512" height="512"/>
+        <image name="prevBtn.png" width="512" height="512"/>
         <image name="tacho-speed.png" width="256" height="256"/>
         <image name="up.png" width="720" height="720"/>
         <image name="upGraph.png" width="50" height="44"/>

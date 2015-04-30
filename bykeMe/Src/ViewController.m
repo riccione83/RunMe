@@ -187,16 +187,27 @@ BOOL UNLOCKED = NO;
 - (void) handle_PlaybackStateChanged: (id) notification
 {
     MPMusicPlaybackState playbackState = [musicPlayer playbackState];
+    MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
+    UIImage *artworkImage = nil;
+    MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
+    
+    if(artwork) {
+        artworkImage = [artwork imageWithSize:CGSizeMake(70, 70)];
+        imageArtworkUI.image = artworkImage;
+    }
+    else
+        imageArtworkUI.image = [UIImage imageNamed:@"musicBackgroud.png"];
     
     if (playbackState == MPMusicPlaybackStatePaused) {
-        [playMusicButton setTitle:@"Play" forState:UIControlStateNormal];
+        //[playMusicButton setTitle:@"Play" forState:UIControlStateNormal];
+        [playMusicButton setImage:[UIImage imageNamed:@"playBtn.png"] forState:UIControlStateNormal];
         
     } else if (playbackState == MPMusicPlaybackStatePlaying) {
-        [playMusicButton setTitle:@"Pause" forState:UIControlStateNormal];
+        [playMusicButton setImage:[UIImage imageNamed:@"pauseBtn.png"] forState:UIControlStateNormal];
   
     } else if (playbackState == MPMusicPlaybackStateStopped) {
-        
-        [playMusicButton setTitle:@"Play" forState:UIControlStateNormal];
+        //[playMusicButton setTitle:@"Play" forState:UIControlStateNormal];
+        [playMusicButton setImage:[UIImage imageNamed:@"playBtn.png"] forState:UIControlStateNormal];
         [musicPlayer stop];
         
     }
@@ -442,14 +453,15 @@ BOOL UNLOCKED = NO;
         }
         oldPos = pos;
     
+        distanceInKM = distanceInMeters/1000;
         if(distanceInMeters<1000)
         {
             unit = @"mt";
             lblDistance.text = [NSString stringWithFormat:@"%.01f %@",distanceInMeters,unit];
+            
         }
         else
         {
-            distanceInKM = distanceInMeters/1000;
             unit = @"km";
             lblDistance.text = [NSString stringWithFormat:@"%.02f %@",distanceInKM,unit];
         }
@@ -638,26 +650,15 @@ BOOL UNLOCKED = NO;
  SALVA LE OPZIONI
  **********************/
 -(void)saveOptions {
-    
-    //if([options count] == 0)
-    //{
         options = [NSMutableArray new];
         [options addObject:[NSNumber numberWithBool:isKmh]];
         [options addObject:[NSNumber numberWithBool:voiceSwitch.isOn]];
         [options addObject:[NSNumber numberWithBool:musicSwitch.isOn]];
         [options addObject:[NSNumber numberWithInt:SESSION_MODE]];
         [options addObject:[NSNumber numberWithInteger:[weightStepper value]]];
-    /*}
-    else {
-        [options replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:isKmh]];
-        [options replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:voiceSwitch.isOn]];
-        [options replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:musicSwitch.isOn]];
-        [options replaceObjectAtIndex:3 withObject:[NSNumber numberWithInt:SESSION_MODE]];
-        [options replaceObjectAtIndex:4 withObject:[NSNumber numberWithInteger:[weightStepper value]]];
-    }*/
     
-    FileSupport *myFile = [[FileSupport alloc] init];
-    [myFile writeDataToFile:options fileToWrite:@"options.plist"];
+        FileSupport *myFile = [[FileSupport alloc] init];
+        [myFile writeDataToFile:options fileToWrite:@"options.plist"];
 }
 
 /*********
@@ -1189,7 +1190,7 @@ BOOL UNLOCKED = NO;
         }
         if(buttonIndex==1)
         {
-           // [speechCore speech:@"Session saved"];
+            [self resetData];
             [timerSpeechSession invalidate];
             timerSpeechSession = nil;
             [self setFinalPoint];

@@ -970,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1276"
-            endingLineNumber = "1276"
+            startingLineNumber = "1277"
+            endingLineNumber = "1277"
             landmarkName = "-startByking:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1002,11 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "991"
-            endingLineNumber = "991"
+            startingLineNumber = "992"
+            endingLineNumber = "992"
             landmarkName = "-hideMenuPanel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1018,11 +1018,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1364"
-            endingLineNumber = "1364"
+            startingLineNumber = "1365"
+            endingLineNumber = "1365"
             landmarkName = "-selectSessionMode:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1034,11 +1034,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1387"
-            endingLineNumber = "1387"
+            startingLineNumber = "1388"
+            endingLineNumber = "1388"
             landmarkName = "-getCalorieForSession"
             landmarkType = "5">
          </BreakpointContent>
@@ -1050,11 +1050,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451930483.333384"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "576"
-            endingLineNumber = "576"
+            startingLineNumber = "588"
+            endingLineNumber = "588"
             landmarkName = "-loadOptions"
             landmarkType = "5">
          </BreakpointContent>
@@ -1066,11 +1066,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1315"
-            endingLineNumber = "1315"
+            startingLineNumber = "1316"
+            endingLineNumber = "1316"
             landmarkName = "-updateLines:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1082,11 +1082,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451926389.45845"
+            timestampString = "452103611.657588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "-showBannerAd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1098,11 +1098,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451926478.855251"
+            timestampString = "452103611.657588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "-showBannerAd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1114,11 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451926519.023026"
+            timestampString = "452103611.657588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "-showBannerAd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1130,11 +1130,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1304"
-            endingLineNumber = "1304"
+            startingLineNumber = "1305"
+            endingLineNumber = "1305"
             landmarkName = "-mapView:viewForOverlay:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1146,11 +1146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451930483.333384"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "608"
-            endingLineNumber = "608"
+            startingLineNumber = "620"
+            endingLineNumber = "620"
             landmarkName = "-loadOptions"
             landmarkType = "5">
          </BreakpointContent>
@@ -1162,27 +1162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452008870.461148"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "642"
-            endingLineNumber = "642"
-            landmarkName = "-saveOptions"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451930483.333384"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "604"
-            endingLineNumber = "604"
+            startingLineNumber = "616"
+            endingLineNumber = "616"
             landmarkName = "-loadOptions"
             landmarkType = "5">
          </BreakpointContent>
@@ -1194,11 +1178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1284"
-            endingLineNumber = "1284"
+            startingLineNumber = "1285"
+            endingLineNumber = "1285"
             landmarkName = "-startByking:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1210,11 +1194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "451930483.333384"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "609"
-            endingLineNumber = "609"
+            startingLineNumber = "621"
+            endingLineNumber = "621"
             landmarkName = "-loadOptions"
             landmarkType = "5">
          </BreakpointContent>
@@ -1274,11 +1258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "817"
-            endingLineNumber = "817"
+            startingLineNumber = "818"
+            endingLineNumber = "818"
             landmarkName = "-animatePanel:withPanel:rightToLeft:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1290,11 +1274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781"
+            startingLineNumber = "782"
+            endingLineNumber = "782"
             landmarkName = "-swipeleftMusicPanel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1306,23 +1290,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "789"
-            endingLineNumber = "789"
-            landmarkName = "-swiperightMusicPanel:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "790"
@@ -1338,11 +1306,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "780"
-            endingLineNumber = "780"
+            startingLineNumber = "791"
+            endingLineNumber = "791"
+            landmarkName = "-swiperightMusicPanel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bykeMe/Src/ViewController.m"
+            timestampString = "452103851.501896"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
             landmarkName = "-swipeleftMusicPanel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1354,11 +1338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "796"
-            endingLineNumber = "796"
+            startingLineNumber = "797"
+            endingLineNumber = "797"
             landmarkName = "-swipeleftMenuPanel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1370,12 +1354,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bykeMe/Src/ViewController.m"
-            timestampString = "452010186.741602"
+            timestampString = "452103851.501896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "805"
-            endingLineNumber = "805"
+            startingLineNumber = "806"
+            endingLineNumber = "806"
             landmarkName = "-swiperightMenuPanel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bykeMe/Src/ViewController.m"
+            timestampString = "452103611.657588"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "-handle_PlaybackStateChanged:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bykeMe/Src/ViewController.m"
+            timestampString = "452103851.501896"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1404"
+            endingLineNumber = "1404"
+            landmarkName = "-getCalorieForRunning"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bykeMe/Src/ViewController.m"
+            timestampString = "452104104.634436"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
+            landmarkName = "-locationManager:didUpdateLocations:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bykeMe/Src/ViewController.m"
+            timestampString = "452104104.634436"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
+            landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
