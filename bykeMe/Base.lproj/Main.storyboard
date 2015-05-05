@@ -526,6 +526,41 @@
             </objects>
             <point key="canvasLocation" x="954" y="25"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="MWC-ch-doL">
+            <objects>
+                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ejn-0D-jF1" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwv-6Q-z8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="728"/>
+        </scene>
+        <!--Page Item Controller-->
+        <scene sceneID="sQS-o4-0bq">
+            <objects>
+                <viewController storyboardIdentifier="ItemController" id="4Aq-lF-UQV" customClass="PageItemController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PEc-Fa-gPj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zDd-mb-kad">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="contentImageView" destination="zDd-mb-kad" id="DS4-gF-ggk"/>
+                        <outlet property="view" destination="PEc-Fa-gPj" id="8y8-zE-3wV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9D-AT-CA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="1550"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Altitude.png" width="223" height="206"/>

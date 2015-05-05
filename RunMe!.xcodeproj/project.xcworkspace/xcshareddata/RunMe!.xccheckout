@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>EE11ACFE-8027-4FF3-BF80-74F59B71A628</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>RunMe!</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3F0DC6E7BA3F23B870FEE37105D4762E9B4E21B4</key>
 		<string>https://github.com/riccione83/RunMe.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RunMe!.xcodeproj/project.xcworkspace</string>
+	<string>RunMe!.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3F0DC6E7BA3F23B870FEE37105D4762E9B4E21B4</key>

@@ -20,11 +20,18 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UIPageViewControllerDataSource>
+
+@property (nonatomic, strong) NSArray *contentImages;
+@property (nonatomic, strong) UIPageViewController *pageViewController;
+@property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 
 @end
 
 @implementation ViewController
+
+@synthesize contentImages;
+@synthesize singleTap;
 
 BOOL UNLOCKED = NO;
 
@@ -49,6 +56,7 @@ BOOL UNLOCKED = NO;
             [self saveSessionWithImage:image];
         }
         imageSaveType = 0;
+        [self resetData];
     }
 }
 
@@ -853,9 +861,170 @@ BOOL UNLOCKED = NO;
 
 }
 
+#pragma mark -
+#pragma mark UIPageViewControllerDataSource
+
+- (UIViewController *) pageViewController: (UIPageViewController *) pageViewController viewControllerBeforeViewController:(UIViewController *) viewController
+{
+    PageItemController *itemController = (PageItemController *) viewController;
+    
+    if (itemController.itemIndex > 0)
+    {
+        return [self itemControllerForIndex: itemController.itemIndex-1];
+    }
+    
+    return nil;
+}
+
+- (UIViewController *) pageViewController: (UIPageViewController *) pageViewController viewControllerAfterViewController:(UIViewController *) viewController
+{
+    
+    PageItemController *itemController = (PageItemController *) viewController;
+ 
+    NSInteger index = itemController.itemIndex;
+    
+    if(index == NSNotFound)
+        return nil;
+    
+    index++;
+    
+    
+    if (itemController.itemIndex+1 < [contentImages count])
+    {
+        return [self itemControllerForIndex: itemController.itemIndex+1];
+    }
+    else if (itemController.itemIndex+1 == [contentImages count])
+    {
+        pageViewController.view.userInteractionEnabled = YES;
+        pageViewController.view.contentMode = UIViewContentModeScaleAspectFit;
+        singleTap = [[UITapGestureRecognizer alloc]
+                     initWithTarget:self
+                     action:@selector(closePageViewControllerForHelp)];
+        singleTap.numberOfTapsRequired=1;
+        [self.pageViewController.view addGestureRecognizer:singleTap];
+    }
+    return nil;
+}
+
+-(void)closePageViewControllerForHelp
+{
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    // saving the preference that init screen has been viewed
+    [prefs setInteger:1 forKey:@"initScreen"];
+    // This is suggested to synch prefs, but is not needed (I didn't put it in my tut)
+    [prefs synchronize];
+
+    //[self.view removeGestureRecognizer:singleTap];
+    [self.pageViewController.view removeGestureRecognizer:singleTap];
+    
+    
+    [UIView beginAnimations:@"curldown" context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.view cache:YES];
+    [self.pageViewController.view removeFromSuperview];
+    [UIView commitAnimations];
+    
+
+}
+
+- (PageItemController *) itemControllerForIndex: (NSUInteger) itemIndex
+{
+    if (itemIndex < [contentImages count])
+    {
+        PageItemController *pageItemController = [self.storyboard instantiateViewControllerWithIdentifier: @"ItemController"];
+        pageItemController.itemIndex = itemIndex;
+        pageItemController.imageName = contentImages[itemIndex];
+        return pageItemController;
+    }
+    return nil;
+}
+
+#pragma mark -
+#pragma mark Page Indicator
+
+- (NSInteger) presentationCountForPageViewController: (UIPageViewController *) pageViewController
+{
+    return [contentImages count];
+}
+
+- (NSInteger) presentationIndexForPageViewController: (UIPageViewController *) pageViewController
+{
+    return 0;
+}
+
+- (void) createPageViewController
+{
+    
+    NSString * language = NSLocalizedString(@"LANGUAGE", nil);
+    if([language compare:@"it-IT"] == NSOrderedSame)
+    {
+        contentImages = @[@"1_ita.png",
+                          @"2_ita.png",
+                          @"3_ita.png",
+                          @"4_ita.png",
+                          @"5_ita.png",
+                          @"6_ita.png",
+                          @"7_ita.png"];
+    }
+    else
+    {
+        contentImages = @[@"1.png",
+                          @"2.png",
+                          @"3.png",
+                          @"4.png",
+                          @"5.png",
+                          @"6.png",
+                          @"7.png"];
+
+    }
+    
+    UIPageViewController *pageController = [self.storyboard instantiateViewControllerWithIdentifier: @"PageController"];
+    pageController.dataSource = self;
+    
+    if([contentImages count])
+    {
+        NSArray *startingViewControllers = @[[self itemControllerForIndex: 0]];
+        [pageController setViewControllers: startingViewControllers
+                                 direction: UIPageViewControllerNavigationDirectionForward
+                                  animated: NO
+                                completion: nil];
+    }
+    
+    self.pageViewController = pageController;
+
+    [self addChildViewController: self.pageViewController];
+    [self.view addSubview: self.pageViewController.view];
+    [self.pageViewController didMoveToParentViewController: self];
+}
+
+- (void) setupPageControl
+{
+    [[UIPageControl appearance] setPageIndicatorTintColor: [UIColor grayColor]];
+    [[UIPageControl appearance] setCurrentPageIndicatorTintColor: [UIColor whiteColor]];
+    [[UIPageControl appearance] setBackgroundColor: [UIColor darkGrayColor]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    // Check if the initScreen has been appared
+    NSInteger initScreen = [prefs integerForKey:@"initScreen"];
+    
+    
+     //uncomment this if you want check the wellcome screen
+    initScreen = 0;
+    
+    
+    if(initScreen == 0) {
+        [self createPageViewController];
+        [self setupPageControl];
+    }
     
     userWeight = 90;
     iHr = 0; iMin= 10; iSec = 0;
@@ -1103,6 +1272,7 @@ BOOL UNLOCKED = NO;
     lblSpeed.text = @"0.0";
     lblAltitude.text = @"0.0";
     lblRitmoMedio.text = @"0:0";
+    valCaloriesLabel.text = @"0";
     statusLabel.text = NSLocalizedString(@"Stopped",nil);
     RUNNING = false;
     viewSpeed.maxValue = 50;
@@ -1190,7 +1360,6 @@ BOOL UNLOCKED = NO;
         }
         if(buttonIndex==1)
         {
-            [self resetData];
             [timerSpeechSession invalidate];
             timerSpeechSession = nil;
             [self setFinalPoint];

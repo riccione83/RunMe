@@ -17,9 +17,10 @@
 #include "Appirater.h"
 #include "SessionData.h"
 #import "TextToSpeechSupport.h"
+#import "PageItemController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate,MPMediaPickerControllerDelegate>{
+@interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate,MPMediaPickerControllerDelegate,UIPageViewControllerDataSource>{
     
     BOOL hintViewHasShowed;
     BOOL adIsShowed;
