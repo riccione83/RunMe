@@ -10,7 +10,7 @@
 
 #define DEGREES_TO_RADIANS(angle)  (angle / 180.0 * M_PI)
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-#define TIME_TO_SPEECH_SESSION  30
+#define TIME_TO_SPEECH_SESSION  120
 #define SAVE_FOR_FACEBOOK   1
 #define SAVE_FOR_FILE       2
 
@@ -637,6 +637,9 @@ BOOL UNLOCKED = NO;
             SESSION_MODE = MODE_RUNNING;
             userWeight = 70;
         }
+        if(SESSION_MODE == 0) SESSION_MODE = MODE_RUNNING;
+        [self setSessionModeImage];
+        
         weightStepper.value = userWeight;
         if(!isKmh) {  //FOR NON EU MUSURATIONS
             userWeight = userWeight * 2.2046;
@@ -647,8 +650,11 @@ BOOL UNLOCKED = NO;
     {
         [voiceSwitch setOn:YES];
         isVoiceON = YES;
-        //[musicSwitch setOn:NO];
         isMusicON = NO;
+        userWeight = 70;
+        weightStepper.value = userWeight;
+        SESSION_MODE = MODE_RUNNING;
+        [self setSessionModeImage];
     }
     
 }
@@ -961,23 +967,25 @@ BOOL UNLOCKED = NO;
     NSString * language = NSLocalizedString(@"LANGUAGE", nil);
     if([language compare:@"it-IT"] == NSOrderedSame)
     {
-        contentImages = @[@"1_ita.png",
-                          @"2_ita.png",
-                          @"3_ita.png",
-                          @"4_ita.png",
-                          @"5_ita.png",
-                          @"6_ita.png",
-                          @"7_ita.png"];
+        contentImages = @[@"0_ita.gif",
+                          @"1_ita.gif",
+                          @"2_ita.gif",
+                          @"3_ita.gif",
+                          @"4_ita.gif",
+                          @"5_ita.gif",
+                          @"6_ita.gif",
+                          @"7_ita.gif"];
     }
     else
     {
-        contentImages = @[@"1.png",
-                          @"2.png",
-                          @"3.png",
-                          @"4.png",
-                          @"5.png",
-                          @"6.png",
-                          @"7.png"];
+        contentImages = @[@"0.gif",
+                          @"1.gif",
+                          @"2.gif",
+                          @"3.gif",
+                          @"4.gif",
+                          @"5.gif",
+                          @"6.gif",
+                          @"7.gif"];
 
     }
     
@@ -1018,7 +1026,7 @@ BOOL UNLOCKED = NO;
     
     
      //uncomment this if you want check the wellcome screen
-    initScreen = 0;
+    //initScreen = 0;
     
     
     if(initScreen == 0) {
