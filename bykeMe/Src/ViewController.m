@@ -412,7 +412,7 @@ BOOL UNLOCKED = NO;
     
     pos = [locations lastObject];
     
-    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.0001, 0.0001));
+    MKCoordinateRegion reg = MKCoordinateRegionMake(pos.coordinate, MKCoordinateSpanMake(0.002, 0.002));
     
     if(!regionCreated) {
         [myMap setRegion:reg];
@@ -698,32 +698,15 @@ BOOL UNLOCKED = NO;
 }
 
 -(IBAction)UnLockIt {
-
     
     if (!UNLOCKED) {
-        if (slideToStart.value ==1.0) {  // if user slide far enough, stop the operation
-            // Put here what happens when it is unlocked
-        
             if(RUNNING)
-                slideToStartLabel.text = NSLocalizedString(@"Slide to start", nil);
+               [startAndStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
             else
-                slideToStartLabel.text = NSLocalizedString(@"Slide to stop", nil);
+                [startAndStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
             UNLOCKED = YES;
             [self hideMenuPanel:nil];
             [self startByking:nil];
-        } else {
-            // user did not slide far enough, so return back to 0 position
-            [UIView beginAnimations: @"SlideCanceled" context: nil];
-            [UIView setAnimationDelegate: self];
-            [UIView setAnimationDuration: 0.35];
-            // use CurveEaseOut to create "spring" effect
-            [UIView setAnimationCurve: UIViewAnimationCurveEaseOut];	
-            slideToStart.value = 0.0;
-            slideToStartLabel.alpha = 1.0;
-            [UIView commitAnimations];
-            
-            
-        }
     }
 }
 
@@ -1015,9 +998,48 @@ BOOL UNLOCKED = NO;
     [[UIPageControl appearance] setBackgroundColor: [UIColor darkGrayColor]];
 }
 
+
+-(void)startHB
+{
+    NSDate *startDate;
+    NSDate *endDate;
+    
+    double beatsPerMinute;// = averageCollector.average;
+    [[HKManager sharedManager]
+     storeHeartBeatsAtMinute:beatsPerMinute
+     startDate:startDate endDate:endDate
+     completion:^(NSError *error) {
+         if(error) {
+          /*   UIAlertView *av = [UIAlertView alertWithTitle:@"HealthStore"
+                                                   message:error.hkManagerErrorMessage];
+             [av addButtonWithTitle:@"Cancel"];
+             [av addButtonWithTitle:@"Repeat" handler:^{
+                 [self tapHKLogB:b];
+             }];
+             [av show];
+           */
+         } else {
+            // [averageCollector removeAllDoubles];
+            // [self updateLogUI];
+           
+             NSString *str = [NSString stringWithFormat:@"%@ B/m have been logged!", @((int)beatsPerMinute)];
+             
+             NSLog(str);
+             
+            /* NSString *message = [NSString stringWithFormat:@"%@ B/m have been logged!", @((int)beatsPerMinute)];
+             UIAlertView *av = [UIAlertView alertWithTitle:@"HealthStore"
+                                                   message:message];
+             [av addButtonWithTitle:@"Ok"];
+             [av show];
+             */
+         }
+     }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     

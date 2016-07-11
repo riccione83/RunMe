@@ -41,9 +41,22 @@
     [self.window makeKeyAndVisible];
     [self welcomeScreen];
  
-    
+    [Appirater setAppId:@"880673984"];
+    [Appirater setDaysUntilPrompt:7];
+    [Appirater setUsesUntilPrompt:5];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    //[Appirater setTimeBeforeReminding:0];
+    [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
     
+    [[HKManager sharedManager] authorizeWithCompletion:^(NSError *error) {
+        
+        
+       /* UIAlertView *av = [UIAlertView alertWithTitle:@"HealthKit" message:error.hkManagerErrorMessage];
+        [av addButtonWithTitle:@"OK"];
+        [av show];
+        */
+    }];
     
     return YES;
 }

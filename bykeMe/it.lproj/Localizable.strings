@@ -5,8 +5,8 @@
 "Units Km/h" = "Unità Km/h";
 "Voice" = "Voce attiva";
 "Music" = "Seleziona Musica";
-"Slide to start" = "Scorri per avviare";
-"Slide to stop" = "Scorri per fermare";
+"Start" = "Avvia";
+"Stop" = "Stop";
 "Time" = "Tempo";
 "Distance" = "Distanza";
 "Altitude" = "Altitudine";

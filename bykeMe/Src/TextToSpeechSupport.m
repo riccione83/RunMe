@@ -22,7 +22,7 @@
     NSString *string = textToSpeech;
     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:string];
     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:language];  //en-US
-    utterance.rate = 0.1;
+    utterance.rate = 0.5;
     AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
     synthesizer.delegate = self;
     [synthesizer speakUtterance:utterance];

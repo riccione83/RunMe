@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HKManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -18,6 +18,8 @@
 #include "SessionData.h"
 #import "TextToSpeechSupport.h"
 #import "PageItemController.h"
+#import "HKManager.h"
+#import "BlueButton.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate,MPMediaPickerControllerDelegate,UIPageViewControllerDataSource>{
@@ -78,6 +80,10 @@
     
     IBOutlet UIImageView *imageArtworkUI;
     IBOutlet UISlider *slideToStart;
+    
+    IBOutlet BlueButton *startAndStopButton;
+    
+    
     IBOutlet UILabel *slideToStartLabel;
     IBOutlet UISwitch *voiceSwitch;
     IBOutlet UISwitch *musicSwitch;
