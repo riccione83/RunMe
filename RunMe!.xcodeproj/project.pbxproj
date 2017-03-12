@@ -16,7 +16,6 @@
 		933A843D1924D5D400676CE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 933A843C1924D5D400676CE5 /* main.m */; };
 		933A84441924D5D500676CE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A84421924D5D500676CE5 /* Main.storyboard */; };
 		933A84491924D5D700676CE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 933A84481924D5D700676CE5 /* Images.xcassets */; };
-		933A84771925210E00676CE5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A84761925210E00676CE5 /* iAd.framework */; };
 		933A847B192533E200676CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933A847A192533E200676CE5 /* MapKit.framework */; };
 		933B5D691AEAA4EF001BCFAF /* SlideToStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D611AEAA4EF001BCFAF /* SlideToStop.png */; };
 		933B5D6A1AEAA4EF001BCFAF /* SlideToStopBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 933B5D621AEAA4EF001BCFAF /* SlideToStopBar.png */; };
@@ -68,6 +67,7 @@
 		93B16E791AF9178B00D4F501 /* 5.gif in Resources */ = {isa = PBXBuildFile; fileRef = 93B16E711AF9178B00D4F501 /* 5.gif */; };
 		93B16E7A1AF9178B00D4F501 /* 6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 93B16E721AF9178B00D4F501 /* 6.gif */; };
 		93B16E7B1AF9178B00D4F501 /* 7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 93B16E731AF9178B00D4F501 /* 7.gif */; };
+		93C7096A1E6D8A82002F7326 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C709691E6D8A82002F7326 /* GoogleMobileAds.framework */; };
 		93CE382B1ADE753F004E476A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CE382A1ADE753F004E476A /* SystemConfiguration.framework */; };
 		93D734DE1AE7AF630040B1A9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D734DD1AE7AF630040B1A9 /* MediaPlayer.framework */; };
 		93E0B3FD1D33B006000A5D4F /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 93E0B3FB1D33B006000A5D4F /* Default-568h.png */; };
@@ -106,8 +106,6 @@
 		933A843E1924D5D400676CE5 /* RunMe!-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunMe!-Prefix.pch"; sourceTree = "<group>"; };
 		933A84431924D5D500676CE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		933A84481924D5D700676CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		933A844F1924D5D700676CE5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		933A84761925210E00676CE5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		933A847A192533E200676CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		933B5D611AEAA4EF001BCFAF /* SlideToStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SlideToStop.png; path = Images/SlideToStop.png; sourceTree = "<group>"; };
 		933B5D621AEAA4EF001BCFAF /* SlideToStopBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SlideToStopBar.png; path = Images/SlideToStopBar.png; sourceTree = "<group>"; };
@@ -176,6 +174,7 @@
 		93B16E711AF9178B00D4F501 /* 5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = 5.gif; path = WelcomeImages/5.gif; sourceTree = "<group>"; };
 		93B16E721AF9178B00D4F501 /* 6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = 6.gif; path = WelcomeImages/6.gif; sourceTree = "<group>"; };
 		93B16E731AF9178B00D4F501 /* 7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = 7.gif; path = WelcomeImages/7.gif; sourceTree = "<group>"; };
+		93C709691E6D8A82002F7326 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = bykeMe/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		93CE382A1ADE753F004E476A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		93D734DD1AE7AF630040B1A9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		93E0B3FB1D33B006000A5D4F /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h.png"; path = "Images/Default-568h.png"; sourceTree = "<group>"; };
@@ -194,11 +193,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93C7096A1E6D8A82002F7326 /* GoogleMobileAds.framework in Frameworks */,
 				93D734DE1AE7AF630040B1A9 /* MediaPlayer.framework in Frameworks */,
 				93CE382B1ADE753F004E476A /* SystemConfiguration.framework in Frameworks */,
 				93168F8C192BA2E500F18F76 /* Social.framework in Frameworks */,
 				933A847B192533E200676CE5 /* MapKit.framework in Frameworks */,
-				933A84771925210E00676CE5 /* iAd.framework in Frameworks */,
 				933A84331924D5D200676CE5 /* CoreGraphics.framework in Frameworks */,
 				933A84351924D5D200676CE5 /* UIKit.framework in Frameworks */,
 				933A84311924D5D200676CE5 /* Foundation.framework in Frameworks */,
@@ -246,15 +245,14 @@
 		933A842F1924D5D200676CE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93C709691E6D8A82002F7326 /* GoogleMobileAds.framework */,
 				93D734DD1AE7AF630040B1A9 /* MediaPlayer.framework */,
 				93CE382A1ADE753F004E476A /* SystemConfiguration.framework */,
 				93168F8B192BA2E500F18F76 /* Social.framework */,
 				933A847A192533E200676CE5 /* MapKit.framework */,
-				933A84761925210E00676CE5 /* iAd.framework */,
 				933A84301924D5D200676CE5 /* Foundation.framework */,
 				933A84321924D5D200676CE5 /* CoreGraphics.framework */,
 				933A84341924D5D200676CE5 /* UIKit.framework */,
-				933A844F1924D5D700676CE5 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -517,6 +515,7 @@
 				TargetAttributes = {
 					933A842C1924D5D200676CE5 = {
 						DevelopmentTeam = RKD82WWETR;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
 								enabled = 0;
@@ -528,6 +527,7 @@
 					};
 					939347CD1AE3E2AB00DC7356 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = RKD82WWETR;
 						TestTargetID = 933A842C1924D5D200676CE5;
 					};
 				};
@@ -763,13 +763,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = RKD82WWETR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/bykeMe/GoogleMobileAdsSdkiOS-7.18.0",
+					"$(PROJECT_DIR)/bykeMe",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bykeMe/RunMe!-Prefix.pch";
 				INFOPLIST_FILE = "bykeMe/RunMe!-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				PRODUCT_NAME = "RunMe!";
-				PROVISIONING_PROFILE = "9a265ca5-557b-48d8-a9c3-e92a1e6ff231";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -780,13 +787,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Riccardo Rizzo (RKD82WWETR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = RKD82WWETR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/bykeMe/GoogleMobileAdsSdkiOS-7.18.0",
+					"$(PROJECT_DIR)/bykeMe",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bykeMe/RunMe!-Prefix.pch";
 				INFOPLIST_FILE = "bykeMe/RunMe!-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				PRODUCT_NAME = "RunMe!";
-				PROVISIONING_PROFILE = "9a265ca5-557b-48d8-a9c3-e92a1e6ff231";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -796,6 +810,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEVELOPMENT_TEAM = RKD82WWETR;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -820,6 +835,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = RKD82WWETR;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

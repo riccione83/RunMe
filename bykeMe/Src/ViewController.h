@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
 #import <MapKit/MapKit.h>
 #include <math.h>
 #include "FileSupport.h"
@@ -22,7 +21,8 @@
 #import "BlueButton.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface ViewController : UIViewController <ADBannerViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate,MPMediaPickerControllerDelegate,UIPageViewControllerDataSource>{
+
+@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UIAlertViewDelegate,MPMediaPickerControllerDelegate,UIPageViewControllerDataSource>{
     
     BOOL hintViewHasShowed;
     BOOL adIsShowed;
@@ -84,6 +84,9 @@
     IBOutlet BlueButton *startAndStopButton;
     
     
+
+    IBOutlet UIPageControl *pageController;
+    
     IBOutlet UILabel *slideToStartLabel;
     IBOutlet UISwitch *voiceSwitch;
     IBOutlet UISwitch *musicSwitch;
@@ -116,7 +119,6 @@
     IBOutlet UILabel *statusLabel;
     IBOutlet UIButton *btnUnits;
     IBOutlet UIImageView *onOffImage;
-    IBOutlet ADBannerView *banner;
     IBOutlet UIView *viewTest;
     IBOutlet UILabel *valCaloriesLabel;
     IBOutlet UILabel *lblCalories;

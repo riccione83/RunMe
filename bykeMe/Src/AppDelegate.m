@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "Appirater.h"
 
+@import GoogleMobileAds;
+
 @implementation AppDelegate
 
 -(void)welcomeScreen {
@@ -40,7 +42,10 @@
  
     [self.window makeKeyAndVisible];
     [self welcomeScreen];
+
  
+    [GADMobileAds configureWithApplicationID:@"ca-app-pub-9863377756867598~4332502667"];
+    
     [Appirater setAppId:@"880673984"];
     [Appirater setDaysUntilPrompt:7];
     [Appirater setUsesUntilPrompt:5];

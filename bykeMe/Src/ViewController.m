@@ -18,10 +18,13 @@
 #define MODE_BIKING              2
 #define MODE_WALKING             3
 
+@import GoogleMobileAds;
+
 #import "ViewController.h"
 
-@interface ViewController () <UIPageViewControllerDataSource>
+@interface ViewController () <UIPageViewControllerDataSource, GADBannerViewDelegate>
 
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 @property (nonatomic, strong) NSArray *contentImages;
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
@@ -230,10 +233,11 @@ BOOL UNLOCKED = NO;
     if (mediaItemCollection) {
         
         [musicPlayer setQueueWithItemCollection: mediaItemCollection];
-        [musicPlayer play];
+        //[musicPlayer play];
     }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [mediaPicker dismissViewControllerAnimated:true completion:NULL];
+   // [musicPlayer play];
+ //   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) mediaPickerDidCancel: (MPMediaPickerController *) mediaPicker
@@ -323,43 +327,35 @@ BOOL UNLOCKED = NO;
    [musicPlayer skipToPreviousItem];
 }
 
- /**************************
-  SE VI E' LA POSSIBILITA' VISUALIZZA IL BANNER PUBBLICITARIO
-   **************************/
--(void) showBannerAd:(BOOL)Visible {
-    if(Visible)
+
+
+-(void)adViewDidReceiveAd:(GADBannerView *)bannerView{
+    if(!adIsShowed)
     {
-        if(!adIsShowed)
-        {
-            [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-            banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
-            myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - banner.frame.size.height);
-            viewSpeed.frame = CGRectOffset(viewSpeed.frame, 0, -banner.frame.size.height);
-            [UIView commitAnimations];
-            adIsShowed = YES;
-        }
-    }
-    else
-    {
-        if(adIsShowed) {
-            [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-            banner.frame = CGRectOffset(banner.frame, 0, +banner.frame.size.height);
-            myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + banner.frame.size.height);
-            viewSpeed.frame = CGRectOffset(viewSpeed.frame, 0, +banner.frame.size.height);
-            [UIView commitAnimations];
-            adIsShowed = NO;
-        }
+        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+        bannerView.frame = CGRectOffset(bannerView.frame, 0, -bannerView.frame.size.height);
+        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height - bannerView.frame.size.height);
+        viewTest.frame = CGRectOffset(viewTest.frame, 0, -bannerView.frame.size.height);
+        [UIView commitAnimations];
+        adIsShowed = YES;
     }
 }
 
--(void)bannerViewDidLoadAd:(ADBannerView *)banner{
-    [self showBannerAd:YES];
-   }
+-(void) adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
+    if(adIsShowed) {
+        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+        bannerView.frame = CGRectOffset(bannerView.frame, 0, +bannerView.frame.size.height);
+        myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + bannerView.frame.size.height);
+        viewTest.frame = CGRectOffset(viewTest.frame, 0, +bannerView.frame.size.height);
+        [UIView commitAnimations];
+        adIsShowed = NO;
+    }
 
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    [self showBannerAd:NO];
-  }
+}
 
+ /**************************
+  SE VI E' LA POSSIBILITA' VISUALIZZA IL BANNER PUBBLICITARIO
+   **************************/
 
 /***************************
  AVVIA LA LOCALIZZAZIONE ED EFFETTUA UNO ZOOM
@@ -777,6 +773,7 @@ BOOL UNLOCKED = NO;
     //Do what you want here
     NSLog(@"Swipe to left");
    [self animatePanel:viewMusic withPanel:menuView rightToLeft:YES];
+    [pageController setCurrentPage:0];
 }
 
 -(void)swiperightMusicPanel:(UISwipeGestureRecognizer*)gestureRecognizer
@@ -785,6 +782,7 @@ BOOL UNLOCKED = NO;
     NSLog(@"Swipe to right");
     
     [self animatePanel:viewMusic withPanel:menuView rightToLeft:NO];
+    [pageController setCurrentPage:0];
 }
 
 
@@ -794,6 +792,7 @@ BOOL UNLOCKED = NO;
     NSLog(@"Swipe to left");
 
     [self animatePanel:menuView withPanel:viewMusic rightToLeft:YES];
+    [pageController setCurrentPage:1];
     
 }
 
@@ -803,6 +802,7 @@ BOOL UNLOCKED = NO;
     NSLog(@"Swipe to right");
     
     [self animatePanel:menuView withPanel:viewMusic rightToLeft:NO];
+    [pageController setCurrentPage:1];
 }
 
 -(void)animatePanel:(UIView*)mainPanel withPanel:(UIView*)secondPanel rightToLeft:(BOOL)rightToLeft {
@@ -1036,10 +1036,23 @@ BOOL UNLOCKED = NO;
      }];
 }
 
+
+-(void) viewWillAppear:(BOOL)animated {
+    [musicPlayer stop];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    GADRequest *request = [GADRequest request];
+    NSLog(@"Google Mobile Ads SDK version: %@", [GADRequest sdkVersion]);
+    self.bannerView.adUnitID = @"ca-app-pub-9863377756867598/1239435462";
+    self.bannerView.rootViewController = self;
+    self.bannerView.delegate = self;
+    request.testDevices = @[ kGADSimulatorID ];
+    [self.bannerView loadRequest:request];
+    
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
@@ -1052,8 +1065,8 @@ BOOL UNLOCKED = NO;
     
     
     if(initScreen == 0) {
-        [self createPageViewController];
-        [self setupPageControl];
+   //     [self createPageViewController];
+   //     [self setupPageControl];
     }
     
     userWeight = 90;
@@ -1064,10 +1077,21 @@ BOOL UNLOCKED = NO;
     
     [self initLocalizationAndUI];
     [self startBackgroundAnimation];
-    
-    banner.delegate = self;
+
     myMap.delegate = self;
     myMap.showsUserLocation = YES;
+    
+    
+    CGFloat theHeight = self.view.frame.size.height;
+    self.bannerView.frame = CGRectMake(0, theHeight - 50, self.view.frame.size.width, 50);
+    
+    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+    self.bannerView.frame = CGRectOffset(self.bannerView.frame, 0, self.bannerView.frame.size.height);
+    myMap.frame = CGRectMake(myMap.frame.origin.x, myMap.frame.origin.y, myMap.frame.size.width, myMap.frame.size.height + self.bannerView.frame.size.height);
+    viewTest.frame = CGRectOffset(viewTest.frame, 0, self.bannerView.frame.size.height);
+    [UIView commitAnimations];
+    adIsShowed = NO;
+    
     
     /**************************
      GPS INITIALIZATION
@@ -1128,10 +1152,6 @@ BOOL UNLOCKED = NO;
     // Load options
     [self loadOptions];
     
-    //Hide AD Banner
-    adIsShowed = YES;
-    [self showBannerAd:NO];
-    
     //Turn off display light saver
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
@@ -1168,6 +1188,7 @@ BOOL UNLOCKED = NO;
         hintView.transform = trasform;
     }];
 
+    [pageController setHidden:false];
     [hintView setHidden:true];
     [self LockIt];
     [self startBackgroundAnimation];
@@ -1180,6 +1201,7 @@ BOOL UNLOCKED = NO;
     
     [backgroundVideoView stopLoading];
     backgroundVideoView = nil;
+    [pageController setHidden:true];
     
     [UIView animateWithDuration:0.5 animations:^{
         CGAffineTransform trasform = CGAffineTransformMakeTranslation(0, -400);

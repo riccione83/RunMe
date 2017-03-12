@@ -54,6 +54,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "mach_msg_trap:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "kGADSimulatorID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ViewController prepareBackgroundImage]:ViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -76,10 +84,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ViewController viewDidLoad]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bannerView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ViewController playMusic:]:ViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "musicPlayer.isPreparedToPlay">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController adViewDidReceiveAd:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "bannerView.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
